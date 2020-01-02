@@ -1,0 +1,46 @@
+System.out.
+	print
+	println
+	printf
+
+
+java.util.
+	Scanner.
+		nextInt
+		nextDouble
+		nextLine
+		next
+
+String.
+	format [static]
+
+Integer.
+	parseInt
+
+
+Math.
+	pow [static]
+	sqrt
+	PI
+	E
+
+
+public , private
+static , instance/non-static
+final
+
+variab
+method
+class
+package
+object
+
+
+primmitive types:
+int
+short
+long
+float
+double
+char
+String

@@ -1,0 +1,12 @@
+sudo apt install ninja-build meson
+git clone -b release/0.21 --recurse-submodules https://github.com/LeelaChessZero/lc0.git
+
+#Download GPU driver
+
+#Download cuda #10.1
+#wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.39_linux.run #??
+
+
+#download cuDNN Runtime library #v7.5.1 for CUDA 10.1
+
+

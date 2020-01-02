@@ -1,0 +1,25 @@
+pipeline {
+	agent any 
+	stages {
+		stage('Build') { 
+			steps {
+				sh "echo build"
+				sh "docker build -t mohammad/test:1.0 ."
+			}
+		}
+		stage('Test') { 
+			steps {
+				sh "echo test"
+				sh "cat hi"
+				sh "docker images"
+			}
+		}
+		stage('Deploy') { 
+			steps {
+				sh "echo deploy"
+				sh "docker run -d --rm -p 80:80 mohammad/test:1.0"
+				sh "docker ps -a"
+			}
+		}
+	}
+}

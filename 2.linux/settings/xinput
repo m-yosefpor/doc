@@ -1,0 +1,26 @@
+## pointer speed (input settings)
+
+xinput --list --short
+#out:
+ Virtual core pointer                    	id=2	[master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer              	id=4	[slave  pointer  (2)]
+⎜   ↳ Sony Vaio Jogdial                       	id=7	[slave  pointer  (2)]
+⎜   ↳ SynPS/2 Synaptics TouchPad              	id=12	[slave  pointer  (2)]
+⎣ Virtual core keyboard                   	id=3	[master keyboard (2)]
+    ↳ Virtual core XTEST keyboard             	id=5	[slave  keyboard (3)]
+    ↳ Sony Vaio Keys                          	id=6	[slave  keyboard (3)]
+    ↳ Video Bus                               	id=8	[slave  keyboard (3)]
+    ↳ Power Button                            	id=9	[slave  keyboard (3)]
+    ↳ USB2.0 Camera: USB2.0 Camera            	id=10	[slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard            	id=11	[slave  keyboard (3)]
+
+
+#in: xinput --list-props 12
+
+#out: ... (koli chiz) masalan : libinput Accel Speed (301):	0.605839
+
+#in : xinput --set-prop 12 301 0.4
+
+
+$ put the last #in line as a #!/bin/bash with chmod +x in start-up application list
+

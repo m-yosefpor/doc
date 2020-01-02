@@ -1,0 +1,51 @@
+systemctl enable/disable/stop/start/daemon-reload
+
+
+ufw
+apache2
+vsftpd
+dropbox
+vpn ##?? or -b
+
+
+
+
+
+
+followin lines in /etc/systemd/system/dropbox.service
+############################################
+[Unit]
+Description=Dropbox Service
+After=network.target
+
+[Service]
+ExecStart=/bin/sh -c '/usr/local/bin/dropbox start'
+ExecStop=/bin/sh -c '/usr/local/bin/dropbox stop'
+PIDFile=${HOME}/.dropbox/dropbox.pid
+User=fmf
+Group=fmf
+Type=forking
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
+##############################################
+
+for vpn
+#####
+[Unit]
+Description=Connect to my VPN
+After=network.target
+
+[Service]
+Type=simple
+Environment=password=correcthorsebatterystaple
+ExecStart=/bin/sh -c 'echo $password | sudo openconnect -u username --passwd-on-stdin vpn.server.tld'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+############################################################

@@ -1,0 +1,10 @@
+/etc/locale-gen
+/etc/localtime : ln -s /usr/share/zoneinfo/Canada/Eastern /etc/localtime
+
+/etc/hostname : echo vnox > /etc/hostname
+
+
+/usr/share/zoneinfo
+
+ln -s /usr/share/zoneinfo/Canada/EAstern /etc/localtime
+

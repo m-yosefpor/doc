@@ -1,0 +1,12 @@
+
+
+docker save busybox > busybox.tar
+
+docker save --output busybox.tar busybox
+
+docker save -o fedora-all.tar fedora
+
+
+docker load < busybox.tar.gz
+
+docker load --input fedora.tar

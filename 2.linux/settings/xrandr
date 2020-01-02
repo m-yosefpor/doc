@@ -1,0 +1,3 @@
+xrandr --output #press double tab to list all outputs
+
+xrandr --output LVDS-1 --brightness 0.4

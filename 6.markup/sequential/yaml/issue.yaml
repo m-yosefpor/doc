@@ -1,0 +1,29 @@
+---
+Issue: Linphone Client Registration Failed.
+
+Client Info:
+  Device: SM-T805
+  Android Version: "6.0.1"
+  SIP Client: Linphone v 4.1
+  Configs:
+    Username: yosefpor
+    Password: yosefpor
+    Domain: sinaimscore.lo
+    Transport: UDP
+    Proxy: <sip:ims.sinaimscore.ir;transport=udp>
+    Outbound proxy: ON
+		
+Explanation: |
+  Used tcpdump to capture the SIP packets between Client and P-CSCF
+  ------
+  Client sends "REGISTER" to P-CSCF : (Without Digest Authentication)
+  P-CSCF sends "401 Unauthorized - Challenging the UE"
+  Client sends "REGISTER" to P-CSCF : (Including Digest Authentication)
+  P-CSCF sends "100 Trying" to Client
+  P-CSCF sends "403 Authentication Failed"
+  ------
+  Registration was successful with the same configurations with Linphone on Windows, Linphone on ios, and Boghe on windows
+  
+Status: Solved
+
+How Resolved: Updated Linphone version to v4.1.1

@@ -1,0 +1,43 @@
+
+dhcpcd enp0s3 : for internet connection after each boot :/ idk?
+#######################################################
+### (on server)
+sudo apt install xauth #
+sudo apt install gedit # an x client
+
+### (on client , local machine)
+#x-server (xorg) should be installed on local computer
+sudo apt install xorg xinit #xinit to start x-server
+echo "#/bin/sh\n exec openbox-session"
+ssh -X user@server
+
+gedit ### NOTE: ## NOTE: xorg is more than x-server : x-server + xlibs + ...
+###################################
+
+pacman -S xorg-server
+pacman -S xorg-xinit # apt install xinit ### a program to start x-server manually
+
+startx /usr/bin/firefox
+
+
+or can just put it in .xinitrc
+
+in .xinitrc write like : exec firefox
+
+put the window manager if needed to here, so like:
+
+
+xfwm4 : window manager (wm)
+
+desktop environment (de)
+twm, xfce4 
+
+.twmrc
+
+display manager (login)
+
+
+export GDK_BACKEND=x11
+exec gnome-session
+
+exec startxfce4

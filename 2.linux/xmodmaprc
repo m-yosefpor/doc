@@ -1,0 +1,13 @@
+xev
+	then check the code nome for key that wants to be remmaped from
+
+	then press the key and check the command (after keysum)
+
+
+	state 0x10, keycode 115 (keysym 0xff56, Next), same_screen YES,
+
+
+	xmodmap -e "keycode 110 = Next"
+
+
+https://askubuntu.com/questions/24916/how-do-i-remap-certain-keys-or-devices

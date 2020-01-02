@@ -1,0 +1,68 @@
+	--
+	kubelet
+	kubeadm
+	kubernetes-cni
+
+harbor
+	microk8s
+	kubernetes
+	(kompose)
+	
+=========================== distributed system
+
+
+
+
+
+
+
+
+	
+	
+heml : kube chart
+
+bitnami?
+
+--
+
+---
+
+kube parts: docker removed
+dockerswarm
+
+Portainer
+
+
+	
+dc (docker compose file), mikrok8s, kube (deployment.yml) , docker run (flags):
+	dc up -d, dc start ,dc stop
+
+
+
+
+
+
+kubernetese (maser node) .. join
+
+
+dc services automatically on a bridged network
+
+docker network create --subnet=172.18.0.0/16 mynet123
+docker run --net mynet123 --ip 172.18.0.22 -it ubuntu bash
+
+
+version: '2'
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-container
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.2
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          #docker-compose v3+ do not use ip_range
+          ip_range: 172.28.5.0/24

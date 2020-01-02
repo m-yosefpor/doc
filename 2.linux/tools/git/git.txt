@@ -1,0 +1,45 @@
+git config --global user.name 'name last'  # if not --global only for this repo
+
+git config --global user.email 'email'
+git config --global core.editor vim
+git config --global merge.tool vimdiff
+git config --list
+############################################################
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+############################################################
+sudo apt install xclip
+xclip -sel clip < ~/.ssh/id_rsa.pub
+## add ssh-key to github accoutn : #setting # ssh and gpg key # add ssh key
+############################################################
+
+git init
+
+git clone https://github.com/user1/repo1.git ~/github/repo1.git
+############################################################
+git remote add name1 link1 
+git remote set-url name1 link1
+
+# name1:origin , sthelse
+#link1: https://github.com/useername1/repo1.git ## git@github.com:/username1/repo1.git
+
+git remote -v
+############################################################
+
+git branch (-d delete) branch1
+
+git checkout (-b , also creats the branch) branch1
+
+############################################################
+git add sth.txt #staging
+git add --all
+git commit (-m 'sth')
+git status
+git log
+############################################################
+git merge branch1
+###########################################################
+git push remotename1 branch1
+git pull remotename1 branch1

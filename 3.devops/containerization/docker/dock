@@ -1,0 +1,28 @@
+
+docker run \
+ -u root \
+    --rm \
+      -d \
+	   -p 8080:8080 \
+	     -p 50000:50000 \
+		  -v jenkins-data:/var/jenkins_home \
+		    -v /var/run/docker.sock:/var/run/docker.sock \
+		      jenkinsci/blueocean
+
+
+
+f you run Jenkins inside docker as a detached container, you can use 
+docker logs containerId
+
+
+
+then :
+docker exec -it <containerID> /bin/sh
+
+#ssh-keygen
+#ssh-copy-id -i git@<gitserv>
+
+
+then jenkins new pipeline
+
+jenkins file

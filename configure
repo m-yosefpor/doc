@@ -1,0 +1,14 @@
+#!/bin/sh
+
+_=[ 'exec' '/bin/sh' '-c' '''
+#which python3.7 >/dev/null && exec python3.7 "$0" "$@"
+which python3 >/dev/null && exec python3 "$0" "$@"
+exec python "$0" "$@"
+''' "$0" "$@"
+]
+del _
+
+
+import sys
+
+print('hello')

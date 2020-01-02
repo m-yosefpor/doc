@@ -1,0 +1,578 @@
+\documentclass[11pt]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{braket}
+\usepackage{amsmath}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usefonttheme{serif}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Madrid} 
+%\usetheme{Copenhagen}
+%\usetheme{Berkeley}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{seahorse}
+%\usecolortheme{wolverine}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Entanglement Detection]{Quantum Machine Learning}
+\subtitle{Entanglement Detection}
+
+ 
+\author[Yosefpor,Mostaan]
+{M.~Yosefpor \and M.~Mostaan}
+
+%\author[Author, Doe]{A.~B.~Arthur\inst{1} \and J.~Doe\inst{2}}
+
+
+
+\institute[SUT]{Sharif University of Technology}
+
+\date[Spring 2019]{Spring 2019}
+
+%\logo{\includegraphics[height=1.5cm]{lion-logo.png}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\AtBeginSection[]{
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents[currentsection]
+\end{frame} 
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+ 
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\section{Preliminaries}
+%---------------------------------------%
+\begin{frame}
+\frametitle{State of a system}
+
+\begin{itemize}
+ \item  A State of a system is represented by a vector in Hilbert space:
+ $$\ket{\psi}$$
+ \item  This only happens when we know the exact state of the system. This state is called a pure state.
+ \item  Usually in laboratories we don’t have so much information about the system.
+\end{itemize}
+\end{frame}
+%---------------------------------------%
+\begin{frame}
+\frametitle{State of a system}
+
+
+\begin{itemize}
+ \item  Imagine a ray of photons
+ \item  After passing a polaroid we can detect that a portion of photons have a vertical (or horizontal) polarization
+ \item  But what about before the polaroid?
+ \item  What can we say about the state of photon ray before entering the polaroid?
+\end{itemize}
+
+\end{frame}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Density Matrix}
+
+\begin{itemize}
+ \item  For representing such systems that we can’t be certain about the exact state of them we use a statistical representation: $$ \braket{A} = \sum_i p_i \braket{\psi_i | A | \psi_i}$$
+
+
+$i$ : index of all possible states for presumed system
+
+$p_i$  : probability of the system being in $\ket{\psi_i}$
+
+\end{itemize}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Density Matrix}
+
+\begin{itemize}
+ \item  Then we can define : $$\rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i} $$
+ \item  so we can write: $$\braket{A} = tr(A\rho) $$
+ 
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Density Matrix}
+
+\begin{itemize}
+ \item  It is clear that $\rho$ is a representation of photon rays 
+and the system has a \textbf{mixed state}.
+ \item  All the information about a system exist in the system's density matrix.
+
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Density Matrices Properties}
+
+\begin{itemize}
+ \item  A density matrix representing a physical system should have these following properties:
+ \item  $\rho^\dag = \rho$
+ \item  $tr(\rho) = 1$
+ \item  $\forall a \; \braket{a|\rho|a} \geqslant 0$ or $\rho \geqslant 0$
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Pure states}
+
+\begin{itemize}
+ \item  Obviously a system is pure when:
+    $$i={1}$$
+    $$\rho = \ket{\psi}\bra{\psi}$$
+ \item  We can separate a pure state from mix:
+ \item  $pure \iff \rho^2 = \rho$
+ \item  $pure \iff tr(\rho^2)=1 $
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Bi-partite systems}
+
+\begin{itemize}
+ \item  Imagine a system constructed from 2 parts  ( A , B ) 
+ \item  The Hilbert space corresponding to this system is:
+    $$\mathcal{H} = \mathcal{H}_A \otimes \mathcal{H}_B $$
+ \item  Measuring an observable $M$ on one of the subsystems $M \otimes     \mathbb{I} $:
+ \item  $tr_{AB}((M \otimes \mathbb{I})\rho) = tr_A(tr_B((M \otimes \mathbb{I} )\rho)) = tr_A(M \rho_A)$
+ \item $\rho_A  = tr_B(\rho)$
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Bi-partite systems}
+
+\begin{itemize}
+ \item  A vector in corresponding Hilbert space:
+    $$\ket{\psi} = \sum_{i,\mu} \psi_{i\mu} \ket{i,\mu}$$
+ \item  Or we can write as density matrix:
+    $$\rho = \sum_{ij\mu\nu} \rho^{ij}_{\mu\nu} \ket{i}\bra{j} \otimes \ket{\mu}\bra{\nu} $$
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Entanglement}
+
+\begin{itemize}
+ \item  A density matrix is said to be separable if and only if it can be written as:
+ $$\rho_{AB} = \rho_A \otimes \rho_B$$
+ 
+ or:
+ 
+ $$\rho_{AB} = \sum_i p_i \rho_A^{(i)} \otimes \rho_B ^{(i)} \; \wedge    \sum_i p_i =1$$
+ \item  otherwise the state is said to be entangled
+
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Qubits}
+
+\begin{itemize}
+ \item  A system with two possible states
+ \item  The smallest part of a quantum computer
+ \item   Two states are often shown in the form: $\ket{0} \, , \, \ket{1}$ 
+\end{itemize}
+
+\end{frame}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Peres – Horodecki  criterion}
+
+\begin{itemize}
+ \item  Partial transpose : 
+ $$ \rho^{T_B} = (\mathbb{I}\otimes T)_{\rho} = \sum_{ij\mu\nu}p^{ij}_{\mu\nu}\ket{i}\bra{j} \otimes (\ket{\mu}\bra{\nu})^T $$
+ $$= \sum_{ij\mu\nu} p^{ij}_{\mu\nu} \ket{i}\bra{j} \otimes \ket{\nu}\bra{\mu}$$
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Peres – Horodecki  criterion}
+
+\begin{itemize}
+ \item  For a separable state:
+ $$ \rho_{AB}^T = \sum_i p_i \rho_A^{(i)} \otimes {\rho_B^{T}}^{(i)}$$
+ \item  $\rho_B^{(i)}$ is also a density matrix so: $\rho^T_{AB} \geqslant 0$
+ \item   so if $\rho_{AB}^T < 0 \implies $ entangled 
+ \item  The condition is proved to be sufficient 2*2 and 3*2 Hilbert spaces.
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Peres – Horodecki  criterion}
+
+\begin{itemize}
+ \item  Recently even a simpler condition for two-qubit systems 
+(and only for them) has been pointed out  (Augusiak et al., 2006)
+    $$det(\rho_{AB}^T) > 0 \iff separable$$ 
+
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Two qubit system :}
+
+\begin{itemize}
+ \item  A two qubit state can be written as below : 
+  $$ \rho = \sum_{ij} \Gamma_{ij} \sigma_i \otimes \sigma_j$$
+  where $\sigma_i$s are pauli matrices
+ \item  So we can determine the exact state of a two qubit system Using 15 measurements
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Features}
+
+\begin{itemize}
+ \item  With 15 measurement we know all the information about the system
+ \item  And we can determine if the given state is entangled or not
+ \item  But doing 15 measurement in laboratory is not cost efficient
+ \item  So we want to reduce the required features for entanglement detection
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Entanglement witness}
+
+\begin{itemize}
+ \item Witnesses are necessary conditions to determine a entangled state, but they may not be sufficient conditions
+ \item So we can use entanglement witnesses to detect some (but not necessarily all) of the entangled states.
+ \item  Entanglement is a resource, because these detected states can be used for multiple applications 
+ \item We have used machine learning techniques to detect a considerable portion of entangled states with a high certainty, using just a few measurements
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Machine Learning Techniques}
+
+\subsection{Data Generation}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Generation}
+
+\begin{itemize}
+ \item generating random density matrices using qutip module
+ \item supervised learning: labeling
+ \item labels: calculating $det(\rho_{AB}^{T_B})$ directly and checking the sign
+ 
+ 
+\end{itemize}
+
+\end{frame}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Generation}
+
+\begin{itemize}
+\item Features: results of the measurements on the desity matrices by calculating $tr(\rho_{AB} (\sigma_i \simga_j))$ 
+  \[
+   Features=
+  \left[ {\begin{array}{cccc}
+\sigma_x\otimes\sigma_x & \sigma_x\otimes\sigma_y & \sigma_x\otimes\sigma_z & \sigma_x\otimes\ \mathbb{I} 
+\\ \sigma_y\otimes\sigma_x & \sigma_y\otimes\sigma_y & \sigma_y\otimes\sigma_z & \sigma_y\otimes\ \mathbb{I}
+\\ \sigma_z\otimes\sigma_x & \sigma_z\otimes\sigma_y & \sigma_z\otimes\sigma_z & \sigma_z\otimes\ \mathbb{I}
+\\ \mathbb{I}\otimes\sigma_x & \mathbb{I}\otimes\sigma_y & \mathbb{I}\otimes\sigma_z & \mathbb{I}\otimes\ \mathbb{I}
+  \end{array} } \right]
+\]
+
+\item removing the trivial $1$ from $ \mathbb{I} \otimes \mathbb{I} $
+
+\item reshape to (15 , 1)
+\end{itemize}
+
+\end{frame}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Generation}
+
+\begin{itemize}
+ \item 5,000,000 data generated and labeled in a pandas dataframe
+ \item data is on dropbox
+ \item size about 600 MiB
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Data Analysis}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Analysis-Histogram}
+
+\includegraphics[width=\textwidth>]{histogram.png}
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Analysis-Scatter Matrix}
+
+\includegraphics[width=\textwidth>]{scatter.png}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Analysis-Scatter Matrix}
+
+\includegraphics[width=\textwidth>]{ent_feature.png}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Analysis-Corolation Matrix}
+\includegraphics[width=\textwidth>]{corr.png}
+\end{frame}
+
+\subsection{Data Preparation}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Data Preparation}
+
+\begin{itemize}
+ \item No Missing Data
+ \itme sampling : train size
+ \item clean up : label encoder
+ \item shuffle
+ \item standard scaler
+ \item polynomial features
+ \item train test split
+\end{itemize}
+
+\end{frame}
+
+\subsection{Learning and Scoring}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Learning and Scoring}
+
+\begin{itemize}
+ \item all 15 features
+ \item direct classification : binary labels
+ \item classifier from regressor: trained on the entanglement
+ \item manually classify : sign of the regressor prediction
+ \item with/without polynomial features
+\end{itemize}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Learning and Scoring}
+
+
+\begin{itemize}
+ \item test and train scores using cross validation
+ \item test and train time
+ \item confusion matrix
+ \item  precision, recall, f1 score, AUC
+ \item precision-recall curve for each class
+ \item learning curve
+ \item vallidaion curve
+\end{itemize}
+
+
+\end{frame}
+
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Learning and Scoring}
+
+\includegraphics[width=\textwidth>]{table.png}
+
+\end{frame}
+
+\subsection{Feature Reduction}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Feature Importance}
+
+\begin{itemize}
+ \item random forest feature importance
+ \item coefs
+ \item \includegraphics[width=\textwidth>]{tree.png}
+\end{itemize}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Feature Reduction}
+
+\begin{itemize}
+ \item manually top features from feature importance
+ \item PCA
+ \itme manifold
+ \item select from model
+ \item RFE : best of all (Random Forest Classifier : 88\% with 6 features)
+\end{itemize}
+
+\end{frame}
+
+\subsection{Neural Network}
+%---------------------------------------%
+\begin{frame}
+\frametitle{Neural Network}
+ \item \includegraphics[width=\textwidth>]{summary.png}
+ \item 99\% test accuracy
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Neural Network}
+\includegraphics[width=\textwidth>]{roc.png}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{non-linear auto-encoder}
+\includegraphics[width=\textwidth>]{summary_nonlin.png}
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{non-linear auto-encoder}
+\includegraphics[width=\textwidth>]{roc_nonlin.png}
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{linear auto-encoder}
+\includegraphics[width=\textwidth>]{summary_lin.png}
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{linear auto-encoder}
+\includegraphics[width=\textwidth>]{roc_lin.png}
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Other Analysis}
+
+\begin{itemize}
+ \item noise robustness of each model to different kinds of noises
+ \item features of states which detected correctly by NN 
+ \item features of states which falsely detected
+\end{itemize}
+
+\end{frame}
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{Ongoing Research}
+
+\begin{itemize}
+ \item higher dimensions bi-partite (qudits)
+ \item multi-partite qubits
+ \item multi-parite qudits
+\end{itemize}
+
+\end{frame}
+
+%---------------------------------------%
+\begin{frame}
+  \centering \huge
+  \emph{Thanks for your attention}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{comment}
+
+In this slide, some important text will be
+\alert{highlighted} because it's important.
+Please, don't abuse it.
+ 
+\begin{block}{Remark}
+Sample text
+\end{block}
+ 
+\begin{alertblock}{Important theorem}
+Sample text in red box
+\end{alertblock}
+ 
+\begin{examples}
+Sample text in green box. The title of the block is ``Examples".
+\end{examples}
+
+
+
+%---------------------------------------%
+\begin{frame}
+\frametitle{}
+
+\begin{itemize}
+ \item 
+ \item  
+ \item  
+ \item  
+\end{itemize}
+
+\end{frame}
+
+
+\end{comment}

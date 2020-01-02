@@ -1,0 +1,3 @@
+install openvpn
+network-manager-openvpn-gnome
+resolvconf

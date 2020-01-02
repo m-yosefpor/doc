@@ -1,0 +1,65 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%equation , table , graphics
+
+
+%%%% equation
+
+
+\begin{equation} \label{eqn:eq1}
+A \iff B
+\end{equation}
+
+
+
+\begin{equation} \label{eqn:eq1}
+\begin{split}
+A & = \frac{\pi r^2}{2} \\
+ & = \frac{1}{2} \pi r^2
+\end{split}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% table
+\begin{tabular}{ |c|c|} % | for v line, l:left align ,c: center
+a1 & a2 \\
+a3 & a4 \\
+a5 & a6
+
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% graphics
+
+\begin{figure}
+\centering
+
+\includegraphics[width=.8\linewidth]{path}
+\caption{sth}
+\label{fig:ff}
+\end{figure}
+
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.8\linewidth]{quadrupole}
+        \caption{storage ring quadrupoles}
+        \label{fig:sub1}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.8\linewidth]{pole_profile}
+        \caption{pole profile}
+        \label{fig:sub2}
+    \end{subfigure}
+    \caption{Qudrupoles}
+    \label{fig:test}
+\end{figure}
+
+
+
+

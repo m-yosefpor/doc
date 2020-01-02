@@ -1,0 +1,4 @@
+docker service update \
+  --config-rm site.conf \
+  --config-add source=site-v2.conf,target=/etc/nginx/conf.d/site.conf,mode=0440 \
+  nginx

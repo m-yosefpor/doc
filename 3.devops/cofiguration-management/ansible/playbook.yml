@@ -1,0 +1,17 @@
+---
+- name: hello
+  hosts: webservers
+  remote_user: ubuntu
+  become_method: sudo
+  become: yes
+  vars:
+   http_port: 80
+   max_client: 200
+  tasks:
+  - name: installing docker
+    apt:
+     name: docker.io
+     state: latest
+
+  - name: installing mysql
+    apt: name=mysql-server state=latest

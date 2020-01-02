@@ -1,0 +1,12 @@
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+deb https://pkg.jenkins.io/debian binary/
+i jenkins
+############################################################
+d run -p
+
+
+
+docker run <image> #either on repo or local # -d (daemon) --name web1 -p 8081:80 (reach through our 8081, gives us the container:80)
+docker start <name|id>
+docker stop <name|id>
+docker ps (-a)

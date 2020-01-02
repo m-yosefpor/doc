@@ -1,0 +1,44 @@
+firewall : ufw
+ftp client: ftp
+ftp server : vsftpd
+http server : apache2
+http client (browser): wget,curl / firefox
+mail server : postfix , exim ,sentmail
+mail client : thunderbird (rss, chat,email client)
+ssh server : openssh-server
+ssh client : openssh-client ( cmd is ssh username@ip)
+--------------------
+ip (sth?)
+hostname -I : show my ip
+netstat
+lsof
+nmap
+--------------------
+(services) (systemctl start/stop enable/disable)
+
+ufw
+
+(20 ftp[data transfer])
+(21 ftp[control]) vsftpd
+(22 ssh) ssh
+(23 telnet)
+(53 domain/dns)
+(80 http) apache2
+(443 https)
+(smtp 25[send/recieve], smtp 587,465[relay], imap 143, 993 imaps, 110 pop3, 995 pop3s)
+--------------------
+#samba
+#filezilla
+#airdroid
+
+
+
+--------------------
+sudo ufw status
+sudo ufw app list
+sudo ufw allow 'Apache'
+
+
+
+
+https://vitux.com/how-to-install-and-configure-apache-web-server-on-ubuntu/

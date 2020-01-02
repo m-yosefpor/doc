@@ -1,0 +1,11 @@
+
+
+
+tcpdump -i any -s0 -nnnn -vvv not port 80 -w yosefpor.pcap 
+
+tcpdump -i eth0 -vvvv -nnnn  src 10.5.2.3 and dst port 3389
+tcpdump -vv src mars and not dst port 22
+
+tcpdump -ni any -s0 -vvv -w sth.pcap
+
+tcpdump -vvvniany -wyosef.pcap

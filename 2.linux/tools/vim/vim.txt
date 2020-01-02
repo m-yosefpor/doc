@@ -1,0 +1,111 @@
+insert mode
+command mode (normal mode)
+visual mode (v)
+visual block (ctrl+v)
+--------------------
+(unused keys)
+<F2>
+<F3><F4><F5><F6><F7><F8><F9>
+
+
+bash does not give it
+
+<F10> <F1> :
+------------------------------
+(changed)
+s : insert new line in command mode
+c : comment uncomment with #
+------------------------------
+# g and z were unused in vi, but now they are prefix to alot of comands in vim
+
+(commanad:)
+-----------------
+(going to insert mode)
+a, i : insert mode (after/before the cursor)
+A, I : insert at the end/beginning of the line
+o , O : new line after/before the current line
+
+(moving)
+h,j,k,l : move charactar-wise
+w,b,e : move word-wise
+W,B,E : move word-wise (skip punctuations)
+0 , $ : home, end
+H,M,L : move to head/middle/low of screen
+gg : ctrl +home
+G : end of the file ( use with numbers to go to line)
+(n)G: go to nth line
+
+(search)
+f , F : find next and prev	
+/ : search text , use 'n' for next and 'N' for prev
+* , #: find the next/prev occurance of the word under the cursor
+% : switch between matching () {} []
+
+(change in command mode)
+x , X : delete after/before the cursor
+r : replace one char without insert mode
+d : cut command
+dd: cut line, also can delete
+y : copy
+yy: copy line
+p, P : paste, next/prev line if in copied in normal mode, next/prev cursor if in visual mode
+>> : indent in command mode ( and visual mode)
+<< : unindent in command mode ( and visual mode)
+(n) >> : indent n lines in command mode
+(n) << : unindent n lines in command mode
+>% : on brackets
+> i B : inside block
+
+
+. : repeat commands
+u : undo
+ctrt + R : redo
+
+numbers: wait for next command and act appropriate
+	f : nth next occurance
+	i : start typing and after pressing esc , it will insert that n times.
+	G : go to nth line
+	
+	
+	
+	
+:w
+:q
+
+:wq : save and exit
+:q!
+:help , :help <key>
+
+:set number : number line
+:set nonumber :no number line (default)
+:set autoindent
+:set noautoindent
+:set all : see all settings
+:set : see all I have set
+:syntax on (default)
+:syntax off
+((see :help vimrc) add to .vimrc in home for every session)
+
+
+
+
+
+(insert mode)
+--------------------
+move letter : <Right> <Up> <Down> <Left> (n,i) , hjkl (n)
+
+
+move word wise: shift+<Right> (n,i) , w (n)
+move word wise: shift+<Left> (n,i) , b (n)
+
+end of line : <End> (n,i) , $ (n)
+beg of line : <Home> (n,i) ,0 (n)
+
+end of doc : ctrl + end (n,i)
+beg of doc : ctrl + home (n,i)
+--------------------
+using shift with all above move will select all, for here we have to go to v mode
+
+
+<C-o> insert one char in mode
+

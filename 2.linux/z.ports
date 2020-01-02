@@ -1,0 +1,19 @@
+# all tcp (sip?)
+20 ftp (data)
+21 ftp (command)
+22 ssh
+23 telnet
+25 smtp
+53 dns
+80 http
+110 pop3
+139 // netbios-ssn (samba)
+143 IMAP
+443 HTTPS  // ocserv
+445 microsoft-ds (samba)
+3306 mysql
+5060 sip
+5900+N (vnc)
+8001 (kubernetes)
+8080 http-proxy (also jenkins)
+9050 SOCKS-5 proxy (Tor)

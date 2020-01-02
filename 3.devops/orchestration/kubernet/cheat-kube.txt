@@ -1,0 +1,10 @@
+kubectl + 
+---
+api-version
+
+---
+$action $resources
+
+$action : api-resources
+$resources: kubectl
+----------

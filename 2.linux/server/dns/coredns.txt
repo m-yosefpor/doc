@@ -1,0 +1,49 @@
+(https://dev.to/robbmanes/running-coredns-as-a-dns-server-in-a-container-1d0)
+
+easier to use
+docker based
+CNCF support
+Kubernates Native
+####################
+vi Corefile
+------
+.:53 {
+    forward . 8.8.8.8 9.9.9.9
+    log
+    errors
+}
+
+example.com:53 {
+    file /root/example.db
+    log
+    errors
+}
+----------
+
+#####################
+vi example.db
+-----
+example.com.        IN  SOA dns.example.com. robbmanes.example.com. 2015082541 7200 3600 1209600 3600
+dns.example.com.    IN  A   192.168.1.2
+host.example.com.   IN  A   192.168.1.10
+server.example.com. IN  CNAME   host.example.com.
+------
+
+
+###############################
+fuser 80/tcp
+ps -p 1337 -o comm= #1337 = <process id>
+sudo systemctl stop systemd-resolved ### this is /etc/localhost??? binded to localhost:53
+### DO NOT DISABLE THIS!!! recursion not available
+/etc/resolv.conf is very important both in server and clients...
+in server it should be like
+nameserver 127.0.0.1
+-----
+
+
+sudo docker run --name coredns -d -v /home/mm/coredns/:/root/ -p 53:53/udp coredns/coredns -conf /root/Corefile
+
+
+-----
+
+Don't forget to change your nameserver in clinet   /etc/resolve.conf

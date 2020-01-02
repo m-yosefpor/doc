@@ -1,0 +1,76 @@
+"#########################################################
+"
+"
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'davidhalter/jedi-vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"############################################################
+"############################################################
+set number
+set autoindent
+set showcmd
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4
+syntax on
+highlight Function ctermfg=10
+highlight Include ctermfg=161
+"#######################################################
+noremap d "+d
+noremap dd "+dd
+noremap y "+y
+noremap yy "+yy
+noremap p "+p
+" ######
+nnoremap s o<Esc>
+"this is for comment/uncomment with # like in (python, bashscript)
+nnoremap c :if getline('.')[0]=='#'<Enter>normal! 0x<Enter>else<Enter>normal! I#<Enter>endif<Enter><Enter>
+"#####
+nnoremap <F9> 60i#<Esc>o'''<Enter>intro<Enter>'''<Enter><Esc>60i#<Esc>oimport time<Enter>t0=time.time()<Enter>#####<Enter>import sys,contextlib,os<Enter>#####<Enter>import multiprocessing as mp<Enter>from numba import jit,prange<Enter>#####<Enter>import numpy as np<Enter>import pandas as pd<Enter>import sympy as sym<Enter>import scipy as sp<Enter>import matplotlib.pyplot as plt<Enter>#import sklearn as sk<Enter>#import tensorflow as tf<Enter>#####<Enter>print('import time : {:.2f}'.format(time.time()-t0))<Enter><Esc>60i#<Esc>o<Esc>
+"#####
+nnoremap <F2> i############################################################<Esc>
+nnoremap <F3> i#####<Esc>
+"#####
+inoremap <F4> print(
+inoremap <F5> time.time()
+

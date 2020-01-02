@@ -1,0 +1,2 @@
+#!/bin/sh
+sh /home/mm/containers/bin/$1

@@ -1,0 +1,1 @@
+docker run -d --name mirror2 -v regis2:/registry -e STORAGE_PATH=/registry -e STANDALONE=false -e REGISTRY_PROXY_USERNAME=greenmn -e REGISTRY_PROXY_PASSWORD=salamsadegh -e REGISTRY_PROXY_REMOTEURL="https://registry.gitlab.com" -p 5556:5000 registry

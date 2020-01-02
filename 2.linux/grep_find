@@ -1,0 +1,2 @@
+grep dir -r -e sth
+find dir -name sth

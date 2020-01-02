@@ -1,0 +1,29 @@
+ tmux -f tmux.conf new-session \; split-window -h \;
+ 
+ -----------------------
+ tmux + command  # or in tmux.con   # or use ctrl+b :command # or ctrl+b $shortcut
+ 
+ -----------------
+ (in ctrl+b mode )
+ 
+ list-keys   ?
+ ---
+ new -s sessionname1 -n windowname1
+ neww -n windowname2 # c
+ ----
+ split-window -h/-v # splitw -h/-v     #  "/%
+ ----
+ tmux ls #list sessions
+ -----
+ choose-tree  # s
+ choose-window # w
+ -----
+ attach -t session1 # a -t session1
+ select-window -t window1
+ select-pane -U/-D/-L/-R
+-----
+ ctrl+d
+ -----
+ kill-session -t session1
+ 
+ kill-pane

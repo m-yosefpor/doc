@@ -1,0 +1,11 @@
+python scripting (sys,os library) :
+	sys.argv #(list)
+	sys.exit
+	sys.stdin
+	--
+	os.system('command') # old
+	pro = subprocess.popen  , shlex
+	pro.communicate
+	pro.... (read stdline)
+	--
+	print('sht',end='\r') #dynamic and sth

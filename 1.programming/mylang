@@ -1,0 +1,65 @@
+(comment)
+# [python , bash]
+// [c, go , rust, kotlin]
+
+
+------------------------------------------------------------
+[data structures]
+----------------
+(bool)
+bool [c,go,rust]
+----
+
+(int)
+a int [go, c], a:Int[kotlin] , i8 a (i8, i16, i32, i64, i128 _ u8,.., u128)[rust]
+----------
+(float)
+f32 , f64 [rust] , float [go ,c]
+---------
+(strings)
+"hi" instead of 'hi'
+string , str, String
+----------------------------------------------------------------
+[control flow]
+---------------
+- for (a in b) {    ::   for a in b {
+- if (true)   : if true
+
+- why val/var (at least optional like js
+- can not overwrite a var with a new value type (autocast), have to use var a = 3.4
+
+- Int a()   #   fun a():Int
+
+
+------------
+(function)
+fn (rust) # def(python), fun (kotlin), func(go)
+
+
+
+val , var , let
+and or not : && || !
+true false | True, False
+
+
+
+
+: instead of {} and spacing?
+
+
+println , print
+
+
+a..b step c  # rane(a,b,c)
+a
+
+
+
+a= [1,2,3,4] rust, python
+
+
+
+
+if a>b {}   # if a>b:
+
+for a in b  #

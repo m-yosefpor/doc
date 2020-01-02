@@ -1,0 +1,7 @@
+ip addr					ifconfig -a
+ss                             netstat
+ip route                     route
+ip maddr                     netstat -g
+ip link set eth0 up         ifconfig eth0 up
+ip -s neigh                    arp -v
+ip link set eth0 mtu 9000    ifconfig eth0 mtu 9000

@@ -1,0 +1,18 @@
+if a>b: return a (like ; for single line)
+if a>b
+    reutn b
+
+
+while a>2
+    1+4
+    print(a)
+
+true , false # True / False
+
+
+---
+true = True
+false = False
+
+def prin(x):
+    print(x,end='')

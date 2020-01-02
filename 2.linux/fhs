@@ -1,0 +1,23 @@
+/usr/bin   # /bin #
+/usr/sbin # /sbin
+
+/usr/lib #/lib
+/usr/lib32 #/lib32
+/usr/lib64 #/lib64
+/usr/libx32 #/libx32
+
+
+/opt #?
+
+/dev
+/etc
+/proc
+
+/run
+/var
+
+/boot
+
+
+/root
+/home

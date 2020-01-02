@@ -1,0 +1,29 @@
+nw = (nw0-f+2*p)/s + 1
+
+
+nc : number of channels
+P : padding , az chand taraf 0 ezafe mikonim ke bodesh barabar bashe
+f : filter size : 3*3 or 5*5
+s: tooly gaam
+
+#nw0: width size of prev layer
+#nw:  width size of this layer
+
+
+pooling ; max pooling , avg pooling
+    f, s 
+    padding niyaz nis chon asan mikhay bod taghir kone
+
+
+
+chand ta conv  , ye pooling
+
+harchi ino kam mikonim , nc ro ziyad mikonim
+
+
+
+faltten
+
+dense relu
+
+dense softamx, sigmoid?(if not efraz)

@@ -1,0 +1,8 @@
+docker stack deploy -c docker-compose.yml ims
+
+compose
+
+
+
+deploy:
+  mode: replicated #global

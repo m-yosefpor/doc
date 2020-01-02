@@ -1,0 +1,52 @@
+sudo mysql -u <user> -p<pass> # not -p <pass> but stick togethter..or let it prompt a pass
+
+
+
+show databases;
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY 'password'; #all premissions
+
+GRANT SELECT ON *.* TO 'username'@'localhost'; # only select
+
+
+CREATE DATABASE <dbname>;
+
+use <dbname>;
+
+CREATE TABLE example ( id smallint unsigned not null auto_increment, name varchar(20) not null, constraint pk_example primary key (id) );
+INSERT INTO example ( id, name ) VALUES ( null, 'Sample data' );
+
+----
+CREATE USER 'wikiuser'@'172.29.0.3' IDENTIFIED BY 'password';
+  7
+  8 alter user 'wiki'@'172.29.0.3' identified with mysql_native_password by 'pass'; #for mysql 8 compatibility with wiki
+  9
+ 10 #CREATE USER 'wikiuser'@'172.29.0.3' IDENTIFIED WITH mysql_native_password BY 'ohdear_secret';
+ 11
+ 12 GRANT ALL PRIVILEGES ON wikidb.* TO 'wikiuser'@'172.29.0.3' WITH GRANT OPTION;
+
+
+
+
+
+---
+
+mysql -u username -p < example.sql
+
+DROP TABLE <tablename>;
+DROP DATABASE <dbname>;
+
+SELECT user FROM mysql.user GROUP BY user;
+
+DELETE FROM mysql.user WHERE user = '<username>';
+
+alter user 'wiki'@'172.29.0.3' identified with mysql_native_password by 'pass'; #for mysql 8 compatibility with wiki
+
+---
+wiki: https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:User_rights
+
+
+---
+use <database>;
+show tables;
+select * from <table>;

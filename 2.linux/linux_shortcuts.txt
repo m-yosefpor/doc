@@ -1,0 +1,72 @@
+[windows control]
+
+super (super + s)
+super + tab (alt + tab) (also with arrows)
+// super + shift + tab
+super + ` (alt + `)
+super + d
+----
+super + right
+super + left
+super + up
+super + down
+super + h = minimize
+-----
+super + q = show numbers
+super + num
+super + shift + num
+
+alt + f4 (ctrl + q)
+--------------------------------------------
+--------------------------------------------
+[tabs] (every app has its own shortcut can see in up, but some unanimous)
+
+ctrl + n = new window
+ctrl + t
+ctrl + w
+ctrl + shift + t
+
+alt + num
+---------------------------------------------
+[input mode, selection mode]
+
+ctrl + x
+ctrl + c
+ctrl + v
+ctrl + a
+ctrl + z
+ctrl + y
+ctrl + s
+ctrl + f
+ctrl + p
+---
+arrows
+ctrl + arrows = word
+end
+home
+ctrl + end
+ctrl + home
+
+shift+ all above = selection
+-----------------------------------------------------
+-----------------------------------------------------
+ctrl + alt + t = terminal
+super + a = all apps
+super + m (super + v) = time and calander
+super + l = lock
+ctrl + alt + delete = log out
+-------------
+f1 = help
+f2 = rename
+f5 = refresh
+f6 = url in browser
+--------------------------------------
+[my ideas]
+super is for windows
+ctrl for tabs, so 
+alt + num == ctrl + num
+ctrl + arrow , switch , not back and go = ctrl + pageup, pagedown
+ctrl + shift + pageup/down
+
+
+

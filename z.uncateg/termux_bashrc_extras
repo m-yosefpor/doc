@@ -1,0 +1,6 @@
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='\[\033[01;32m\]\w\[\033[00m\]\$ '
+#export HOME='/storage/emulated/0/ADM'
+
+
+alias ftpdd='tcpsvd -vE 0.0.0.0 1024 ftpd -w /storage/emulated/0/backups'

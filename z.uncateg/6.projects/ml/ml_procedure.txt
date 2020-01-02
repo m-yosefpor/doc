@@ -1,0 +1,27 @@
+data collection/generation
+data analysis
+data preperation:
+	missing handling
+	feature reduction : pca
+	shuffle ##
+	feature increasing : polynomial features
+	data scaling : standardscaler, minmax , 
+
+classifiers, regressors | with GridSearchCV , RandomizedSearchCV , a good model
+ensembles: boot straping , Bagging: for high var, low bias
+
+
+
+learning curve : bias , variance
+validation curve:
+
+
+sth is evident: always test<trian,
+	but if test << train, increase sample size , if its not possible to increase that much so
+	else if (test ==train): model saturated, if higher score needed, change model
+
+random forrest , dummy classifier
+
+
+
+decision tree and random forrest dont react to sccaling 

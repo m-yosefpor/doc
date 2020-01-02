@@ -1,0 +1,45 @@
+#share data train and test on each other data
+#write both classifiers and regressors
+#achieved 1.0 test score for linear regression
+#y scaled and again 1.0 score
+#achieved 0.85 test score for direct classification
+#build a classifer with linear regressor, write a class myself
+#achieved 0.997 test score with the new classifier
+#checked the errors, it was for zero determinants, regressor estimated 10e-18 or so
+#pickle export the regressor and new classifier
+#histogram for x  , sigmaz?? not really rand_dm
+#random generation of density matrix using qutip, using np.rand and NN^\dag
+#random generation using a uniform selection of features in bloch sphere
+#proposal
+------------------------------
+validation curves
+learning curves
+GridSearchCV , RandomizedSearchCV
+
+removing each feature and calculate scores
+add noise and calculate robustness
+
+
+study entanglement : physical review recents, seprability criterion
+prepare for a presentation
+------------------------------
+?add kernel, with only jomalate martabe 4
+------------------------------
+how to : randomized/grid searchCV + feature selction + cross validation
+
+
+data analysis
+tree feature importance
+entangle ment base on features
+corolation martabe balatar, decistion tree default is 1
+tarkib khati ina
+
+
+table of comparision
+
+h4
+fek kon rooye masale, nahve erae
+weight and model
+clf hame jadval , with pca , manifold
+reg-clf hame jadval, with pca, manifold
+is pca same as A*B

@@ -1,0 +1,9 @@
+busybox:
+	tcpsvd -vE 0.0.0.0 1024 ftpd -w / # on port 1024 : ftp 192...1 1024
+
+openssh:
+	ssh user@ip
+sshd # to connect : ssh -p 8022 ip
+pkill sshd
+
+passwd

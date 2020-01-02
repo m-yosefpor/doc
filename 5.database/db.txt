@@ -1,0 +1,19 @@
+https://softwareengineering.stackexchange.com/questions/194340/why-are-nosql-databases-more-scalable-than-sql
+
+https://medium.com/@denisanikin/what-an-in-memory-database-is-and-how-it-persists-data-efficiently-f43868cff4c1
+
+BASE vs ACID
+
+A : Mongodb: MongoDB write operations are atomic, only at the level of a single document. If you’re modifying multiple subdocuments inside a document the operation is still atomic, but if you’re modifying multiple documents, the operation is not atomic., couchdb
+C : 
+I :
+D : IMDB/MMDB  (redis [with persistance] , memcache)  ,  mongodb: in memory storage engine
+(C) [cap] vs EC:    Cassandra , riak , [mongo] single-master system and all reads go to the primary by default. If you optionally enable reading from the secondaries then MongoDB becomes eventually consistent where it's possible to read out-of-date results.
+
+
+
+
+b tree: mysql , 
+lsm : rocksdb
+
+voltDB , memSQL : inmemory sql

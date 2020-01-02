@@ -1,0 +1,4 @@
+golang tour.golang.org:
+		fmt
+		time
+		math

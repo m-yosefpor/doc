@@ -1,0 +1,19 @@
+ssh root@machineB 'cmd'
+user@host> ssh user2@host2 "echo \$HOME"  :prints out /home/user2
+user@host> ssh user2@host2 "echo $HOME"    :prints out /home/user
+
+
+
+
+ssh root@MachineB 'bash -s' < local_script.sh
+cat sth | ssh -t mohammad@192.168.7.21  
+
+
+ sshpass -p password ssh root@$line bash
+ 
+ 
+
+ssh root@MachineB 'bash -s' < local_script.sh
+
+ssh -X/-Y
+

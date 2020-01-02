@@ -1,0 +1,14 @@
+a browser : firefox , chrome
+firefox:
+add gnome extension in extensions
+sudo apt install gnome-extension
+
+
+
+add gnome extension in chrome store
+sudo apt install chrome-gnome-shell
+############################################################
+hide top bar
+desktop icons
+appfolders management extension
+

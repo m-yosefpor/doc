@@ -1,0 +1,5 @@
+lxc list
+lxc launch ubuntu:
+lxc list
+lxc exec name1 bash
+ps ax

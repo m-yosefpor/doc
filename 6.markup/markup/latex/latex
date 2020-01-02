@@ -1,0 +1,21 @@
+\textcolor{red}{sth}
+\colorbox{red}{sth}
+\bold{}
+\textit{}
+
+
+array vs tabular vs blockarray
+----
+\[ vs $$ vs equation vs split vs 
+displaymath =  \[ = unnumberd equation = equation*
+----
+\( adfk \) = $ ad$
+figure vs graphic
+parbox
+
+
+
+
+\newcommand{\quotes}[1]{``#1''}
+...
+\quotes{Hello World!}

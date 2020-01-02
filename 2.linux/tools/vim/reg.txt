@@ -1,0 +1,24 @@
+" is the sign for register
+:reg show all registers
+
+e.g. : "kyy  or "kp  , that will use register k
+and capital means append, e.g. "Ky means append to register k
+if not specified then it is " register means : simple p is ""p
+
+system registers are + for mouse and * for ctrl+c and etc
+
+to check if vim can access system registers or not, check:
+
+:echo has('clipboard') if it returns 0 so it has not, you have to
+compile your vim with +clipboard option
+
+making vim is ... you know :)
+
+so just install vim-gtk
+
+
+then map like vnoremap y "+y
+note: don't use map cause it becomes recursively mapped and it haults.
+
+############################################################
+don't do +y reg, if needed, do it like in terminal, select with mouse and then ctrl+c and ctrl+v , if needed to select multiple lines or the whole text, :set nonumber

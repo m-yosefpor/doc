@@ -1,0 +1,9 @@
+https://github.com/nicolaka/netshoot
+
+docker network ls
+
+docker run -it --rm -v /var/run/docker/netns:/var/run/docker/netns --privileged=true nicolaka/netshoot
+nsenter --net=/var/run/docker/netns/1-79lzwjai49 sh
+
+ip a (ifconfig)
+tcpdump 

@@ -1,0 +1,10 @@
+
+#!/bin/bash
+  2
+  3 while getopts "ab:" opt; do
+  4 >----case $opt in
+  5 >---->----a)
+  6 >---->----echo "-a was triggered"
+  7 >---->----;;
+  8 >---->----\?)
+

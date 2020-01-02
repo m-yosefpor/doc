@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  prometheus:
+    image: prom/prometheus
+#    volumes:
+#      - ./prometheus.yml:/prometheus.yml
+    ports:
+      - 9090:9090
+#    command: '--config.file=/prometheus.yml'
+
+
+
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+     - 9093:9093
+#    volumes:
+#     - ./alertmanager.yml:/alertmanager.yml
+#    command: '--config.file=/alertmanager.yml'
+
+  grafana:
+    image: grafana/grafana
+    ports:
+     - 3000:3000
+
+
+
+
+# grafana template 11074 : node-exporter
+# grafana template : 193
+
+
+
+container_start_time_seconds metric, which records the start time of containers (in seconds). You can select for specific containers by name using the name="<container_name>"

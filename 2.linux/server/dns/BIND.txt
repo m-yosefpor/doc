@@ -1,0 +1,108 @@
+sudo apt-get install bind9 bind9utils bind9-doc
+--------
+########################################
+sudo nano /etc/default/bind9
+...
+OPTIONS="-u bind -4"
+...
+sudo systemctl restart bind9
+
+----------
+########################################
+sudo nano /etc/bind/named.conf.options	
+
+Above the existing options block, create a new ACL (access control list)
+
+acl "trusted" {
+        10.128.10.11;    # ns1 - can be set to localhost
+        10.128.20.12;    # ns2
+        10.128.100.101;  # host1
+        10.128.200.102;  # host2
+};
+
+
+
+options {
+        directory "/var/cache/bind";
+
+        recursion yes;                 # enables resursive queries
+        allow-recursion { trusted; };  # allows recursive queries from "trusted" clients
+        listen-on { 10.128.10.11; };   # ns1 private IP address - listen on private network only
+        allow-transfer { none; };      # disable zone transfers by default
+
+        forwarders {
+                8.8.8.8;
+                8.8.4.4;
+        };
+
+        . . .
+};
+-------------
+########################################
+sudo nano /etc/bind/named.conf.local
+
+zone "nyc3.example.com" {
+    type master;
+    file "/etc/bind/zones/db.nyc3.example.com"; # zone file path
+    allow-transfer { 10.128.20.12; };           # ns2 private IP address - secondary
+};
+
+zone "128.10.in-addr.arpa" {
+    type master;
+    file "/etc/bind/zones/db.10.128";  # 10.128.0.0/16 subnet
+    allow-transfer { 10.128.20.12; };  # ns2 private IP address - secondary
+};
+
+--------
+########################################
+sudo mkdir /etc/bind/zones
+sudo cp /etc/bind/db.local /etc/bind/zones/db.nyc3.example.com
+sudo nano /etc/bind/zones/db.nyc3.example.com
+
+$TTL    604800
+@       IN      SOA     ns1.nyc3.example.com. admin.nyc3.example.com. (
+                  3     ; Serial
+             604800     ; Refresh
+              86400     ; Retry
+            2419200     ; Expire
+             604800 )   ; Negative Cache TTL
+;
+; name servers - NS records
+     IN      NS      ns1.nyc3.example.com.
+     IN      NS      ns2.nyc3.example.com.
+
+; name servers - A records
+ns1.nyc3.example.com.          IN      A       10.128.10.11
+ns2.nyc3.example.com.          IN      A       10.128.20.12
+
+; 10.128.0.0/16 - A records
+host1.nyc3.example.com.        IN      A      10.128.100.101
+host2.nyc3.example.com.        IN      A      10.128.200.102
+
+########################################
+sudo cp /etc/bind/db.127 /etc/bind/zones/db.10.128
+sudo nano /etc/bind/zones/db.10.128
+
+
+
+$TTL    604800
+@       IN      SOA     nyc3.example.com. admin.nyc3.example.com. (
+                              3         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+; name servers
+      IN      NS      ns1.nyc3.example.com.
+      IN      NS      ns2.nyc3.example.com.
+
+; PTR Records
+11.10   IN      PTR     ns1.nyc3.example.com.    ; 10.128.10.11
+12.20   IN      PTR     ns2.nyc3.example.com.    ; 10.128.20.12
+101.100 IN      PTR     host1.nyc3.example.com.  ; 10.128.100.101
+102.200 IN      PTR     host2.nyc3.example.com.  ; 10.128.200.102
+###########################################
+
+
+
+

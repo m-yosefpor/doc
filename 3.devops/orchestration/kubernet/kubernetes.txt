@@ -1,0 +1,83 @@
+sudo apt update
+
+
+
+# turn off swap
+swapoff -a
+sudo vim /etc/fstab
+#comment the swap line
+
+
+#update the hosts name
+/etc/hosts
+
+#set static IP
+
+/etc/network/interfaces
+
+auto enp0s8
+iface enp0s8 inet static
+adress <IP>
+
+
+#install docker
+sudo apt install docker.io
+
+sudo apt install apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+cat <<EOF >/etc/apt/resources.list.d/kubernetes.list deb http://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+sudo apt update
+
+sudo apt install kubelet kubeadm kubectl
+
+vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"
+
+
+
+
+---------------
+(only server)
+
+sudo kubeadm init --pod-network-cidr=<> --apiserver-advertise-address=<IP_master> # Caico CNI: 192.168.0.0/16 , Flannel CNI : 10.244.0.0/16
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -g) $HOME/.kube/config
+
+
+kubectl get nodes
+kubectl get pods --all-namespaces
+
+
+## pod network??
+kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+
+
+
+## dashboard
+kubectl creat -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+
+##
+kubectl proxy
+
+kubectl create serviceaccount dashboard -n default
+
+kubectl creat clusterrolebinding dashboard-admin -n defualt \
+--clusterrole=cluster-admin \
+--serviceaccount=default:dashboard
+
+
+#
+kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.....
+
+
+#go to localhost:8001/api/v1/namespaces/kube-system/services....
+
+
+
+
+--------------
+(node only)
+sudo kubeadm join <servIP> --token .jlkjkljk --descovery-token-ca-cert-hash sha256:jasfkjajfaskljfkafjkajflkj

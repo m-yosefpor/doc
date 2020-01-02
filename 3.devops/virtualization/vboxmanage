@@ -1,0 +1,21 @@
+vboxmanage
+	https://www.virtualbox.org/manual/ch08.html
+	
+	
+vboxmanage
+
+VBoxManage hostonlyif create
+theN:
+
+https://www.linuxtechi.com/manage-virtualbox-virtual-machines-command-line/
+
+
+vboxmanage and virtualbox are user based:
+(sudo vboxmanage list vms) differs from (vboxmanage list vms ) [as another user]
+#even extension packs
+also sudo virtualbox, and , virtualbox [as anther user]
+
+-----------------------------
+hyper-v grabs all the vt-x and virtualbox cannot run, when enabled:
+
+hyper-v off: CMD (as admin) > bcdedit /set hypervi

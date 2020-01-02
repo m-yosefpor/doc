@@ -1,0 +1,10 @@
+apiVersion: app/v1, v1, ... 
+kind: Pod, Deployment (Replication..?) , Service , ServiceAccount, ClusterRole(?) , ClusterRoleBind
+metedata:
+spec:
+  replicas: 2
+  
+  
+  
+  
+  

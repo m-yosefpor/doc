@@ -1,0 +1,108 @@
+sh (bourne again shell)
+k shell
+x shell
+bourne shell
+
+kdb
+x servere
+gnome 3
+
+coreutils
+busybox
+
+echo (shell built-in)
+echo st  >dir1
+
+man
+$command --help | less
+
+type (b)
+which
+
+pwd (shell bulit-in)
+
+ls (i)
+dir
+tree
+
+cd (b)
+
+mkdir (i)
+rmdir (i)
+
+ln
+
+file (i)
+touch (i)
+rm -irf (i)
+cp -ir (i)
+mv -i (i)
+rename
+
+head -$n (default 10)
+tail
+cat f1 f2 f3 >f4 (i)
+cat >f1   <<str1 (default EoF  ctrl+d)
+tac (i)
+more
+less (i)
+
+echo
+
+vim, vi, nano, gedit, gvim, pico
+
+apt
+apt-get
+yum # centos, rhel
+dnf # fedora
+pip
+(gui) software center
+
+.deb # dpkg command
+from source code # compile   # dependency  (apt auto install dependency)
+
+tar
+tar.gz , tgz
+tar.bz2
+gz (gunzip)
+bz2 , bzip2 (bunzip2)
+zip
+rar
+
+type cmd1 (b)
+which (i)
+alias cmd1=cmd2 (b)
+unalias (b)
+
+
+
+bash : new bash, then with 'exit' back to last dir
+
+
+set -x, +x
+______________
+ps (process)
+
+
+_____________________
+ping
+nslookup
+dig
+nmap
+
+fdisk
+
+help
+type
+pwd
+cd
+alias
+unalias
+echo
+exit
+export
+
+--help
+--version
+--verbose
+

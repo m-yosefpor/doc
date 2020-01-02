@@ -1,0 +1,4 @@
+sudo apt install build-essential
+sudo snap install --classic snapcraft
+snapcraft init
+snapcraft

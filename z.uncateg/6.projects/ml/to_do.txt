@@ -1,0 +1,10 @@
+#state haye tashkhis nemidim ro negah darim rooye fazaye hilbert bekeshim
+
+#sayer maghalat witness hashoono code konam , ba in random ha recall dar biyarim moghayese konim
+
+#ba hamoon 6 ta tree bebinim ta chand miresim
+
+#ba auto encoder, ha biyaym check konim
+
+
+#pca rooye neural network

@@ -1,0 +1,30 @@
+--init-file
+bind  /etc/inputrc
+ctrl+v : ctrl+c    #quoted-insert
+ctll+v : alt+c  #quoted-insert
+--------
+\C-x  : ctrl +x
+\ex : alt +x
+
+
+
+------
+bind '"\e[18~":"Hi!"'
+Bind a macro to your F7 key (keycode \e [ 1 8 ~) with the text Hi!.
+
+bind "\C-k":kill-line 
+Bind Ctrl+k to the kill-line function, which in bash means to cut all text
+
+bind "\C-y":yank
+Bind Ctrl+y to the yank function, which in bash means to paste the last text that was cut.
+
+
+bind -r "\C-y"
+Remove all bindings for the key sequence \C-y. The yank function is no longer bound to anything.
+
+
+
+bind -p > mybinds
+Output all key bindings to a file called mybinds, in a format that can be used as input to bind. For example, you can open mybinds in a text editor and make changes to bindings, and save the file. Then, you can apply your changes with the next command.
+
+bind -f mybinds

@@ -1,0 +1,50 @@
+(go to preferences in hotkeys, changable)
+
+
+
+
+h: subtitle delay
+g: subtitle early
+v: subtitle track switch , off
+
+e: next frame(frame by frame)
+
+
+w: full screen window ##
+f: switch full screen
+o: original size or fit to screen
+
+t: show time
+
+[ : speed slow
+] : speed fast
+= : speed 1.0x
+
+
+a: aspect ratio
+c: crop
+
+j: audio delay -
+k: audio delay +
+b: audio track switch
+
+m: mute / unmute
+
+space : pause / unpause
+n: next
+p: previous
+s: stop
+l: loop all/one/off
+
+----
+S : screenshot
+
+
+
+shift + left/right : very short
+alt + left/right : short
+
+ctrl + left : medium
+alt + ctrl + left : long
+
+up / down : volume
