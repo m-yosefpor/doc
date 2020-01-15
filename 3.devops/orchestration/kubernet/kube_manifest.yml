@@ -1,0 +1,63 @@
+apiVersion: app/v1, v1, ... 
+kind: Pod, Deployment (ReplicaSet) , Service , ServiceAccount, ClusterRole(?) , ClusterRoleBind
+metedata:
+spec:
+  replicas: 2
+  
+  
+  
+  
+  
+  
+  ---
+apiVersion: v1
+kind: Pod
+spec:
+ containers:
+ - name: sth
+   image: nginx
+   ports:
+   - containerPort: 80
+
+
+
+    ---
+    apiVersion: app/v1
+    kind: Deployment
+    metedata:
+      name: nginx-deployment
+      spec:
+        selector:
+          app: nginx
+        replicas: 3
+        template:
+          metdata:
+            labels:
+              app: nginx
+          spec:
+            containers:
+            - name: nginx
+              image: nginx:1.7.9
+              ports:
+              - containerPort: 80
+            
+            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: NodePort #ClusterIP (default), LoadBalancer, ExternalName #if want to expose to exeternal world (publish)
+  selector:
+    app: MyApp
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8001
+      targetPort: 80
+      nodePort: 30036 #you can only use ports 30000–32767
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443

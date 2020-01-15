@@ -74,11 +74,11 @@ sudo apt update
 (only master)
 
 
-# api server
+# api server, network
 	(if previously configured): kubeadm reset -f && rm -rf /etc/kubernetes /var/lib/etcd $HOME/.kube/config
 	kubeadm init --pod-network-cidr={$CNI address} --apiserver-advertise-address={$IP_master} # Calico CNI: 192.168.0.0/16 , Flannel CNI : 10.244.0.0/16
    
-#conifg
+#conifg kubectl
 	mkdir -p $HOME/.kube
 	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 	sudo chown $(id -g) $HOME/.kube/config

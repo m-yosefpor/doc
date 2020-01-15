@@ -1,0 +1,4 @@
+minikube version
+
+minikukbe start
+

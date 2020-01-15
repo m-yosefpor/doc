@@ -1,0 +1,5 @@
+https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0
+
+You can choose an ingress controller such as ingress-nginx or NGINX kubernetes-ingress
+You can choose an API Gateway deployed as a Kubernetes service such as Ambassador (built on Envoy) or Traefik.
+You can deploy your own using a custom configuration of NGINX, HAProxy, or Envoy.
