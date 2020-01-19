@@ -1,0 +1,75 @@
+c --> s
+handshake type: client hello
+length
+version: TLS 1.2
+Random #RandomAlice
+Session ID
+Cipher suites Length: 22
+cihper suites:
+	TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+	TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA (0xc02f)   ## protocol {ssl,tls} + key exchange{dh, dhe (ephemeral), ecdh, ecdhe } + Auth {rsa, ecdsa} + ciphper {des,aes-gcm(galova counter mode, aes-cbc (cipher block chaining), rc4, camellia} + MAC (message authentication code) {sha,md5]
+	
+	
+s --> c
+handshake type: server hello
+version: TLS 1.2
+session ID
+cipher suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+Random: #randomBob
+
+s ---> c
+Handshake type: certificate
+certificate length: 1134
+certificate: id-at-commonName=sni32414.cloudflaressl.com, id-at-organization...  #prove the ownership of a 
+certificate length: 993
+certificate: id-at-commonName=COMDO ECC DOMAIN ....
+		# version - v3  x509
+		# serial number -> CA
+		# sig algorithm - SHA 256 RSA
+		# sig hash algorithm - SHA 256
+		# Issuer - CA
+		# Valid dates 1/1/2016-2/1/2018
+		# Subject - CN, loc, state, city
+		# publickey - RSA 2048
+		# AIA (Authority Info Access) -> ocsp (online certification status protocol)
+		
+		
+
+Handshake type: server key exchange
+EC-Diffie Hellman server params:
+	curve type: named_curve
+	named_curve: secp256r1
+	pubKey length: 65
+	pubKey: 3214kj134klh13jk4gh1gk
+	signature hash algorithm: 0x0603
+	signature length: 72
+	signature: 53af67ad58asdf4as65f
+	
+s ---> c
+Handshake type: server hello done
+
+
+c ---> s
+Handshake type: client key exchange
+EC-Diffie Hellman client params:
+  PubKey length: 65
+  PubKey: 892841adsf67ad65876a87s6fd          ### this is encrypte	d session key/ pre-master key
+  
+  
+
+### calculating  master-secret f(pre-masster,randomAlice, randomBo b)  The point of a premaster secret is to provide greater consistency between TLS cipher suites. While RSA cipher suites involve the client sending a random 48-byte premaster secret directly to the server, other suites do more complex things to generate the secret, and end up with a secret that might have some structure to it. For instance, (EC)DH suites use (elliptic curve) Diffie-Hellman to negotiate the secret; the output of this can be longer or shorter than 48 bytes, and it might potentially be poorly distributed (which could be bad). For PSKs, it's even worse - the premaster secret basically is the PSK. For various reasons, it's nice to have the master secret be some consistent format; it lets you separate the key-exchange side from the encryption side. Likewise, it's nice to have the master key be pseudorandom.
+### sesision key / shared secret: This could be the encryption key, integrity protection keys (for say HMAC), IVs for the ciphers. This could be the encryption key, integrity protection keys (for say HMAC), IVs for the ciphers
+
+c --->s
+cipher spec exchange
+
+c --->s
+client finished
+
+s ---> c
+cipher spec exchange
+
+s ---> c
+server finished
+
+

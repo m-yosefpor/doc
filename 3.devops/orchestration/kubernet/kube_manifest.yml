@@ -22,12 +22,13 @@ spec:
 
 
     ---
-    apiVersion: app/v1
+    apiVersion: apps/v1
     kind: Deployment
     metedata:
       name: nginx-deployment
-      spec:
-        selector:
+    spec:
+      selector:
+        matchLabels:
           app: nginx
         replicas: 3
         template:
