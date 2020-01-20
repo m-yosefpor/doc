@@ -1,0 +1,12 @@
+/etc/ansible/hosts
+####
+[sth]
+193.4.11.34
+193.4.5.55
+
+
+[sthelse]
+193.5.194.211
+
+###########
+ansible-playbook -s playbook.yml

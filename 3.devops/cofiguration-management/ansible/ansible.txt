@@ -1,0 +1,7 @@
+ansible-playbook -s play.yml
+
+ansible all -m ping -u ubuntu
+
+ansible sth -u ubuntu -m ping
+
+ansible sth -m command "

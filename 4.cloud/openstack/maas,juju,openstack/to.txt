@@ -1,0 +1,7 @@
+## maas
+
+sudo apt-add-repository -y ppa:maas/2.6
+sudo apt install -y maas
+sudo maas init --admin-username admin --admin-password ubuntu \
+   --admin-email admin@example.com --admin-ssh-import <username>
+sudo maas-region apikey --username=admin > ~/admin-api-key

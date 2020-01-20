@@ -15,3 +15,25 @@
 
   - name: installing mysql
     apt: name=mysql-server state=latest
+
+
+  - name: commands
+    command: echo sth
+    
+  - name: run local script on remote/dest
+    script: sth.sh --somearge 1 2 3
+    args:
+      chdir: /home
+
+  - name: copy scp
+    copy: src=/path/to/source/on/local  dest=/path/to/remote/dest
+    
+    
+  - name: service restart
+    service: name=nginx state=restarted
+    
+    
+ - name: service 
+ 
+ 
+ 
