@@ -1,0 +1,33 @@
+/proc/modules
+
+lsmod
+insmod /lib/modules/4.4.0-21-generic/kernel/drivers/cpufreq/speedstep-lib.ko
+
+rmmod /lib/modules/4.4.0-21-generic/kernel/drivers/cpufreq/speedstep-lib.ko 
+
+
+modprobe # searches in /lib/modules/$(uname -r) , but excludes alternative configuration files in the /etc/modprobe.d directory.
+
+
+
+modprobe speedstep-lib  # insert
+
+
+modprobe -r speedstep-lib  # remove
+
+Note: Under modprobe, automatic underscore conversion is performed, so there is no difference between _ and – while entering module names.
+
+depmod -a
+
+
+
+
+
+
+[kmod] : lsmod, rmmod, insmod , modprobe , 
+
+
+########################
+
+
+s docker  run  --name test  --privileged  --cap-add=ALL  -it  -v  /dev:/dev  -v  /lib/modules:/lib/modules ubuntu
