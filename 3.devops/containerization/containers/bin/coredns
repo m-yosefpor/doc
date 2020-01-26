@@ -1,8 +1,0 @@
-#!/bin/sh
-sudo docker run \
-	--name coredns \
-	-d \
-	-v $HOME/containers/etc/coredns/:/root/ \
-	-p 53:53/udp \
-	coredns/coredns \
-	-conf /root/Corefile \

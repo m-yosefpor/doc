@@ -1,8 +1,0 @@
-my.                 IN  SOA dns.my. yosefpor.my. 2019082541 7200 3600 1209600 3600
-dns.my.             IN  A   192.168.2.84
-pc.my.              IN  A   192.168.5.206
-ims.my.             IN  A   192.168.7.17
-sinadns.my.         IN  A   192.168.1.2
-ali.my.             IN  A   192.168.1.21
-redmine.my.         IN  A   192.168.1.23
-imscore.my.         IN  CNAME ims.my.

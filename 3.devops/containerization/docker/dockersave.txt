@@ -1,6 +1,6 @@
 
 
-docker save busybox > busybox.tar
+docker save busybox:latest > busybox.tar
 
 docker save --output busybox.tar busybox
 

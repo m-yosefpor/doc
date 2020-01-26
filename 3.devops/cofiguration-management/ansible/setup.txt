@@ -1,12 +1,12 @@
 /etc/ansible/hosts
 ####
-[sth]
+[masters]
 193.4.11.34
 193.4.5.55
 
 
-[sthelse]
+[workers]
 193.5.194.211
 
 ###########
-ansible-playbook -s playbook.yml
+ansible-playbook  playbook.yml
