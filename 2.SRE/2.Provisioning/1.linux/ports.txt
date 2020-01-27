@@ -1,0 +1,18 @@
+22 : ssh , scp , sftp
+443 (80) : https
+465 (25) : smtps
+993 (143,220): imaps
+853 (53): DNS over TLS (DoT)
+995 (110): pop3s
+5061 (5060): sip over tls
+
+
+---
+191 irc, 994 irc over tls
+20 ftp data , 989 fpts
+21 ftp control , 990 ftps
+23 telnet, 992 telnet over tls
+109 pop2
+
+
+3478: STUN, TURN
