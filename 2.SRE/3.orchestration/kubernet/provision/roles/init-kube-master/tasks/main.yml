@@ -1,0 +1,25 @@
+- name: Initialize the Kubernetes cluster using kubeadm
+  command: "{{ item }}"
+  with_items:
+   - kubeadm reset -f
+   - kubeadm init --node-name k8s-master --pod-network-cidr=192.168.0.0/16
+
+
+- name: Setup kubeconfig for root user
+  command: "{{ item }}"
+  with_items:
+   - mkdir -p /root/.kube
+   - cp /etc/kubernetes/admin.conf /root/.kube/config
+     #   - chown root:root /root/.kube/config
+
+
+- name: Install calico pod network
+  command: kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+
+- name: Generate join command
+  command: kubeadm token create --print-join-command
+  register: join_command
+
+- name: Copy join command to local file
+  #become: "{{user}}" #???
+  local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./join-command"

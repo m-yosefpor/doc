@@ -1,0 +1,15 @@
+- name: Installing Helm
+  command: "{{ item }}"
+  with_items:
+   - curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > /tmp/install-helm.sh
+   - chmod u+x /tmp/install-helm.sh
+   - . /tmp/install-helm.sh
+
+
+
+- name: Installing tiller
+  command: " {{item}} "
+  with_items:
+   - kubectl -n kube-system create serviceaccount tiller
+   - kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+   - helm init --service-account tiller

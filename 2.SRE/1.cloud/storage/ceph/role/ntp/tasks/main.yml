@@ -1,0 +1,21 @@
+- name: Install NTP
+  apt: 
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+      - ntp
+      - ntp-date 
+      - ntp-doc
+
+
+- name: start ntp
+  service:
+    name: docker
+    state: started
+
+- name: enable ntp service
+  service:
+    name: docker
+    enabled: yes 

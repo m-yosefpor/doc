@@ -1,0 +1,4 @@
+- name: Installing k8s dashboard
+  command: "{{ item }}"
+  with_items:
+   - helm install stable/kubernetes-dashboard --name kubernetes-dashboard --namespace kube-system

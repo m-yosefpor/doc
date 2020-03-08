@@ -1,0 +1,41 @@
+sudo apt install nfs-kernel-server
+
+sudo mkdir -p /mnt/sharedfolder
+
+sudo chown nobody:nogroup /mnt/sharedfolder
+
+sudo chmod 777 /mnt/sharedfolder
+
+
+
+---
+
+## /etc/exports
+
+/mnt/sharedfolder subnetIP/24(rw,sync,no_subtree_check)
+
+/mnt/sharedfolder client2IP(rw,sync,no_subtree_check)
+
+
+
+
+
+----
+
+sudo exportfs -a
+
+
+
+sudo systemctl restart nfs-kernel-server
+
+
+
+
+
+================================ client ==============
+
+sudo apt-get install nfs-common
+
+
+
+sudo mount serverIP:/exportFolder_server /mnt/mountfolder_client

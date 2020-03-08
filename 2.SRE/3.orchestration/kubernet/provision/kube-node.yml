@@ -1,0 +1,12 @@
+---
+- name: Initializing worker node
+  hosts: node
+  become: yes            #in ansible-playbook -b command
+  #  remote_user: ubuntu    #in inventory
+  #  become_method: sudo    #not necessary
+  roles:
+    - swap-off
+    - apt-tls
+    - docker
+    - kube
+    - init-kube-node

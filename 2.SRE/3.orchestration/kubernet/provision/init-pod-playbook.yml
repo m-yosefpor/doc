@@ -1,0 +1,9 @@
+---
+- name: 
+  hosts: master
+  remote_user: ubuntu
+  #  become_method: sudo
+  become: yes
+  roles:
+          #    - helm
+    - helm-kube-dashboard 
