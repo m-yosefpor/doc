@@ -1,0 +1,7 @@
+adduser : password, home ,...
+
+useradd: only user
+passwd
+
+
+usermod -aG sudo user1

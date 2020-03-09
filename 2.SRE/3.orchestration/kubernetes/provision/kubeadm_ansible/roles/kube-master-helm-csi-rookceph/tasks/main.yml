@@ -1,0 +1,9 @@
+- name: add rook helm repo
+  command: "{{ item }}"
+  with_items:
+  - helm repo add rook-release https://charts.rook.io/release
+
+- name: install rook-ceph helm repo
+  command: "{{ item }}"
+  with_items:
+  - helm install --namespace rook-ceph rook-release/rook-ceph

@@ -9,4 +9,4 @@
     - apt-tls
     - docker
     - kube
-    - init-kube-node
+    - kube-node

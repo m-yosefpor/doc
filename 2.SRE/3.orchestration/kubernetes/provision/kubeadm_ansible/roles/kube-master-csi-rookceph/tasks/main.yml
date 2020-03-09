@@ -1,0 +1,13 @@
+- name: cloning rook-ceph github repo
+
+
+
+- name: kubernetes deploy
+
+  common.yaml
+  operator.yaml
+  cluster.yaml
+
+
+- name: ceph rbd storage class 
+  storageclass.yaml

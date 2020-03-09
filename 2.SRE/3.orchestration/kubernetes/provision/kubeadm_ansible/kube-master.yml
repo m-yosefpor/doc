@@ -1,14 +1,19 @@
 ---
 - name: Initializing master node
   hosts: master
+  become: yes
   #  remote_user: ubuntu
   #  become_method: sudo
-  #  become: yes
   #vars:
   #  masterIP: 10.12.7.60
   roles:
-    - swap-off
-    - apt-tls
-    - docker
-    - kube
-    - init-kube-master
+#    - swap-off
+#    - apt-tls
+#    - docker
+#    - kube
+#    - kube-master
+#    - kube-master-cni-calico
+#    - kube-master-csi-rookceph
+    - kube-master-helm
+    - kube-master-helm-kubedashboard
+    - kube-master-helm-csi-rookceph

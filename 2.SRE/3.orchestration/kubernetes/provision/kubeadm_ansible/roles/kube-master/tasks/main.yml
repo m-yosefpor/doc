@@ -13,8 +13,8 @@
      #   - chown root:root /root/.kube/config
 
 
-- name: Install calico pod network
-  command: kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+#- name: Install calico pod network
+# command: kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 
 - name: Generate join command
   command: kubeadm token create --print-join-command

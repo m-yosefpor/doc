@@ -1,6 +1,7 @@
 no
 
 
+ns
 
 po
 rs
@@ -12,6 +13,15 @@ ep
 svc
 
 
+
+secret
+configMap
+
+sc
 pv
 pvc
-sc
+
+
+
+
+crd

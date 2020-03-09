@@ -1,0 +1,31 @@
+git clone https://github.com/rook/rook.git
+
+cd rook/cluster/examples/kubernetes/ceph/
+
+kubectl apply -f common.yaml
+
+kubectl apply -f operator.yaml 
+
+kubectl apply -f cluster.yaml
+
+kubectl apply -f storageclass.yaml
+
+kubectl get sc
+
+kubectl get pods -n rook-ceph
+
+kubectl apply -f toolbox.yaml
+
+kubectl exec -it rook-ceph-tools-76c7d559b6-td9gd -n rook-ceph sh
+
+# ceph -s
+
+kubectl apply -f mysql.yaml #in git repo example/kubernetes
+
+
+
+
+
+https://medium.com/volterra-io/kubernetes-storage-performance-comparison-9e993cb27271
+
+https://medium.com/faun/what-is-rook-ceph-storage-integration-on-kubernetes-with-rook-9fa3f3487b90
