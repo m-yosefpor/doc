@@ -1,0 +1,2 @@
+k expose deploy nginx --name nginx-node1 --external-ip 10.12.7.59
+k expose deploy nginx --name nginx2-node2 --external-ip 10.12.7.60

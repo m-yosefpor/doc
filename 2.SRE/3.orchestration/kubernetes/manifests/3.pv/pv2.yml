@@ -1,0 +1,13 @@
+apiVersion: "v1"
+kind: "PersistentVolume"
+metadata:
+  name: "pvnfs02"
+spec:
+  capacity:
+    storage: "1Gi"
+  accessModes:
+  - "ReadWriteOnce"
+  nfs:
+    path: "/mnt/share/pv2"
+    server: "10.12.7.59"
+  persistentVolumeReclaimPolicy: "Delete" #"Retain" #"Recycle"
