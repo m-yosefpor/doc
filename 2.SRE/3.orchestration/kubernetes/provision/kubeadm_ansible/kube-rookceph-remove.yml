@@ -1,0 +1,8 @@
+---
+- name: Remove rook-ceph
+  hosts: all
+  become: yes            #in ansible-playbook -b command
+  #  remote_user: ubuntu    #in inventory
+  #  become_method: sudo    #not necessary
+  - tasks:
+    - name: remove

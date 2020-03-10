@@ -1,7 +1,19 @@
 adduser : password, home ,...
 
+
+adduser mohammad sudo  # create mohammad in sudo group
+--
+
 useradd: only user
 passwd
 
 
 usermod -aG sudo user1
+
+
+chshell     # /etc/passwd
+
+
+
+
+hostnamectl set-hostname sth1  #  /etc/hostname , /etc/hosts

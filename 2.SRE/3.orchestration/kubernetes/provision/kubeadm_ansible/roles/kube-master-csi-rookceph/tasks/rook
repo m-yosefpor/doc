@@ -1,3 +1,15 @@
+
+
+
+##### NOTE:
+at leaste three nodes to run pods (untaint master if needed)
+not sure: same hostname as nodename
+each need a RAW device (sth like sdb)
+edit cluster.yaml , useall nodes: false, usealldevies: false, unccomment below 100gb, uncomment node, device sdb, use host/node names on them
+----
+
+when deleting cluster, first cluster, then operator, then common, and then rm -rf /var/lib/rook (on EACH node)
+
 git clone https://github.com/rook/rook.git
 
 cd rook/cluster/examples/kubernetes/ceph/
