@@ -1,0 +1,14 @@
+#every service gets a unique ip, by cloud providers, and then without routing, forward ALL kind of traffics, without filter to servrice
+
+#best solution, needs cloud provider, need to pay per servcie, each service has it's own ip
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80

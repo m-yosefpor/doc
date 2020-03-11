@@ -3,9 +3,7 @@ kind: Deployment
 metadata:
  name: nginx
  labels:
-   project: pilot
-   environment: staging
-   tier: frontend
+   app: nginx
 spec:
  selector:
    matchLabels:
@@ -20,12 +18,5 @@ spec:
      - name: nginx
        image: nginx
        imagePullPolicy: IfNotPresent
-       volumeMounts:
-       - name: pv
-         mountPath: "/usr/share/nginx/html"
        ports:
        - containerPort: 80
-     volumes:
-     - name: pv
-       persistentVolumeClaim:
-         claimName: "pvclaim01"

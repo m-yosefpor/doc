@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: simple
+  namespace: monitor
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  #backend: #default if not match each rule
+  #serviceName:  wanton-cricket-grafana 
+  #serviceName:  nginx
+  #  servicePort: 80
+  rules:
+  - host: grafana.yosefpor.com #foo.mydomain.com
+    http:
+      paths:
+      - path: 
+        backend:
+          serviceName: wanton-cricket-grafana
+          servicePort: 80
+
+  - host: prometheus.yosefpor.com #mydomain.com #if empty means *
+    http:
+      paths:
+      - path: 
+        backend:
+          serviceName: wanton-cricket-prometheus-prometheus
+          servicePort: 9090
+
