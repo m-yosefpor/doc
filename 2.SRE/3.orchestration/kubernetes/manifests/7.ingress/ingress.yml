@@ -16,7 +16,7 @@ spec:
       paths:
       - path: 
         backend:
-          serviceName: wanton-cricket-grafana
+          serviceName: prom-grafana
           servicePort: 80
 
   - host: prometheus.yosefpor.com #mydomain.com #if empty means *
@@ -24,6 +24,6 @@ spec:
       paths:
       - path: 
         backend:
-          serviceName: wanton-cricket-prometheus-prometheus
+          serviceName: prom-prometheus-prometheus
           servicePort: 9090
 

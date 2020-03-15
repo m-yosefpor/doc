@@ -1,0 +1,7 @@
+helm delete --purge prom
+
+k get crd
+k delete crd *.coreos.org
+
+
+k delete pvc -n monitor sth

@@ -2,10 +2,11 @@ helm install --name monitor --namespace monitor stable/prometheus-operator
 
 
 then expose grafana with k expose deploy -n monitor promethues-l... --external-ip folan
+#or use an ingress-nginx (I did it once)
 
 user: admin
 pass: prom-operator
 
 
 to do:
-values.yml: (confijs are ok, dashboards are ok with all k8s nodes, but no pvc, should define in valuse.yaml, or chanje confijs
+values.yml: (configs are ok, dashboards are ok with all k8s nodes, but no pvc, should define in valuse.yaml, or change configs
