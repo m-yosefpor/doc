@@ -21,3 +21,24 @@ fmt.Scanf("%d",&i)
 fmt.Scan(&i)
 fmt.Scanln(&s)
 ----------------------------------
+package main
+
+import (
+	"fmt"
+	"strings"
+	"input"
+	"bufio"
+	"os"
+	"math/rand"
+)
+
+func main(){
+	fmt.Println("Hello World!")
+	read := bufio.NewReader(os.Stdin)
+	text , _ := read.ReadString('\n')
+	a ,b int // var a,b int
+	v := 3
+	b map[string]int
+	b['hello']=2
+	fmt.Println(v,a,b)
+}
