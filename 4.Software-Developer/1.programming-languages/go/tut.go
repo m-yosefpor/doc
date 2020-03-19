@@ -41,4 +41,6 @@ func main(){
 	b map[string]int
 	b['hello']=2
 	fmt.Println(v,a,b)
+	rand.Seed(4)
+	a = rand.Intn(10)
 }
