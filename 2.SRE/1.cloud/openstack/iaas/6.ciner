@@ -1,0 +1,16 @@
+sqldb, mq
+
+
+cinder create --display-name VOLUME_NAME SIZE_GB
+
+
+nova volume-attach INSTANCE_ID VOLUME_ID /dev/vdc
+
+
+cinder list
+cinder delete VOLUME_ID
+
+
+cinder snapshot-create VOLUME_ID
+cinder snapshot-list
+cinder snapshot-delete

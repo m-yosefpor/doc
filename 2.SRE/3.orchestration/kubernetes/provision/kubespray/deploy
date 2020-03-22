@@ -1,0 +1,7 @@
+git clone https://github.com/...kubespray
+ansible -i hosts.ini -m ping all --key-file=pv.pem
+ansible -b -i hosts.ini -m ping all --key-file=pv.pem
+
+ansible-playbook -b -i ../hosts.ini --key-file=../pv.pem cluster.yml -vv
+scp -i pv.pem root@MASTER_X_IP:/etc/kubernetes/admin.conf kubespray-do.conf
+export KUBECONFIG=/home/mm/home/kubespray-do.conf

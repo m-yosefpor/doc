@@ -1,10 +1,10 @@
-master1 ansible_ssh_host=10.12.7.59   ansible_user=mohammad  ansible_python_interpreter=/usr/bin/python3
-node1 ansible_ssh_host=10.12.7.60   ansible_user=ubuntu    ansible_python_interpreter=/usr/bin/python3
-node2 ansible_ssh_host=10.12.7.58   ansible_user=ali    ansible_python_interpreter=/usr/bin/python3
+node1 ansible_ssh_host=10.12.7.61   ansible_user=root  ansible_python_interpreter=/usr/bin/python3
+node2 ansible_ssh_host=10.12.7.62   ansible_user=root    ansible_python_interpreter=/usr/bin/python3
+node3 ansible_ssh_host=10.12.7.63   ansible_user=root    ansible_python_interpreter=/usr/bin/python3
 
 
 [master]
-master1
+node1
 
 
 [node]

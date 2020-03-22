@@ -1,0 +1,26 @@
+keyston
+mariadb
+keystonconfig: add mariadb
+populate db: keystone-manage db_sync
+gen ssl config with keystone: keystone-manage ssl_setup --keystone-user keystone --keystone-group keystone
+keyston.config: add ssl
+keystone clinet
+
+keystone tenant-create # tenant-list
+role-create # role-list
+/etc/keystone/policy.json
+user-create # user-list
+user-role-add
+
+service-create # service-list
+endpoint-create
+
+ /etc/glance/glance-registry.conf
+
+
+ keystone tenant-create --name service ...
+
+
+ ldap
+
+

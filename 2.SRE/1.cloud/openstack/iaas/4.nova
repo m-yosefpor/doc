@@ -1,0 +1,66 @@
+nova-scheduler
+nova-api
+nova-conductor
+on controller: sudo apt-get install nova-api nova-conductor nova-scheduler nova-objectstore
+on compute nodes: sudo apt-get install nova-api nova-conductor nova-scheduler nova-objectstore
+on compute: ntp , ntp.conf
+create nova db , and user/pass
+controller: nova.conf : to use sql
+
+controller, compute: nova.conf: db,  mq, neutron, cinder, glance, sheduler, keystone
+nova-manage db sync
+
+
+###
+The following are the services:
+ nova-api
+ nova-objectstore
+ nova-scheduler
+ nova-conductor
+ nova-cert
+ nova-novncproxy
+ nova-consoleauth
+
+Compute
+The following are the services:
+ nova-compute
+ nova-api-metadata
+ nova-novncproxy
+ libvirt-bin
+
+
+nova keypair-list
+nova keypair-elete demokey
+nova keypair-add demo > demo.pem
+chmo 0600 *.pem
+
+nova secgroup-create webserver “Web Server Access”
+nova secgroup-add-rule webserver tcp 80 80 0.0.0.0/0
+nova secgroup-add-rule webserver tcp 443 443 0.0.0.0/0
+
+nova secgroup-delete webserver
+
+
+
+ nova image-list # glance?
+ nova flavor-list
+
+ neutron net-list
+
+ nova boot myInstance --image IMAGE_ID --flavor 2 --nic net-id=NET_ID --key-name demokey (--security-group default,webserver)
+
+
+ nova list
+
+ nova show INSTANCE_ID
+ nova rescue
+ nova delete INSTANCE_ID/INSTANCE_NAME
+
+
+ s 2 vCPU, 16 GB RAM, and 30 GB disk, carry out the
+following steps:
+1. We run the following commands:
+nova flavor-create m1.javaserver 49 16384 30 2 --is-public=true
+
+
+live-migration

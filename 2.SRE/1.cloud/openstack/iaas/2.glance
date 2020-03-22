@@ -1,0 +1,26 @@
+mariadb
+rabbitmq
+glance
+glance-manage syncdb
+configure db, rabbitmq as backend for glance glance-registry.conf: [database]
+glance-api.conf : [keystone_authtoken]
+glance-registry.conf : [keystone_authtoken]
+
+
+/etc/glance/glance-api.conf [DEFAULT] , [glance_store]
+
+glance image-create # glance image-list # glance image-show IMAGE_ID
+glance image-delete IMAGE_ID
+glance image-update IMAGE_ID --is-public True --property KEY=VALUE
+glance image-update IMAGE_ID --purge-props
+
+glance [--can-share] member-create image-id tenant-id
+glance member-list --image-id IMAGE_ID
+glance member-list –-tenant-id TENANT_ID
+
+
+/etc/nova/nova.conf # scheduler_default_filters=ImagePropertiesFilter
+stop nova-scheduler && start nova-scheduler
+
+# property architecture=arm --property hypervisor_type-qemu
+

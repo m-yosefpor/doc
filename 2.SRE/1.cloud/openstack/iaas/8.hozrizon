@@ -1,0 +1,3 @@
+apt install openstack-dashboard
+
+configure /etc/openstack-dashboar/local_settings.py

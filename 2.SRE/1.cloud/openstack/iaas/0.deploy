@@ -1,0 +1,8 @@
+dev: packstack
+prod:
+	manual
+	ansible
+	ansible in containers: kolla
+	juju
+	fuel
+	kuber?? helm

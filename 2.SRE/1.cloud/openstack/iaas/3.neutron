@@ -1,0 +1,32 @@
+install req: linux-headers/ vlan, bridge-utils, dnsmasq/ ovs,...
+install neutron, neutron-plugin-openvswitch,...
+configuring ovs: ovs-vsctl, ip, ifconfig
+sysctl, ip_forward,...
+neutron.conf: db,mq, keystone_auth: [DEFAULT], [agent],[database] 
+l3_agent.ini
+dhcp_agent.ini
+dnsmasq-neutron.conf
+metadata_agent.ini
+/etc/neutron/plugins/ml2/ml2_conf.ini
+###
+neutron-server
+neutron.conf
+neutron-db-manage
+
+nova.conf
+
+
+neutron net-create
+neutron subnet-create
+neutron router-create
+neutron router-interface-add
+
+neutron net-list
+neutron subnet-list
+neutron port-list
+
+#nova list
+
+neutron router-interface-delete
+neutron subnet-delete
+neutron net-delete

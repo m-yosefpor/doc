@@ -1,0 +1,38 @@
+HOT
+parameters:
+key_name:
+  type: string
+  description: Name of keypair to assign to servers
+image:
+  type: string
+  description: Name of image to use for servers
+flavor:
+  type: string
+  description: Flavor to use for servers
+public_net_id:
+  type: string
+  description: >
+    ID of public network for which floating IP addresses  will be allocated
+private_net_id:
+  type: string
+  description: ID of private network into which servers  get deployed
+private_subnet_id:
+  type: string
+  description: ID of private sub network into which servers get deployed
+
+####
+heat stack-create haproxy101 \
+--template-file=cookbook.yaml \
+--environment-file=cookbook-env.yaml
+
+
+
+heat stack-list
+
+heat output-list
+
+heat output-show haproxy101 haproxy_public_ip
+
+
+
+
