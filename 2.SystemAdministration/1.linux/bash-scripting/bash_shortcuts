@@ -1,0 +1,24 @@
+ctrl+
+
+Ctrl + p   Previous command (Up arrow)
+Ctrl + n   Next command (Down arrow)
+	l : clear
+	k : delter after the cursor
+
+	h : delete backward char
+	w : delete backward word
+	u : delete backward all
+
+
+	t: swap last two chars
+
+	b: back char : alt ; word
+	f: forward char: alt: word
+
+	r: search backward
+	s: search forward
+
+
+	c: suspend
+
+	j: enter #also in vim insert
