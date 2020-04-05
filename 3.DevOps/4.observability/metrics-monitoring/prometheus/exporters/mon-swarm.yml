@@ -1,0 +1,112 @@
+version: "3.7"
+
+services:
+########################################################
+#                     manager                          #
+########################################################
+  prometheus:
+    image: prom/prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    configs:
+    - source: prometheus-conf
+      target: /prometheus.yml
+    volumes:
+    - prometheus_data:/promehteus/data
+    ports: 
+    - 9090:9090
+#    logging:
+#      driver: fluentd
+#      options:
+#        tag: docker.ci.prometheus
+#        fluentd-async-connect: "true"
+
+    command: '--config.file=/prometheus.yml'
+
+  alertmanager:
+    image: prom/alertmanager
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    ports:
+    - 9093:9093
+#   configs:
+#   - source: alertmanager.yml
+#      target: /alertmanager.yml
+#   command: '--config.file=/alertmanager.yml'
+#    logging:
+#      driver: fluentd
+#      options:
+#        tag: docker.ci.alertmanager
+#        fluentd-async-connect: "true"
+
+  grafana:
+    image: grafana/grafana
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    ports:
+    - 3000:3000
+    volumes:
+    - grafana_data:/var/lib/grafana
+      #    logging:
+      #      driver: fluentd
+      #      options:
+      #        tag: docker.ci.grafana
+      #        fluentd-async-connect: "true"
+
+
+########################################################
+#                     all                              #
+########################################################
+ #mysqld-exporter
+
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter 
+    deploy:
+      mode: global
+      restart_policy:
+        condition: any
+        delay: 10s
+        window: 120s
+    volumes:
+    - /:/host:ro,rslave
+    command: '--path.rootfs=/host'
+
+
+  cadvisor:
+    image: google/cadvisor:latest
+    deploy:
+      mode: global
+      restart_policy:
+        condition: any
+        delay: 10s
+        window: 120s
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+
+########################################################
+#                     components                       #
+########################################################
+networks:
+  monitoring_net:
+
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+configs:
+  prometheus-conf:
+    file: ./prometheus.conf

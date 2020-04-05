@@ -1,0 +1,32 @@
+sensor types:
+	ping
+	Windows System Uptime , snmp system uptime
+	Windows CPU Load , snmp cpu load
+	WMI Memory , snmp Linux meminfo
+	WMI Volume , snmp disk free
+	Windows Network Card , snmp traffic 64bit
+	Windows Physical Disk I/O , 
+	
+	Windows IIS Application
+
+
+	WMI Microsoft SQL Server 2016
+	PostgreSQL
+	Mysql v2
+
+
+	port
+		available (ms)
+		downtime
+	HTTP
+		loading time (ms)
+		downtime
+	#process# snmp library
+		process index
+		Downtime
+
+
+
+
+
+	PerfCounter Custom

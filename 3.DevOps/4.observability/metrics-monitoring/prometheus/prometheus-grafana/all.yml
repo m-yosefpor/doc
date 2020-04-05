@@ -1,0 +1,155 @@
+version: "3.7"
+
+services:
+########################################################
+#                     manager                          #
+########################################################
+  prometheus-taraabar:
+    image: prom/prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+    - prometheus-taraabar:/prometheus
+    - ./prometheus/prometheus-taraabar.conf:/prometheus.yml
+    ports: 
+    - 9091:9090
+
+    command:
+     - '--config.file=/prometheus.yml'
+     - '--storage.tsdb.path=/prometheus'
+
+########################################################
+  prometheus-taaghcheh:
+    image: prom/prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+    - prometheus-taaghcheh_data:/prometheus
+    - ./prometheus/prometheus-taaghcheh.conf:/prometheus.yml
+    ports: 
+    - 9092:9090
+
+    command:
+     - '--config.file=/prometheus.yml'
+     - '--storage.tsdb.path=/prometheus'
+########################################################
+  prometheus-myket:
+    image: prom/prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+    - prometheus-myket_data:/prometheus
+    - ./prometheus/prometheus-myket.conf:/prometheus.yml
+    ports: 
+    - 9093:9090
+
+    command:
+     - '--config.file=/prometheus.yml'
+     - '--storage.tsdb.path=/prometheus'
+########################################################
+  prometheus-magnet:
+    image: prom/prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+    - prometheus-magnet_data:/prometheus
+    - ./prometheus/prometheus-magnet.conf:/prometheus.yml
+    ports: 
+    - 9094:9090
+
+    command:
+     - '--config.file=/prometheus.yml'
+     - '--storage.tsdb.path=/prometheus'
+######################################################
+  prometheus-sepinno:
+    image: prom/prometheus
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    volumes:
+    - prometheus-sepinno_data:/prometheus
+    - ./prometheus/prometheus-sepinno.conf:/prometheus.yml
+    - ./rules.yml:/rules.yml
+    ports: 
+    - 9095:9090
+
+    command:
+     - '--config.file=/prometheus.yml'
+     - '--storage.tsdb.path=/prometheus'
+     - '--web.enable-lifecycle'
+
+
+
+########################################################
+  alertmanager:
+    image: prom/alertmanager
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    ports:
+    - 9090:9093
+    volumes:
+    - ./alertmanager.yml:/alertmanager.yml
+    command: '--config.file=/alertmanager.yml'
+
+###########################################
+  grafana:
+    image: grafana/grafana:6.4.0
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    ports:
+    - 80:3000
+    volumes:
+    - grafana_etc:/etc/grafana
+    - grafana_data:/var/lib/grafana
+      #    logging:
+      #      driver: fluentd
+      #      options:
+      #        tag: docker.ci.grafana
+      #        fluentd-async-connect: "true"
+
+
+########################################################
+#                     components                       #
+########################################################
+networks:
+  monitoring_net:
+
+
+volumes:
+  prometheus-taraabar:
+    external: true
+  prometheus-taaghcheh_data:
+    external: true
+  prometheus-myket_data:
+    external: true
+  prometheus-magnet_data:
+    external: true
+  prometheus-sepinno_data:
+    external: true
+  grafana_data:
+    external: true
+  grafana_etc:
+    external: true
+
+
+

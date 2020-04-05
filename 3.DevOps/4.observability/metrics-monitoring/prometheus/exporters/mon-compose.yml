@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+ #mysqld-exporter
+
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter 
+    #    deploy:
+    #      mode: global
+    #      restart_policy:
+    #        condition: any
+    #        delay: 10s
+    #        window: 120s
+    volumes:
+    - /:/host:ro,rslave
+    command: '--path.rootfs=/host'
+    ports:
+      - 9100:9100
+
+
+  cadvisor:
+    image: google/cadvisor:latest
+    #    deploy:
+    #      mode: global
+    #      restart_policy:
+    #        condition: any
+    #        delay: 10s
+    #        window: 120s
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - 9101:8080
