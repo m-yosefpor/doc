@@ -1,0 +1,45 @@
+openssl req  -x509  -newkey rsa:4096 -nodes  -keyout example.com.key   -out example.com.crt
+===============
+./node_exporter --web.config="web-config.yml"
+
+#web-config.yml sample
+
+tlsConfig :
+  # Certificate and key files for server to use to authenticate to client
+  tlsCertPath : <filename>
+  tlsKeyPath : <filename>
+
+  # Server policy for client authentication. Maps to ClientAuth Policies
+  # For more detail on clientAuth options: [ClientAuthType](https://golang.org/pkg/crypto/tls/#ClientAuthType)
+  [ clientAuth : <string> | default = "NoClientCert" ] 
+		#NoClientCert ClientAuthType = iota
+    		#RequestClientCert
+    		#RequireAnyClientCert
+    		#VerifyClientCertIfGiven
+    		#RequireAndVerifyClientCert  #select this
+
+  # CA certificate for client certificate authentication to the server
+  [ clientCAs : <filename> ]
+
+===========================
+in prometheus conf
+
+- jobname: folan
+  static-config: folan
+  scheme: https
+  tls_config:
+    # CA certificate to validate API server certificate with.
+    [ ca_file: <filename> ]
+
+    # Certificate and key files for client cert authentication to the server.
+    [ cert_file: <filename> ]
+    [ key_file: <filename> ]
+
+    # ServerName extension to indicate the name of the server.
+    # https://tools.ietf.org/html/rfc4366#section-3.1
+    [ server_name: <string> ]
+
+    # Disable validation of the server certificate.
+    [ insecure_skip_verify: <boolean> ]  ### this is esp important
+========================================
+	

@@ -1,0 +1,15 @@
+openssl genrsa -des3 -out rootCA.key 4096
+
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt
+---
+
+openssl genrsa -out mydomain.com.key 2048
+
+openssl req -new -key mydomain.com.key -out mydomain.com.csr  #FQDN , or IP (Common NAME CN) is important
+
+openssl x509 -req -in mydomain.com.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out mydomain.com.crt -days 500 -sha256
+
+============================
+
+
+curl -v  --cacert rootCA.crt   --key prom.key  --cert prom.crt  https://mon.yosefpor.com:9100/metrics
