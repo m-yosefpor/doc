@@ -1,0 +1,117 @@
+class SRE implements interface DevOps
+
+No More silos
+Accidents Are Normal:
+	speeding recovery than preventing accidents.
+	fail often, fail fast, fail forward
+change should be gradual:
+	change is best when it is small and frequent
+	Change is risky, true, but the correct response is to split up your changes into smaller subcomponents where possible
+Measurement Is Crucial
+
+
+
+
+#SRE
+
+Operations Is a Software Problem
+	should therefore use software engineering approaches to solve that problem
+Manage by Service Level Objectives (SLOs)
+
+Work to Minimize Toil
+	For SRE, any manual, structurally mandated operational task is abhorrent.
+	Opposite of: where toil is the job, and that’s what you’re paying a person to do
+
+Automate This Year’s Job Away:
+	SRE as practiced in Google has a hard limit of how much time a team member can spend on toil, as opposed to engineering that produces lasting value: 50%
+
+
+Move Fast by Reducing the Cost of Failure:
+	MTTR , MTTF
+
+Share Ownership with Developers
+
+
+
+
+#SRE,DevOps
+change is necessary in order to improve
+Collaboration is front and center for DevOps work
+Change management is best pursued as small, continual actions, the majority of which are ideally both automatically tested and applied.
+
+
+
+“These people will quit if they’re tasked with too much operational work and aren’t given the opportunity to use their engineering skill set.” 
+
+
+traditional ops-focused group scales linearly with service size:
+ 50% cap on the aggregate “ops” work for all SREs— tickets, on-call, manual tasks, etc
+
+
+  SRE team is responsible for
+the availability, latency, performance, efficiency, change management, monitoring, emergency response, and capacity planning of their service(s).
+
+
+blamefree postmortem culture,
+
+
+SLO: error budget
+
+
+Monitoring:
+	a system that requires a human to read an email and decide whether or not some type
+of action needs to be taken in response is fundamentally flawed. Monitoring should
+never require a human to interpret any part of the alerting domain. Instead, software
+should do the interpreting, and humans should be notified only when they need to
+take action.
+		alert
+		ticket
+		logging
+
+
+
+	on-call playbooks
+
+training
+	Disaster Role Playing
+
+Change Management
+	Implementing progressive rollouts
+	Quickly and accurately detecting problems
+	Rolling back changes safely when problems arise
+
+Capacity Planing
+ organic growth (which stems from natural product adoption
+and usage by customers) and inorganic growth (which results from events lik
+
+
+
+
+
+
+
+
+============
+Our Software Infrastructure
+Our software architecture is designed to make the most efficient use of our hardware
+infrastructure. Our code is heavily multithreaded
+
+To facilitate dashboards, monitoring, and debugging, every server has an
+HTTP server that provides diagnostics and statistics for a given task. #exporters?
+
+Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured
+data.
+Protocol buffers have many advan‐
+tages over XML for serializing structured data: they are simpler to use, 3 to 10 times
+smaller, 20 to 100 times faster, and less ambiguous.
+
+
+
+availability
+	up time
+	succesful requests
+
+
+types of failure
+	Which is worse for the service: a
+constant low rate of failures, or an occasional full-site outage?

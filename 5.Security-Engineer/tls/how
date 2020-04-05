@@ -1,0 +1,56 @@
+Prerequisites
+First we have to generate a private and public key for the CA we want to use as to sign certs. To do this we have to:
+
+
+
+openssl req -x509 -newkey rsa:4096 -keyout promCA.key -out promCA.crt -days 365 -subj '/CN=sth'
+make sure you to protect promCA.key from others.
+
+This is to sign the certs for Prometheus servers. So we shouldn't sign any other certs with this CA, since they can use the signed cert to claim they are authorized servers. So we need another CA to sign other node exporters:
+
+openssl req -x509 -newkey rsa:4096 -keyout nodeCA.key -out nodeCA.crt -days 365 -subj '/CN=sth'
+To generate a cert sign request for node exporters:
+
+openssl req -nodes -newkey rsa:4096 -keyout node.key -out node.csr -days 365 -subj '/CN=sth'
+ To sign this csr with nodeCA:
+
+openssl x509 -req -in node.csr -CA nodeCA.crt -CAkey nodeCA.key -CAcreateserial -out node.crt -days 500 -sha256
+you can use the same "node.key" and "node.crt" in EVERY node exporter for one organization.
+
+
+
+For Promtheus we have to provide csr with the ip of promtheus server "Common Name":
+
+openssl req -node -newkey rsa:4096 -keyout prom.key -out prom.csr -days 365 -subj '/CN=10.12.9.60' #use Prometheus sever ip as CN
+then sign this csr with promCA:
+
+openssl x509 -req -in prom.csr -CA promCA.crt -CAkey promCA.key -CAcreateserial -out prom.crt -days 500 -sha256
+
+
+
+
+Configuring Node-exporter
+now you can use this "node.key" and "node.crt" to use TLS, but nodeCA is not important, since we disable cert check in pormetheus configs. we also need to provide promCA.crt in node-exporters to authenticate prometheus servers. Put all these three files in node-exporter directory. 
+
+Also provide web-config.yml for node-exporter:
+
+tlsConfig:
+  tlsCertPath: node.crt
+  tlsKeyPath: node.key
+  clientAuth: RequireAndVerifyClientCert
+  clientCAs: promCA.crt
+and run node-exporter with:
+
+./node-exporter --web.config="web-config.yml"
+Configuring Prometheus
+For configuring Prometheus to use TLS, provide "prom.key" an "prom.crt" in Prometheus directory , also provide "prometheus.conf":
+
+- jobname: <job-name>
+   static-config: <static-conf>
+   scheme: https
+   tls_config:
+     # Certificate and key files for client cert authentication to the server.
+     cert_file: prom.crt
+     key_file: prom.key
+     # Disable validation of the server certificate.
+     insecure_skip_verify: true

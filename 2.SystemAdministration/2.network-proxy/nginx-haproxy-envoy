@@ -1,0 +1,9 @@
+nginx only http, ha all tcp??
+nginx health check only if 500 error, ha priodic healthcheck
+http check, tcp check? ( ha does, nginx doesnt)?
+
+
+nginx good webserver, cache
+
+
+Nginx Plus offers additional features not included in OSS Nginx, such as active health checks, session persistence based on cookies, DNS-service-discovery integration, Cache Purging API, AppDynamic, Datalog, Dynatrace New Relic plug-ins, Active-Active HA with config sync, Key-Value Store, on-the-fly with zero downtime updates upstream configurations, and key‑value stores using Nginx Plus API[45] and web application firewall (WAF) dynamic module

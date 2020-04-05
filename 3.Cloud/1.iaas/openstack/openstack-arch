@@ -1,0 +1,422 @@
+Physical architecture
+
+Hardware:
+
+flavors: 1*2, 2*4 , 4*8 , 
+v-core = 10* phys-core
+RAM = 2* v-core
+
+max-instance = v-core / 1
+avg-instance = v-core / 2
+min-instance = v-core / 4
+
+
+{max,avg,min}-eph-storage = v-core * 20 GB
+---
+phys-core
+RAM = 20* phys-core
+Disk = 100*phys-core
+network=2*10G
+
+network = two bonded-10G
+avg-instance-bw = 20G / avg-instance
+
+
+physical network architecture:
+	management which is routable to the intranet
+		private communication between all nodes, tenant/storage traffic
+	provider network which provides floating IPs
+	tenant network for instance traffic
+
+
+
+====================
+
+compute-node: nova-compute(+kvm) , openvswitch-agent
+
+
+
+===========
+HA
+active/passive:
+	VIP
+	pacemaker, keepalived , (heartbeat?)
+	corosync
+	fencing
+acitve/active:
+	require loabalancer
+???
+VLAN, VxLAN (overlay on top of L3)
+
+------
+
+regions, cells, and availability zones
+
+
+SR-IOV allows a single network aapter to appear as multiple network aapters, each of these (refere to as virtual functions VFs) can be iretily assoiated with a virtual instance
+OVN open virtual network, open-v-switch: simplifying the path tht packet takes from instance down through the switch (or use PCI pass through)
+
+
+tunings:
+	PCI-passthrough
+	CPU and memory pinning
+	huge page support
+
+
+Load balancer: These systems provide the load balancing services in an Active/Passive configuration
+Cloud controller: These systems provide the API services, the scheduling services, and the Horizon dashboard services in an Active/Active configuration
+Database node: These systems provide the MySQL database services in an Active/Passive? configuration , (Active/active galera)
+Messaging node: These systems provide the RabbitMQ messaging services in an
+Active/Active configuration
+Compute node: These systems act as KVM hypervisors and run the nova-
+compute and openvswitch-agent services
+
+
+Ceilometer -> MongoB : active/active three replicas
+
+neutron
+	dhcp active/active
+	L3 routing agent:active/passive but can be active/active Distributed Virtual Routers (DVR),`
+
+
+
+
+HAProxy Active/Passive and manage it as a resource along with our VIP in Pacemaker.
+Keepalived and run HAProxy in an Active/Active
+
+
+
+========
+infrustructure as software
+test-first approach, bulding the test first
+	TDD
+	BDD
+Configuration management: declarative
+
+
+
+Deployment strategies:
+	Canary Deployment
+
+
+
+In our experience, if the tests aren't written before the code, they are frequently not written.
+Every project runs out of time at some point and if the tests are the last thing on the list,
+they tend to get cut
+
+It has been our experience that manually administrated
+environments always result in inconsistency, regardless of the skill of the operator
+performing the deployment.
+
+
+
+
+Stage Test focus
+	Pre-commit: Before the change enters the pipeline, it is tested to ensure that there are no syntax errors or style issues.
+	Deployment testing: At this stage, each of the systems in the test cluster attempts to apply the configuration update. Success is indicated by whether or not the change is applied without errors. Some deployments will initiate a second application to test for idempotency.
+	Integration testing: Once the test cluster has successfully applied the configuration, a unit test suite is run against the OpenStack APIs, verifying the functionality of the configuration.
+	Performance testing: A series of tests are run against the test cluster to ensure that the change did not adversely affect performance.
+	Acceptance testing: At this stage in the pipeline, any manual testing is performed. The change is then promoted to the next environment.
+	Canary testing: A subset of the production environment is updated with the change and automated and the acceptance testing is repeated with the production database and hypervisors.
+	Release: The entire production environment is updated with the change.
+
+
+python:
+	openstack is in python: test/development
+	tempest: test frame work for openstack in python
+
+
+Small, manageable changes, not large upgrade cycles
+Test-driven development
+Continuous deployments
+
+
+
+Provide real-time, or near real-time introspection and alerting into the OpenStack
+infrastructure
+Support some sort of discovery and configuration management
+Be scalable to support enterprise clouds
+Have the ability to self-monitor and the ability to be configured as highly
+available
+
+
+
+Monitoring:
+	Stateless services:
+		nova-api , glance-api , keystone-api
+	Additional programs:
+		MySQL, MongoDB, Memcached, RabbitMQ, HAproxy, Corosync, Pacemaker
+	The host operating system
+	Network hardware:
+		routers, switches, firewalls
+	#iLo
+	External storage
+		fiber channel, iSCSI or NAS
+		. One exception: Ceph should be monitored with the command line or tools like Calamari(Red Hat Storage Console/Tendri), Intel VSM, InkScope, ceph-dash, or OpenAttic.
+
+
+monitoring practices:
+	availability
+		Availability can be defined as simply available versus not available or as granular as specific Service-Level Agreements (SLAs)
+	performance
+		how long it takes to complete certain workflows. Some of these workflows are: creating instances, volumes, networks, or other OpenStack resources
+	resource usage -> it relates to capacity planning -> Ceilometer
+		. In most instances, resource monitoring is an activity done with data that has been collected over a specific period of time.
+
+
+Alertring:
+	hese alerts are driven by a change in state and may not be a direct indication of a problem, but may be an indication of a future issue.
+	should have:
+		Display which OpenStack service is affected
+		Contain a general description of the change in state that caused the alert
+		If implemented, have a severity level defined by the operational staff
+		Have the ability to be marked as a false positive or be disabled during events such as maintenance
+		Have the ability to chain alerts together in a logical fashion to trigger additional actions and provide rudimentary correlation
+		Provide the ability to refer to time-series statistics such as median, percentile, and standard deviation
+		Provide an instant view of services that are in a good, warning, or failed state
+	policy
+		Critical errors, require immediate action
+		degradation of high availability :failed service on one controller in an environment with three controllers
+	###method
+		telegram
+		SMS
+		Call
+
+
+test the capacity of an OpenStack: Rally
+
+
+
+Monitoring:
+	service (port)
+	process
+
+Capacity risk mitigation and planning
+	Track usage
+	Analyze growth
+	Chargeback/showback
+
+what happens if, during operation, errors are made and are replicated across all HA nodes?
+Failure.
+Backup strategies – what to backup
+full or partial disaster
+backaup:
+	mariadb: Use mysqldump to export the contents of the database. Copy the data to a backup server.
+	nova: Make copies of /etc/nova and copy to the backup server. Make copies of /var/lib/nova except /var/lib/nova/instances on compute nodes. Instance backups will be discussed later.
+	glance: Copy  /etc/glance and /var/lib/glance rsync /var/lib/glance/images to another backup server.
+	kystone: /etc/keystone , /var/lib/keystone
+	cinder: /etc/cinder, /var/lib/cinder
+	swift: /etc/swift: it contains the configuration files as well as the ring and ring builder files. Without these, your data is completely inaccessible.
+
+in order to restore your OpenStack cloud you will basically need to stop all services on the existing cloud, copy all of the files back into place, recover the database from the export, and restart the cloud.
+penStack highly available and create an architecture that is both
+multicloud and multiregion while having the ability to fail over and recover to a completely
+different site during a disaster
+
+even tools such as OpenStack's Cinder API, which provides support for taking full and
+incremental volume snapshots are still disruptive and the workload has to be taken offline
+to take a snapshot or risk data corruption.
+	1. Pause instances.
+	2. Detach Cinder volumes (root volume and any additional nonroot volumes).
+	3. Take an instance snapshot for each instance and store it in Glance for later retrieval.
+	4. Use Cinder to backup all the aforementioned volumes and place them in Object Storage (Swift/Ceph).
+	5. Document these copies since OpenStack does not track them for you.
+	6. Resume instances.
+
+backup:
+	native snapshots from OpenStack
+		Raksha: opensource
+		TrilioVault: commercial
+	traditional file-based backup , Backup-as-a-Service (BaaS)
+		Community Amanda (open source)
+		Zmanda
+		Zmanda
+		Commvault Simpana
+
+
+Version 3 of the API introduces the concept of
+authorization domains, which provide a hierarchy above basic tenancy. Version 3 of the
+Keystone API has been around for a few releases, but it has taken some time for each of the
+services to support the new authorization model. As such, most OpenStack deployments
+still use the Keystone v2 API
+
+The identity driver can either be SQL (the reference implementation) or Lightweight
+Directory Access Protocol (LDAP).
+
+assignment driver. This
+driver allows users to authenticate using LDAP and assign roles using the SQL database
+
+Dev:
+	using the language's HTTP or REST library
+		json
+		requsets
+	Cloud libraries
+		Apache jclouds for Java
+		OpenStack Shade for Python
+		Fog for Ruby
+	using message bus
+			kombu
+		notification subsystem
+		To enable notification in Nova, the following settings need to be changed in /etc/nova/nova.conf :
+		nova.conf Setting ,Example value, Description instance_usage_audit true Turns on usage auditing
+		instance_usage_audit_period, hour ,Sets usage auditing to hourly
+		notify_on_state_change, vm_and_task_state, Tells Nova to send a notification when a VM's state changes
+		notification_driver, messagingv2 ,Tells Nova to send notifications to the message bus
+Other notification drivers are available as well. Notifications can be sent to syslog, for
+example.
+
+Yagi library
+oslo.messaging library
+
+
+Consuming events from Ceilometer
+
+
+
+The message format
+for these RPC messages is well defined, but the content of the messages is version-specific.
+For these reasons, most developers will choose to use the notification subsystem instead.
+
+
+
+Given that Nova (as
+well as other services) is configured to emit notifications over the message bus, the
+Ceilometer service can store them and make them available for polling. To enable this
+functionality, set store_events to True in /etc/ceilometer/ceilometer.conf
+
+
+then python REST API to get events
+
+
+This event data can then be used to track usage and generate
+billing information for end users of the system.
+makes this data available via a REST API.
+
+The Ceilometer service was designed to do
+exactly that; track usage based on event data and generate billing information. Ceilometer
+#python REST
+
+
+
+For both the ephemeral and persistent
+workloads, cloud-init and cloudbase-init could be used to execute an update to an image
+upon boot using native software management tools and the local software repositories.
+However, these updates that would occur upon boot may delay provisioning depending on
+the number of updates performed on the image. This is why the updating of the base glance
+images is the best practice for security and software update compliance of instances
+
+
+Ubuntu allows you to have security updates automatically installed – once configured you
+don't need to run security updates manually again. Ubuntu allows users to configure
+automatic security updates via unattended-upgrades using cron-apt . Similar behavior
+can be applied to Red Hat hosts using yum-cron with update_cmd = minimal-
+security-severity:Important .
+
+
+
+Pulp is a free and open-source platform for managing
+software repositories.
+
+Pull in content from distribution repositories to the Pulp server manually on
+either a one-time-only or recurring basis
+Upload your own content to the Pulp server (OpenStack security patches)
+Publish content as a web-based repository, a series of ISOs, or various other
+methods
+
+Security:
+SELinux and AppArmor
+
+sVirt: Mandatory Access Control (MAC)
+Ensure SELinux remains “Enforcing” in
+order to receive protection from sVirt.
+zones can be isolated with physical LAN or VLAN separation
+
+
+It is recommended that all API endpoints in all zones be configured to use SSL/TLS.
+However, in certain circumstances performance can be impacted due to the processing
+needed to do the encryption
+in these cases, we recommend using hardware accelerators
+as possible options in order to offload the encryption from the hosts themselve
+
+
+/etc/keystone/keystone.conf file to contain these lines:
+also 
+/etc/openstack-dashboard/local_settings (Horizon access to Keystone)
+/etc/ceilometer/ceilometer.conf
+/etc/glance/glance-api.conf
+/etc/neutron/neutron.conf
+/etc/neutron/api-paste.ini
+/etc/neutron/metadata_agent.ini
+/etc/glance/glance-registry.conf
+/etc/cinder/cinder.conf
+/etc/cinder/api-paste.ini
+/etc/swift/proxy-server.conf
+==
+[ssl]
+enable = True
+certfile = /etc/pki/tls/certs/keystone.crt
+keyfile = /etc/pki/tls/private/keystone.ke
+
+
+
+
+On the compute servers, the default configuration of the libvirt daemon is to not allow
+remote access. However, live migrating an instance between OpenStack compute nodes
+requires remote libvirt daemon access between the compute nodes
+
+In order to allow remote access to libvirtd (assuming you are using the KVM
+hypervisor), you will need to adjust some libvertd configuration directives. By default,
+these directives are commented out but will need to be adjusted to the following in
+etc/libvirt/libvirtd.conf :
+listen_tls = 1
+listen_tcp = 0
+auth_tls = "none"
+
+
+
+Also, when using SSL/TLS, a nondefault URI is required for
+live migration. This will need to be set in /etc/nova/nova.conf :
+live_migration_uri=qemu+tls://%s/system
+
+It is also important to take other security measures for protecting libvirt, such as restricting
+network access to your compute nodes to only other compute nodes on access ports for
+TLS. Also, by default, the libvirt daemon listens for connections on all interfaces. This
+should be restricted by editing the listen_addr directive in
+/etc/libvirt/libvirtd.conf :
+listen_addr = <IP address or hostname>
+
+Additionally, live-migration uses a large amount of random ports to do live migrations.
+However, after the initial request is established via SSL/TLS on the daemon port, these
+random ports do not continue to use SSL/TLS. However, it is possible to tunnel this
+additional traffic over the regular libvirtd daemon port. This is accomplished by
+modifying some additional directives in the /etc/nova/nova.conf configuration file:
+live_migration_flag=VIR_MIGRATE_UNDEFINE_SOURCE,
+VIR_MIGRATE_PEER2PEER, VIR_MIGRATE_TUNNELLED
+
+
+For example, if the CADF logs detected thousands of failed Keystone authentication events
+from the same IP address within a short time period. Chances are, this is a brute force attack
+and warrants an alert to the security and network teams.
+
+
+Magnum is a popular project that automates the provisioning of container orchestration
+environments. Magnum uses the Nova compute service to provision these environments
+inside of OpenStack tenants in the same way that Trove and Sahara do. As of the Newton
+release of OpenStack, Magnum supports Docker Swarm, Kubernetes, and Apache Mesos
+clusters, abstracted as “bays” for containers.
+
+kolla uses Ansible and Docker
+OpenStack-Ansible project (OSA) uses LXC containers
+
+he various services
+to ensure that services can be updated one at a time without downtime. The truth is,
+though, that it's hard to upgrade an operating private cloud
+Organizations who deployed
+the Icehouse release of OpenStack and have run it for a couple of years will end up re-
+engineering much of their configuration management and deployment processes for the
+Newton release. This work takes a lot of time and effort. Organizations who have stepped
+through the releases or have deployed a new release every calendar year will have a much
+smaller amount of change to manage when the new version does come out.
+
+
+Deployments whih use the ceilometer service also require a mongodb to store telemetry ata. mongob is horizentally scalable by design an is typically deployed active/active with at least three replicas
