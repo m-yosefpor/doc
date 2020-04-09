@@ -1,0 +1,24 @@
+package main
+import "time"
+
+func main() {
+	//type Time
+	a=time.Now()
+	fmtp.Printf("%T",a) // Time
+	  func (t Time) Second() int
+	      func (t Time) Minute() int
+    func (t Time) Month() Month
+    func (t Time) Nanosecond() int
+    func (t Time) Hour() int
+        func (t Time) Day() int
+
+
+	//type Duration
+	const (
+    Nanosecond  Duration = 1
+    Microsecond          = 1000 * Nanosecond
+    Millisecond          = 1000 * Microsecond
+    Second               = 1000 * Millisecond
+    Minute               = 60 * Second
+    Hour                 = 60 * Minute
+    )

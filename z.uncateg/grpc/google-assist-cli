@@ -1,0 +1,8 @@
+alias tgoogle='source ~/py-venv/bin/activate && cd ~/GoogleAssistant/grpc  && python -m textinput --device-model-id "GAsst" --device-id my-project-74654'
+
+alias tgoogle-gtk='source ~/py-venv/bin/activate && cd ~/GoogleAssistant/grpc  && python -m textinput --display --device-model-id "GAsst" --device-id my-project-74654'
+
+
+alias google='source ~/py-venv/bin/activate && cd ~/GoogleAssistant/grpc && python -m googlesamples.assistant.grpc.pushtotalk --device-model-id "GAsst" --project-id my-project-74654'
+
+alias google-gtk='source ~/py-venv/bin/activate && cd ~/GoogleAssistant/grpc &&  python -m pushtotalk --display --device-model-id "GAsst" --device-id my-project-74654'

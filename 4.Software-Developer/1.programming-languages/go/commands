@@ -1,0 +1,12 @@
+apt install golang
+
+go get sth
+go build a.go
+go run a.go #build and run
+go install sth
+go mod init #creating modules
+
+go test
+
+
+go help # go help run

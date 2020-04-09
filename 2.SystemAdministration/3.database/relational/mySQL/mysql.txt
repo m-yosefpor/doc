@@ -49,4 +49,50 @@ wiki: https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:User_rights
 ---
 use <database>;
 show tables;
-select * from <table>;
+select column1, column2 from <table>;
+select distinct column1,column2 from table1
+SELECT COUNT(DISTINCT Country) FROM Customers;
+
+SELECT * FROM Customers WHERE column1=value1;
+SELECT * FROM Customers WHERE City IN ('Paris','London');
+WHERE condition1 AND condition2 AND condition3 ...;
+WHERE condition1 OR condition2 OR condition3 ...;
+WHERE NOT condition;
+
+WHERE Country='Germany' AND (City='Berlin' OR City='München'); #tartib mohasebat mesle riyazi 
+
+SELECT * FROM Customers
+ORDER BY Country, CustomerName; //by country, if equal then by customername
+
+
+SELECT * FROM Customers
+ORDER BY Country DESC;
+
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC; // = BY Country , CustomerName DESC
+=====================
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+===========================
+mysql:
+	db:
+		tables:
+			record, field
+
+commands:
+	SELECT, UPDATE, DELETE, INSERT, WHERE
+SELECT - extracts data from a database
+UPDATE - updates data in a database
+DELETE - deletes data from a database
+INSERT INTO - inserts new data into a database
+CREATE DATABASE - creates a new database
+ALTER DATABASE - modifies a database
+CREATE TABLE - creates a new table
+ALTER TABLE - modifies a table
+DROP TABLE - deletes a table
+CREATE INDEX - creates an index (search key)
+DROP INDEX - deletes an index
