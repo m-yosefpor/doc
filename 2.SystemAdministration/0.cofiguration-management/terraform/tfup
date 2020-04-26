@@ -1,0 +1,83 @@
+CAMS
+	culture
+	automation
+		ad hoc script
+			bash,python
+			The great thing about ad hoc scripts is that you can use popular, general-purpose programming languages and you can write the code however you want. The terrible thing about ad hoc scripts is that you can use popular, general-purpose programming languages and you can write the code however you want
+		conf mgm
+			Chef, Puppet, Ansible, and SaltStack
+			Coding conventions which enforces a consistent, predictable structure, including documentation, file layout, clearly named parameters, secrets management
+			Idempotency
+			Distribution
+		server templating
+			Docker, Packer, and Vagrant
+				VM: packer AMI, as base image to VMs on cloud
+				container
+			immutable
+		orch.
+			efficient placement
+			deploy strategies: rolling update, canary, blue/green
+			auto healing
+			auto scaling
+			load balancing+healthcheck
+			service discovery
+			overlay network
+		provisioning
+			Terraform, CloudFormation, and OpenStack Heat
+			IaC benefits
+			NO Transparent portability: deploy exactly the same infrastructure in another cloud provider, because they do not provide same infra, no standard, different definition parameters
+
+	measurement
+	sharing
+
+IaC:
+	Self-service: not based on a person knowledge
+	speed
+	safety
+	IaC acts as Documentation
+	VCS: debugging, rollback
+	validation
+	reuse
+	happiness: not repetitive and tedious
+
+
+
+Here are the main trade-offs to consider:
+
+ Configuration management versus provisioning
+ Mutable infrastructure versus immutable infrastructure
+ 	configuration drift even with cma tools
+	more effective automated testing
+	- rebuilding an image from a server template and redeploying all your servers for a trivial change can take a long time
+ Procedural language versus declarative language
+ 	chef , ansible  vs slatstack, puppet, TF, etc
+	ec2 module deploy new servers again (if count/image changes)! also modules I wrote as non-declarative previously
+		Procedural code does not fully capture the state of the infrastructure
+			order is important
+			you need to know the full history of every change that has ever happened.
+		Procedural code limits reusability
+			The reusability of procedural code is inherently limited because you must manually take into account the current state of the infrastructure
+		- limited ability to do “logic” (e.g., if-statements, loops), creating generic, reusable code can be tricky.
+		- some types of infrastructure changes, such as a zero-downtime deployment, are difficult to express in purely declarative terms
+
+ Master versus masterless # Chef, Puppet, and SaltStack do have varying levels of support for masterless modes where you run just their agent software on each of your servers
+ 	+ single, central place where you can see and manage the status of your infrastructure
+	+ master servers can run continuously in the background, and enforce your configuration. That way, if someone makes a manual change on a server, the master server can revert that change to prevent configuration drift
+	- Extra infrastructure for running HA master  #some support pulling from Git
+	- maintenance
+	- security
+
+ 
+ Agent versus agentless # Chef, Puppet, and SaltStack do have varying levels of support for agentless modes (e.g., salt-ssh)
+ 	- bootstarping #in image (AMI) or via ansible
+	- maintenance:  #but also sshd, but more stable and not frequently updated
+	- security
+ Large community versus small community
+ 	The community determines how many people contribute to the project, how many plug-ins, integrations, and extensions are available, how easy it is to find help online (e.g., blog posts, questions on StackOverflow), and how easy it is to hire someone to help you (e.g., an employee, consultant, or support company)
+	community: Ansible > Salt = TF > chef = puppet
+	trend change: Ansible > TF > Salt > chef = puppet
+ Mature versus cutting-edge
+ 	TF is cutting-edge
+ Using multiple tools together
+ 	provisioning + cma: TF+ ansible
+	provisioning + server-templating: TF + packer

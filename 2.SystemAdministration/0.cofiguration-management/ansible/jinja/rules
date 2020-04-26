@@ -1,0 +1,16 @@
+{{ var }}
+
+(if)
+{% if s2 in var %}
+{% elif var1=="hello" %}
+{% elif var is defined %}
+
+{% else %}
+
+{% endif %}
+
+
+
+
+
+(for)

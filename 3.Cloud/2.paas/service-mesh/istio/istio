@@ -1,0 +1,79 @@
+istio
+	sidecar: #inject with curl https:... | istioctl kube-inject -f - | kubectl create -f -
+		envoy
+	control plane (central)
+		mixer : telemetry data
+		pilot : config, service disccovery, etc
+		citadel: tls
+
+
+####################
+observibility:
+	tracing:
+		jaeger dashboard
+	metrics:
+		lots of metrics we can define
+		prometheus-grafana
+	log:
+	other:
+		kiali
+			Which service is connected to which other service?” and “How much traffic goes to each microservice? visualize
+
+fault injection
+	Apply some chaos engineering by throwing in some HTTP errors or network delays
+
+canary deployement:
+	virtual service
+		10% to v2, 90% v1
+		mirroring traffic
+
+ratelimit:
+	memquota, quota
+		qps
+
+resilience:
+	load test:
+		siege: regression test and benchmark utility
+			maxconncection
+			mac pending req
+
+	circuit breaker: to avoid multiple concurrent requests to an instance; (#opposite concept of mq?)
+	pool ejection: to remove failing instances from the pool of responding instances;
+	retires: to forward the request to another instance just in case we get an open circuit breaker and/or pool ejection;
+
+
+mTLS:
+	mutual service TLS
+
+authentication:
+
+
+egress:
+	ServiceEntry
+
+
+ingress:
+	Gateway:
+		L4-L6, and can use istio rules to provide L7,
+
+
+endpoint discovery
+health checks
+############################
+
+VirtualService # replaces RouteRule
+DestinationRule # DistinationPolicy
+memquota, quota
+ServiceEntry # EgressRule
+Gateway #why not Kubernetes Ingress API? Istio Gateway overcomes the Ingress shortcomings by separating the L4-L6 spec from L7. 
+
+
+
+
+
+
+=========================================
+API gateway:
+	Ingress for API/Edge Services, provides circuit-breakers, observability(telemetry, tracing),LB, TLS, JWT valiation, canary releasing, rate limiting, etc
+	they can flow  downstream traffic to service mesh (or not).
+	with evolution of Service mesh, they might be not needed anymore (Gatewary resource in Istio alpha v1alpha3)

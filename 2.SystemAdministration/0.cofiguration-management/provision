@@ -1,0 +1,15 @@
+0.one server used for provisioning in the cluster network:
+	ubuntu
+	snap
+		ansible
+			python-hpilo module
+			two methods:
+				boot from network and use maas
+				boot from media: https://webserver
+		MaaS
+			setup PXE and subnet/vlan
+
+1.use a hpilo list of inventory file to boot all from network
+2.use maas to provision all machines (or use juju instead??)
+3.use ansible to provision all machines
+

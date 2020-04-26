@@ -1,0 +1,55 @@
+{{ sth | filter }}
+
+
+ipv4
+ipv6
+ipaddr
+	CIDR
+	index number
+	name
+	---
+	private
+	public
+	net
+	host
+	address
+	size
+	network
+	netmask
+	broadcast
+	prefix
+	int
+	revdns
+ipwrap
+ip4_hex
+ipsubnet
+hwaddr
+
+
+
+
+==========
+list filter:
+min
+max
+flatten
+	set theory:
+unique
+intersect(list2)
+union(list2)
+
+
+dict2items(key_name , value_name)
+items2dict
+
+regex_search('(foo)')
+regex_findall
+regex_replace
+
+
+k8s filter
+
+
+other
+	quote
+	join(" ")  #list to str

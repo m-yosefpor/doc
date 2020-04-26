@@ -1,0 +1,93 @@
+package:
+	yum
+	apt
+
+service
+	service
+
+file
+	file
+	copy
+	template
+
+
+
+
+
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+# or add all to trusted hosts (but how?)
+
+
+## not dependent on prev state: oc create, oc patch, vs. oc apply
+
+playbook
+	import_playbook
+	play
+		import_tasks
+		tasks
+		pre-tasks
+		post-tasks
+		handlers
+
+
+
+
+non declarative /non states
+	restart service
+	reboot
+
+
+
+playbook, play , role, task
+#block is a special task: group tasks
+
+#############
+facts, vars
+vars scope:
+	play
+	task  #task will mask play if same name
+
+
+hostvars
+#############
+(each play)
+name
+hosts
+--
+remote_user
+become
+
+--
+serial  #percent, number, batch(list)
+
+vars
+vars_files
+
+gather_facts
+tasks
+roles
+
+
+###############
+(each task)
+
+name
+$module
+when
+tags
+register
+loop
+changed_when
+failed_when
+delegate_to
+ignore_erros
+vars
+
+################
+
+
+To be declarative and ignore manual changes, I should use force: yes as much as possible:
+	git
+	file
+
+use tags for refactor, new, old

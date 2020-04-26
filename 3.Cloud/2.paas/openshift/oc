@@ -1,0 +1,28 @@
+Buildconfig
+	Source-to-image strateg	y
+	Docker strategy
+	Custom strategy
+	Pipeline strateg
+Route : Ing
+ImageStream
+Template
+DeploymentConfig : isn't it just deploy?
+Security Context Constraints (SCC)
+
+
+
+CNI: not flannel or calico, but openshift-SDN and openshif-OVS
+
+
+oc new-app
+oc new-project
+oc get builds
+oc adm
+
+
+oc project openshift-project # k set active-context 
+
+
+oadm policy add-role-to-user
+
+

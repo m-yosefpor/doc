@@ -1,0 +1,24 @@
+(magic) #also all 2-indent variables can be used directly, which the value is hostvars[$target_host][$2-indent-var]
+
+hostvars
+	$hostname
+		ansible_facts
+			all_ipv4_addresses
+		ansible_inventory_sources
+		 - /home/mm/inv
+		group_names
+		 - $all-parent-groups-except-all #all hosts are member of "all" and another group ("nogroup" if none)
+		groups
+		 - $all-groups-in-inv
+		    - $members
+		inventory_dir: /home/mm/ans-test/inventory
+		inventory_file: /home/mm/ans-test/inventory/all.yml
+		inventory_hostname: localhost
+		inventory_hostname_short: localhost
+
+		all_ipv4_addresses ## also they all appear here
+		ansible_default_ipv4
+			address
+
+		$defined-variables  #resolved for each hosts, child-first, if same level, alphabetic, if different inv, by order of -i passing, if dir, then alphabetic file name  ## NOTE that it will resolve for each HOST (overwrite a final value not mask, such that in calling to a group it will not assign the group var, but for each host the resolve value, groups are meaningless for ansible and only are defined in inv, and resolved once before execution), but also this final resolved value  could be masked within plays/roles/task by env key
+
