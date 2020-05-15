@@ -1,0 +1,35 @@
+kubernetes
+	api-server
+	kubelet
+	kube-controller-manager
+	kube-scheduler
+	autoscaler
+	kube-state-metrics
+	kube-proxy * -> istio-proxy
+	kube-dns * -> coredns
+	heapster * -> prometheus
+	---
+	csi-api
+	cri-api
+	node-api
+	ingress-nginx
+	---
+	kubectl
+	kompose
+	--
+	kubeadm
+	kops
+	minikube
+	--
+	dashboard
+
+
+etcd
+
+coredns
+
+istio
+
+envoy
+
+prometheus

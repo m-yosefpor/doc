@@ -1,0 +1,14 @@
+directory hierarchy
+
+inventory file
+
+ansible.cfg
+
+modules to use: never shell/command/..
+
+version locking
+
+changed only if really changed.. ignore errors handling (retry) etc
+
+
+use force in file, copy, .. we WANT the desired state

@@ -1,0 +1,21 @@
+## oc get all
+po
+rc
+rs
+deploy
+dc
+ds
+sts
+--
+svc
+route
+--
+is
+build
+bc
+
+
+========
+(not includes)
+secret
+cm

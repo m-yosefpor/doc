@@ -1,22 +1,58 @@
+## > , >> , tee , sed
 blockinfile
 lineinfile
 replace
 
 
+## chmod, chown, touch , mkdir, mv , cp , scp , 
 file
 copy
 template
+fetch
+######
+
+## wget, curl
+unrachive
+get_url
+####
 
 ###
 timezone
 firewalld
 
 
-package
+## yum , apt, pip, service, systemctl
+package , yum , apt
 service
 pip
 
 
+## find , grep
+find
 
-
+## reboot 
 reboot
+
+######################################
+inventory modules:
+	add_host
+	group_by
+
+set fact
+
+#######################################
+oc -> openshift_raw
+openstack -> os_*
+docker -> docker_image , docker_container
+aliyun -> alidns
+terrraform -> terraform
+######################################
+Remote Management modules:
+	hpilo
+		hpilo_boot
+		hpilo_info
+	ipmi
+		impi_boot
+		impi_power
+	imc
+		imc_rest

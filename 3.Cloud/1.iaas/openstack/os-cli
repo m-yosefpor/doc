@@ -1,0 +1,55 @@
+list  #get
+create
+show  #describe
+set
+delete
+####################
+(nova)
+server
+flavor
+compute
+	agent
+	service
+--
+(cinder)
+volume
+	@
+	service
+--
+(swift)
+object
+--
+(neutron)
+network
+subnet
+router
+loadbalancer
+firewall
+--
+(glance)
+image
+--
+(keystone)
+service
+security
+secret
+role
+
+---
+(tripleo)
+tripleo
+undercloud
+overcloud
+
+--
+(ironic)
+baremetal
+	node
+	port
+	volume
+	introspection
+	driver
+--
+messaging
+dataprocessing
+database

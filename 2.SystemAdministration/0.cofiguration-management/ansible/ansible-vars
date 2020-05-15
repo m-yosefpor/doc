@@ -11,10 +11,13 @@ hostvars
 		groups
 		 - $all-groups-in-inv
 		    - $members
-		inventory_dir: /home/mm/ans-test/inventory
 		inventory_file: /home/mm/ans-test/inventory/all.yml
 		inventory_hostname: localhost
 		inventory_hostname_short: localhost
+
+		inventory_dir: main_dir/inventory
+		playbook_dir:  main_dir/playbooks (what passed to ap command)
+		role_path: path to dir of the current running role
 
 		all_ipv4_addresses ## also they all appear here
 		ansible_default_ipv4
