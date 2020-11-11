@@ -1,0 +1,135 @@
+oc/kubectl + 
+----------
+general:
+    version
+    api-resources
+    api-versions
+    cluster-info
+    options
+
+
+-------
+-------
+$verb $resources
+----------
+verbs: #crud
+    create/apply/replace
+    get/describe
+    edit/apply/patch/label/annotate
+    delete
+    explain
+-----------
+pods-verbs:
+    exec
+    logs
+    cp
+    port-forward
+-----------
+node-verbs:
+    drain
+    cordon
+    uncordon
+    taint #node
+-----------
+dc/deploy/sts/ds
+    scale
+    autoscale
+    rollout
+	status
+	undo
+	history
+	pause
+	resume
+	restart
+	--
+        latest (oc only??)
+        cancel dc
+
+-----------
+mixed:
+    top (po/no)
+    expose (deploy/dc , svc)
+-----------
+special:
+    set
+        env
+        image
+        resources
+        selector
+    auth
+        can-i
+    proxy
+    config
+        get-contexts
+        set-context
+        current-context
+        delete-context
+        get-clusters
+        delete-cluster
+    plugin
+        list
+        $plugin
+    completion
+    
+
+------------
+oc login
+oc whoami
+oc new-app
+oc new-project
+oc policy
+    add-role-to-user
+    remove-role-from-user
+    who-can
+oc adm
+    policy
+        add-cluster-role-to-user
+            cluster-admin
+            cluster-editor
+            cluster-reader
+    manage-node
+        node-x --list-pods
+    top
+
+
+oc project openshift-project # k set active-context
+----------------
+
+kubectl run php-apache \   
+
+  --image=gcr.io/google\_containers/hpa-example \
+
+  --requests=cpu=500m,memory=500M --expose --port=80
+  
+  
+  
+kubectl run -i --tty service-test --image=busybox /bin/sh
+  
+  
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+kubectl get hpa
+ 
+ 
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+ 
+ 
+kubectl rollout undo deployment/kubernetes-bootcamp
+ 
+ 
+kubectl taint nodes node1 key=value:NoSchedule
+places a taint on node node1. The taint has key key, value value, and taint effect NoSchedule. This means that no pod will be able to schedule onto node1 unless it has a matching toleration.
+
+To remove the taint added by the command above, you can run:
+
+kubectl taint nodes node1 key:NoSchedule-
+kubectl taint nodes --all node-role.kubernetes.io/master-
+
+-------------
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+
+You can create a Service at the same time you create a Deployment by using
+--expose in kubectl.
+
+kubectl label pod $POD_NAME app=v1
+
+kubectl scale deployments/kubernetes-bootcamp --replicas=4

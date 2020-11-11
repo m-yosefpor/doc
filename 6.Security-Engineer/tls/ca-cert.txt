@@ -1,3 +1,7 @@
+openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out MyCertificate.crt -keyout MyKey.key  #???
+####
+
+
 openssl genrsa -des3 -out rootCA.key 4096
 
 openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.crt

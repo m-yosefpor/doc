@@ -1,0 +1,20 @@
+# add the following to task
+
+  async: 1000
+  poll: 0
+  register: async_results
+  changed_when: false
+
+
+#it will change if changed in next step, if not green
+
+
+# insert this when you want to make sure the job is finished
+- name: wait for async
+  async_status:
+    jid: "{{ item.ansible_job_id }}"
+  loop: "{{ async_results.results }}"
+  register: job_result
+  until: job_result.finished
+  retries: 30
+

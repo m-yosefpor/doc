@@ -1,0 +1,7 @@
+oc create, apply:   changed_when: "'created' in command_result.stdout or ' changed' in command_result.stdout"
+oc delete: changed_when: "'deleted' in command_result.stdout"
+oc start-build : 
+oc adm policy
+oc policy
+oc scale
+oc serviceaccounts

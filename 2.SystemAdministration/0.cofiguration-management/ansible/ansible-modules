@@ -1,52 +1,71 @@
-## > , >> , tee , sed
+########################### file content
+## modify existing files # > , >> , tee , sed
 blockinfile
 lineinfile
 replace
+ini_file
+file #only for permission change and stuff
 
 
-## chmod, chown, touch , mkdir, mv , cp , scp , 
+## create new files #chmod, chown, touch , mkdir, mv , cp , scp , wget, curl
+###### ign: storage-file
 file
 copy
 template
 fetch
-######
-
-## wget, curl
 unrachive
 get_url
-####
+git
+
+
+### mount
+### ign: storage-filesystem
+mount
+filesystem
+############################### OS configs
 
 ###
 timezone
 firewalld
+modprobe
+sysctl
+user
 
+################################# package and services
+## service, systemctl
+service, systemd
 
-## yum , apt, pip, service, systemctl
+## yum , apt, pip,
 package , yum , apt
-service
 pip
 
 
-## find , grep
-find
 
+################################# not declarative
 ## reboot 
 reboot
 
-######################################
+###################################### find/set info
+## find , grep
+find
+
+setup
+
+###
+
 inventory modules:
 	add_host
 	group_by
 
 set fact
 
-#######################################
+####################################### apps
 oc -> openshift_raw
 openstack -> os_*
 docker -> docker_image , docker_container
 aliyun -> alidns
 terrraform -> terraform
-######################################
+##################################### ilo
 Remote Management modules:
 	hpilo
 		hpilo_boot

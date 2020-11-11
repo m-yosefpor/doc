@@ -1,0 +1,3 @@
+hostvars, groups, group_names, omit, playbook_dir, role_name, role_path
+inventory_hostname, inventory_dir, inventory_file
+ansible_*, ansible_facts

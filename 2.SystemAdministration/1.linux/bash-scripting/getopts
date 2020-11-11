@@ -2,9 +2,8 @@
 a=0
 b=0
 c=''
-while getopts 'abc:' x
-do
-	case $x in
+while getopts 'abc:' opt; do
+	case $opt in
 		a) a=1;;
 		b) b=1;;
 		c) c=$OPTARG;;

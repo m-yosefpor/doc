@@ -1,0 +1,84 @@
+----------
+oc
+	kubectl #
+-----------
+cluster operator (CO)
+etcd-ha-operator #?
+######
+
+[cluster-version-operator (CVO)]
+
+cluster-etcd-operator (CEO)
+	etcd
+cluster-openshift-api-server-operator
+	openshift-api-server
+cluster-kube-controller-manager-operator
+    kube-controller-manager
+cluster-kube-scheduler-operator
+    kube-scheduler
+cluster-openshift-controller-manager-operator
+	openshift-controller-manager
+---
+cluster-network-operator (CNO)
+	openshift-sdn
+	openshift-ovs /ovn
+cluster-dns-operator (CDO):
+	coredns
+cluster-ingress-operator (CIO)
+	router (haproxy)
+---
+cluster-image-registry-operator
+    image-registry
+    	#docker-registry
+cluster-logging-operator (CLO)
+	elasticsearch-operator
+		elasticsearch
+	kibana
+	curator-operator
+		curator
+	origin-aggregated-logging (fluentd)
+	eventrouter
+cluster-monitoring-operator (CMO)
+    prometheus-operator
+    	prometheus + thanos-sidecar
+    	alertmanager
+        thanos ruler
+    thanos-query
+    grafana
+    node-exporter
+    google-cadvisor
+    openshift-state-metrics
+    kube-state-metrics
+    prometheus-adapter
+---
+console-operator
+	console
+origin-web-console-server
+origin-web-console
+---
+
+
+
+
+
+
+cluster-autoscaler-operator
+  	kubernetes-autoscaler
+machine-api-operator (adding a new node)
+machine-config-operator (MCO)
+    machine-config-server
+    machine-config-controller
+    machine-config-daemon
+cluster-config-operator
+cluster-node-tuning-opertator
+
+
+certman-operator
+
+rook
+
+baremetal-operator
+
+
+	kuryr #
+	ovnkubernetes#

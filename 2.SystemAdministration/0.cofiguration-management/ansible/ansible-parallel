@@ -1,0 +1,6 @@
+* pass vars as inventory and call all hosts with the same role with different at the same time
+	- vm_lb
+* async + poll
+* strategy=free
+* mitogen
+* factor all common roles

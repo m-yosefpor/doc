@@ -8,7 +8,12 @@ echo
 true
 false
 pwd
+--
 kill
+jobs
+fg
+bg
+--
 exit
 export
 history : history of cmds in bash ( not just current session, but even prev shutdown) #not in sh

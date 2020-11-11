@@ -1,0 +1,4 @@
+convert: ffmpeg -i video.mp4 -vcodec libx265 -crf 28 video.mkv
+trim: ffmpeg -ss 00:01:00 -i input.mp4 -to 00:02:00 -c copy output.mp4
+concat: https://stackoverflow.com/questions/7333232/how-to-concatenate-two-mp4-files-using-ffmpeg
+

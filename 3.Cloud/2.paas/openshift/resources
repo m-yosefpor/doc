@@ -1,0 +1,56 @@
+(bc)Buildconfig
+	Source-to-image strateg	y
+	Docker strategy
+	Custom strategy
+	Pipeline strateg
+Build
+Route : Ing
+(is)ImageStream
+(istag)ImageStreamTag
+Template
+DeploymentConfig : isn't it just deploy?
+(scc)Security Context Constraints
+users
+groups
+identity
+
+
+
+CNI: not flannel or calico, but openshift-SDN and openshif-OVS
+
+
+oc get builds
+
+
+
+oc login
+oc whoami
+oc new-app
+oc new-project
+os rsh 
+oc policy
+    add-role-to-user
+    remove-role-from-user
+    who-can
+oc adm
+    policy
+        add-cluster-role-to-user
+            cluster-admin
+            cluster-editor
+            cluster-reader
+    manage-node
+        node-x --list-pods
+
+
+oc project openshift-project # k set active-context 
+
+
+
+
+bc
+dc
+is
+scc
+templates
+routes / routers
+

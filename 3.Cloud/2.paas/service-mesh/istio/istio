@@ -39,7 +39,7 @@ resilience:
 
 	circuit breaker: to avoid multiple concurrent requests to an instance; (#opposite concept of mq?)
 	pool ejection: to remove failing instances from the pool of responding instances;
-	retires: to forward the request to another instance just in case we get an open circuit breaker and/or pool ejection;
+	retries: to forward the request to another instance just in case we get an open circuit breaker and/or pool ejection;
 
 
 mTLS:

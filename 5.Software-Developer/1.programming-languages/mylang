@@ -11,10 +11,15 @@ bool [c,go,rust]
 ----
 
 (int)
-a int [go, c], a:Int[kotlin] , i8 a (i8, i16, i32, i64, i128 _ u8,.., u128)[rust]
+i8 a (i8, i16, i32, i64, i128 _ u8,.., u128)[rust]
+a int [go] (int8, int16, int32, uint16)
+int a [c]
+a:Int[kotlin]
 ----------
 (float)
-f32 , f64 [rust] , float [go ,c]
+f32 , f64 [rust]
+float32, float64 [go]
+float [c]
 ---------
 (strings)
 "hi" instead of 'hi'
@@ -22,7 +27,9 @@ string , str, String
 ----------------------------------------------------------------
 [control flow]
 ---------------
-- for (a in b) {    ::   for a in b {
+(loop)
+[go] for a;b;c { } for b {} for {}
+for (a in b) {    ::   for a in b {
 - if (true)   : if true
 
 - why val/var (at least optional like js
@@ -33,11 +40,12 @@ string , str, String
 
 ------------
 (function)
-fn (rust) # def(python), fun (kotlin), func(go)
+fn (rust)
+def(python), fun (kotlin), func(go)
 
 
 
-val , var , let
+val , var , let  :=
 and or not : && || !
 true false | True, False
 
@@ -63,3 +71,10 @@ a= [1,2,3,4] rust, python
 if a>b {}   # if a>b:
 
 for a in b  #
+################################## I wish golang was like
+func -> fn
+package -> pkg
+#### I can alias the followings, but it's not standard
+float  -> f
+int -> i
+uint -> u

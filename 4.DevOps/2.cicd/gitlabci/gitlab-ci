@@ -1,3 +1,6 @@
+https://docs.gitlab.com/ee/ci/variables/README.html#list-all-environment-variables
+---
+encryption thing: don't create rooms with e2e
 Secret vars in settings >> CICD >> expand vars
 
 vars in yaml .gitlab-ci.yml (global)
@@ -28,4 +31,11 @@ CI_COMMIT_SHORT_SHA
 	tag
 	branch
 	title
+
+#######
+whoami : root
+HOME : /root
+pwd: /builds/snappcloud/cluster
+CI_BUILDS_DIR: /builds
+CI_PROJECT_DIR: /builds/snappcloud/cluster
 

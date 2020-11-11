@@ -1,9 +1,36 @@
+---
+server:
+    ts-1:
+        virtual-undercloud
+flavor
+---
 volume
+    ts-1:
+        virtual-undercloud
 ---
 port
+    ts-1:
+        undercloud-ip NEVER
 subnet
-network
-security groups: 3 default can not be deleted
+    ts-1:
+        tenant
+        private
+network:
+    ts-1
+        tenant
+        private
+security group:
+    ts-1
+        virtual-undercloud
+        default
+    office-1(3 default can not be deleted)
 ---
-server
-flavor
+keypair
+    ts-1:
+        virtual-undercloud
+
+
+#######################################################
+for x in "server" "flavor" "volume" "port" "subnet" "network" "security group" "keypair"; do
+  openstack $x delete $(openstack $x list | grep -v virtual-undercloud | awk '{print $2}')
+done

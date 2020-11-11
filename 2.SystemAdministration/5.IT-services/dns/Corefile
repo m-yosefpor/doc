@@ -1,0 +1,98 @@
+(global) {
+  health :8080 {
+    lameduck 5s
+  }
+  reload 10s
+}
+
+(common) {
+  whoami
+  loop
+  errors
+  any
+  prometheus :9153
+}
+
+(upstreams) {
+  forward . /etc/coredns/resolv.conf {
+    force_tcp
+  }
+}
+
+######################
+(errorsconsolidate) {
+  errors {
+    consolidate 1m ".* timeout$"
+    consolidate 1m "^.* network is unreachable$"
+    consolidate 1m "^Failed to .+"
+  }
+}
+
+(logtrace) {
+  trace zipkin localhost:9411{
+    every 10000
+  }
+  dnstap /tmp/dnstap.sock
+}
+
+(debug) {
+  debug
+  log
+}
+
+
+
+(DoT) {
+  forward . tls://1.1.1.1 tls://1.0.0.1 {
+    tls_servername cloudflare-dns.com
+    health_check 5s
+  }
+}
+
+(nonegcache) {
+  cache {
+    success 10240 3600
+    denial  0
+  }
+}
+
+(allservers) {
+  fanout . /etc/coredns/resolv.conf {
+    network TCP
+  }
+}
+
+
+#######################
+. {
+  import global
+  cache
+  import upstreams
+  import common
+}
+
+cluster.local in-addr.arpa {
+  kubernetes {
+    ttl 1
+    fallthrough in-addr.arpa
+  }
+  import upstreams
+  ready :8181
+  loadbalance
+  import common
+}
+
+snapp.infra consul {
+  forward . {{ legacy_consul_service_discovery.primary_addr }} {{ legacy_consul_service_discovery.secondary_addr }}
+  cache
+  import common
+}
+
+snappcloud.io staging-snappcloud.io {
+  file /etc/coredns/static {
+    reload 3s
+  }
+  cache
+  import common
+}
+

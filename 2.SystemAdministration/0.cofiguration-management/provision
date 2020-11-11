@@ -13,3 +13,17 @@
 2.use maas to provision all machines (or use juju instead??)
 3.use ansible to provision all machines
 
+
+
+modules:
+    create file,link,dir: ansible(file, template, unrachive,...) ignition(storage block file node)
+    edit existing files: ansible(
+    user
+    service
+    package
+    firewall #ignition?
+    network: /etc/NetworkManager/
+    sysctl # /etc/sysctl.d/
+    modprobe # /etc/modules-load.d/ 
+    timezone #ignition?
+

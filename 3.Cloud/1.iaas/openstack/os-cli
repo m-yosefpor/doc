@@ -1,3 +1,9 @@
+######################### install (dependency resolution cause it sucks)
+pip install pip --upgrade
+
+pip install --upgrade --requirement https://raw.githubusercontent.com/platform9/support-locker/master/openstack-clients/requirements.txt --constraint https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
+
+###########################
 list  #get
 create
 show  #describe
