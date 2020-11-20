@@ -1,5 +1,141 @@
 naked pod
 static pod
 
-rc/rs
-dc/deploy/ds/sts
+cluster-wide: *
+############## core
+bindings 
+cs*     e
+cm      
+ep      
+ev      
+limits  
+ns*
+no*     
+pvc     
+pv*     
+po      
+podtemplates
+rc
+quota
+secrets
+sa
+svc
+
+############### apps
+controllerrevisions
+ds      
+deploy  
+rs      
+sts     
+
+############### batch
+job
+cj (v1beta)
+
+############## autoscaling
+hpa
+
+############## policy (beta)
+psp false
+pdb
+
+################### flowcontrol?? alpha
+flowschema
+prioritylevelconfiguration
+
+################### discovery ?? beta
+enpointslices ??
+
+################## node ?? beta
+runtimeclass
+
+################## setting ?? (alpha)
+podpreset
+
+################### scheduling.k8s.io
+pc
+
+################### coordination.k8s.io
+lease
+
+################### authentication.k8s.io
+TokenReview  false
+
+################### authorization.k8s.io
+LocalSubjectAccessReview
+SelfSubjectAccessReview  false
+SelfSubjectRulesReview  false
+SubjectAccessReview  false
+
+################### admissionregistration.k8s.io
+MutatingWebhookConfiguration   false
+ValidatingWebhookConfiguration false
+
+################### rbac.authorization.k8s.io
+clusterrolebindings*
+clusterroles*
+rolebindings
+roles
+
+################## apiextensions.k8s.io
+crd*
+
+################### apiregistration.k8s.io
+apiservice*
+
+################### certificates.k8s.io
+csr*
+
+################### events.k8s.io
+ev
+
+################### storage.k8s.io
+sc*
+volumeattachments*
+csinode*
+csidriver*
+
+###################  networking.k8s.io
+netpol
+ing
+ingressclass
+
+
+################################# openshift
+
+############ apps.openshift.io
+dc
+
+############ build.openshift.io
+build
+bc
+
+############ image.openshift.io
+image false
+is
+istag
+
+############ network.openshift.io
+netnamespaces
+egressnetworkpolicies
+
+########### route.openshift.io
+route
+
+########## security.openshift.io
+scc
+
+#################################  argoproj.io
+app,apps          Application
+appproj,appprojs  AppProject
+
+
+################################ monitoring.coreos.com
+amc
+am
+pm
+pms
+pmsr
+sm
+thanosrulers
+

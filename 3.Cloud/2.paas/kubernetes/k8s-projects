@@ -2,6 +2,8 @@ kubernetes
 	api-server
 	kubelet
 	kube-controller-manager
+        resource-controllers...
+        a/d-controller
 	kube-scheduler
 	autoscaler
 	kube-state-metrics
