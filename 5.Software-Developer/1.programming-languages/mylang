@@ -1,29 +1,51 @@
 (comment)
+// [c, go, rust, v, kotlin]
+/* [c, go, rust, v, kotlin]
 # [python , bash]
-// [c, go , rust, kotlin]
 
 
 ------------------------------------------------------------
 [data structures]
 ----------------
 (bool)
-bool [c,go,rust]
+bool [c,go,rust, v]
 ----
 
 (int)
+i8    i16  int  i64      i128 [v]
 i8 a (i8, i16, i32, i64, i128 _ u8,.., u128)[rust]
 a int [go] (int8, int16, int32, uint16)
 int a [c]
 a:Int[kotlin]
+
+
+supports _ separator: python, v
+---
+(uint)
+byte  u16  u32  u64      u128 [v]
 ----------
 (float)
-f32 , f64 [rust]
+f32 , f64 [rust, v]
 float32, float64 [go]
 float [c]
 ---------
 (strings)
-"hi" instead of 'hi'
+"hi": go, c
+'hi'
+both: python, v
 string , str, String
+
+r'sth' : python, v
+---
+(string interpolation)
+%s : c , go
+{} + .format: python
+$  : v
+----
+(structs)
+
+struct a // v, c
+type A //go
 ----------------------------------------------------------------
 [control flow]
 ---------------
@@ -40,12 +62,36 @@ for (a in b) {    ::   for a in b {
 
 ------------
 (function)
-fn (rust)
+fn (rust, v)
 def(python), fun (kotlin), func(go)
+---
+(function publish)
+Captilize first letter (go)
+pub fn sth() (rust, v)
 
 
-
+----
+(variable definition)
 val , var , let  :=
+
+var a int // go
+a := 1 // go , v
+a := float(1)
+
+----
+(variabe naming)
+
+CampleCase (go)
+hyfened (python , v[enforced])
+---
+(const, mut)
+
+mut by default:
+    const //go
+immutable by default:
+    mut // rust, v
+
+----
 and or not : && || !
 true false | True, False
 
@@ -54,16 +100,26 @@ true false | True, False
 
 : instead of {} and spacing?
 
+---------------
+(stdio)
+println (golang, rust, v)
+print (golang, rust, python, v)
+printf (golang, ..)
 
-println , print
+* golang needs fmt package
 
+-----------------
+(array)
+
+a = [1, 2, 3] rust, python
+a := [1, 2, 3] v
+a := int[]{ 1, 2, 3 } go
 
 a..b step c  # rane(a,b,c)
 a
 
 
 
-a= [1,2,3,4] rust, python
 
 
 
@@ -71,10 +127,47 @@ a= [1,2,3,4] rust, python
 if a>b {}   # if a>b:
 
 for a in b  #
+--------
+(commands)
+
+go run sth
+go build sth
+go get sth
+go mod sth
+
+
+v sth
+v run sth
+-----
+(compiler)
+unused enforce: go
+unused warn: v (-prod enforce)
+memory safety: rust, v
+gc: go
+
+---
+(shadowing)
+allowed: c
+not allowed: v
 ################################## I wish golang was like
-func -> fn
-package -> pkg
+memory safe -> no gc // v
+fast // v, c, rust
+no global state (functions) // v
+--
+err != nil // v??? isn't it unnecesasrily complex
+one way declaration // v??? messed with array declaration
+simpler for i,v := range // v
+for     i in 0..4 // rust , v
+map for // v
+func -> fn // v
+
 #### I can alias the followings, but it's not standard
 float  -> f
 int -> i
 uint -> u
+################################ I wish v was like
+enfore package main
+enforce fn main
+doesn't mess with golang naming: module/package,
+immut by default?
+only one way declaration: what about arrays? int[]{1,2} vs {int(1), 2}.. someone might forget first array, esp if 

@@ -3,11 +3,13 @@ server:
     ts-1:
         virtual-undercloud
 flavor
+image
 ---
 volume
     ts-1:
         virtual-undercloud
 ---
+network trunk
 port
     ts-1:
         undercloud-ip NEVER
@@ -19,15 +21,19 @@ network:
     ts-1
         tenant
         private
+
 security group:
     ts-1
         virtual-undercloud
         default
     office-1(3 default can not be deleted)
+security group rule
 ---
 keypair
     ts-1:
         virtual-undercloud
+---
+server groups
 
 
 #######################################################
