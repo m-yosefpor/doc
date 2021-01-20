@@ -1,0 +1,48 @@
+#node-x, master-x, lb-okd-x, lb-public-x, lb-private-x, lb-interdc? , 
+{$role='true'} # master, infra, router, compute
+###
+
+sum(kube_pod_status_phase{pod=~'openshift-acme.*'})
+up{instance='node-x.*'}
+
+    restarting
+    down
+
+node_.. 
+    resizing
+
+
+
+################################ (node-exporter)
+##### (CPU)
+node:cpu_usage:percent
+### (Memory)
+node:memory_usage:percent
+node:memory_avail:MB
+### (Disk)
+node:root_volume_usage:GB
+### (disk-io)
+node:disk_write:MB
+node:disk_read:MB
+### (network-io)
+node:net_rx:Mbps
+node:net_tx:Mbps
+###
+
+
+
+
+##################3
+node-exporter: node_
+cadvisor: container_
+kube_state_metrics: kube_
+openshift_state_metrics: openshift_
+ipmi-exporter: ipmi_
+haproxy: haproxy_
+ceph: ceph_
+blackbox: prob_
+
+
+
+which node has high disk usage:
+    topk(10, sum(irate(node_disk_read_bytes_total{instance=~"node.*"}[2m])) by (instance)) / 1024 /1024

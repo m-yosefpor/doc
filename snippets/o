@@ -1,0 +1,1 @@
+openstack server migrate --live compute-hci-1.localdomain --wait node-2

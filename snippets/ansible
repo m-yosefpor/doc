@@ -1,0 +1,2 @@
+ansible -m yum -a "name=iotop,htop" -f 1
+ansible -m apt -a "sudo cat sth"
