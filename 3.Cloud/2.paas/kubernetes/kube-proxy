@@ -1,0 +1,9 @@
+https://www.stackrox.com/post/2020/01/kubernetes-networking-demystified/
+
+
+
+#### type loadbalancer , externalPolicy=local
+KUBE-FW-* tcp anywhere 172.18.1.1
+
+KUBE-XLB-*
+KUBE-MARK-DROP
