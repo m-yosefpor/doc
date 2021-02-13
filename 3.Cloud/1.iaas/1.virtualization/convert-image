@@ -1,0 +1,1 @@
+qemu-img convert -f qcow2 -o raw fedora-coreos-32.20201104.3.0-openstack.x86_64.qcow2 fcos-32.raw
