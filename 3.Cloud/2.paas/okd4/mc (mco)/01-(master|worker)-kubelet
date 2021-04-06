@@ -1,0 +1,5 @@
+systemd:
+  kubelet.service
+storage:
+  /etc/kubernetes/cloud.conf
+  /etc/kubernetes/kubelet.conf

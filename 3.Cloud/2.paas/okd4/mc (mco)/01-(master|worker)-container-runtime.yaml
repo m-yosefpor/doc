@@ -1,0 +1,4 @@
+storage:
+  /etc/containers/registries.conf
+  /etc/crio/crio.conf.d/00-default
+  /etc/containers/policy.json

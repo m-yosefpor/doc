@@ -1,0 +1,18 @@
+clouds:
+  shiftstack:
+    auth:
+      auth_url: http://10.10.14.42:5000/v3
+      project_name: shiftstack
+      username: shiftstack_user
+      password: XXX
+      user_domain_name: Default
+      project_domain_name: Default
+    cacert: "/etc/pki/ca-trust/source/anchors/ca.crt.pem"
+
+  dev-env:
+    region_name: RegionOne
+    auth:
+      username: 'devuser'
+      password: XXX
+      project_name: 'devonly'
+      auth_url: 'https://10.10.14.22:5001/v2.0

@@ -1,0 +1,133 @@
+--- ## cluster
+deploy/openshift-cluster-version/cluster-version-operator:
+  clusterversions.config.openshift.io:
+  "*.config.openshift.io":
+  "*.operator.openshiftio":
+--- ## core control
+deploy/openshift-etcd-operator/etcd-operator:
+  etcd.operator.openshift.io: w??
+deploy/openshift-kube-apiserver-operator/kube-apiserver-operator:
+  kubeapiservers.operator.openshift.io: w??
+deploy/openshift-kube-controller-manager-operator/kube-controller-manager-operator:
+  kubecontrollermanagers.operator.openshift.io: w??
+deploy/openshift-kube-scheduler-operator/openshift-kube-scheduler-operator:
+  kubeschedulers.operator.openshift.io: w??
+
+---
+deploy/openshift-etcd/etcd-quorum-guard: {}
+--- ## control
+deploy/openshift-apiserver-operator/openshift-apiserver-operator:
+  openshiftapiserver.operator.openshift.io:
+    deploy/openshift-apiserver/apiserver:
+    - openshift-apiserver
+    - openshift-apiserver-check-endpoints
+deploy/openshift-controller-manager-operator/openshift-controller-manager-operator:
+  openshiftcontrollermanagers.operator.openshift.io:
+    ds/openshift-controller-manager/controller-manager:
+    - controller-manager
+--- ## network
+deploy/openshift-dns-operator/dns-operator:
+  dns.operator.openshift.io:
+    ds/openshift-dns/dns-default:
+    - dns
+    - dns-node-resolver
+    - kube-rbac-proxy
+deploy/openshift-network-operator/network-operator:
+  network.operator.openshift.io: #clusterNetworkCIDR, OVNKubernetes, serviceCIDR
+    ds/openshift-ovn-kubernetes/ovnkube-master: #master ds
+    - ovnkube-master
+    - nbdb
+    - northd
+    - sbdb
+    - ovn-dbchecker
+    - kube-rbac-proxy
+    ds/openshift-ovn-kubernetes/ovnkube-node:
+    - ovnkube-node
+    - ovn-controller
+    - kube-rbac-proxy
+    ds/openshift-ovn-kubernetes/ovs-node:
+    - ovs-daemons
+deploy/openshift-ingress-operator/ingress-operator:
+  ingresscontroller.operator.openshift.io:
+    deploy/openshift-ingress/router-default:
+      ing: haproxy config
+--- ## storage
+deploy/openshift-cluster-storage-operator/cluster-storage-operator:
+  storage.operator.openshift.io:
+    ##### cinder-csi-driver-operator:
+    #####   clustercsidriver:
+      ##### deploy/cinder-csi-controller
+      ##### deploy/cinder-csi-ds
+deploy/openshift-kube-storage-version-migrator-operator/kube-storage-version-migrator-operator:
+  kubestorageversionmigrators.operator.openshift.io: deploy/openshift-kube-storage-version-migrator/migrator
+deploy/openshift-cluster-storage-operator/csi-snapshot-controller-operator:
+  csisnapshotcontrollers.operator.openshift.io: deploy/openshift-cluster-storage-operator/csi-snapshot-controller
+--- ## machine
+deploy/openshift-machine-config-operator/machine-config-operator:
+  deploy/openshift-machine-config-operator/machine-config-controller:
+    ImageContentSourcePolicy: w??
+    mc: ignition
+    mcp: ignition
+    controllerconfigs: ""
+    kubeletconfigs: ""
+    ctrcfg: ""
+  ds/openshift-machine-config-operator/machine-config-daemon: ""
+deploy/openshift-cluster-node-tuning-operator/cluster-node-tuning-operator:
+  tuned: ""
+  profile: ""
+  w?? : ds/openshift-cluster-node-tuning-operator/tuned
+deploy/openshift-machine-api/machine-api-operator:
+deploy/openshift-cluster-machine-approver/machine-approver:
+deploy/openshift-machine-api/cluster-autoscaler-operator:
+  ca:
+--- ## registry
+deploy/openshift-image-registry/cluster-image-registry-operator:
+  imagepruners:
+  configs.imageregistry.operator.openshift.io:
+--- ## monitoring
+deploy/openshift-monitoring/cluster-monitoring-operator:
+  cm/openshift-monitoring/cluster-monitoring-config:
+    deploy/openshift-monitoring/kube-state-metrics: ""
+    deploy/openshift-monitoring/openshift-state-metrics: ""
+    deploy/openshift-monitoring/prometheus-adapter: ""
+    ds/openshift-monitoring/node-exporter: ""
+    deploy/openshift-monitoring/prometheus-operator:
+      prometheus: sts/prometheus
+      alertmanager: sts/alertmanager
+      podmonitors:
+      probes:
+      prometheusrules:
+      servicemonitors:
+      thanosrulers:
+--- ## policy
+deploy/openshift-service-ca-operator/service-ca-operator:
+  servicecas.operator.openshift.io: deploy/openshift-service-ca/service-ca
+deploy/openshift-authentication-operator/authentication-operator:
+  deploy/openshift-oauth-apiserver/apiserver:
+deploy/openshift-cloud-credential-operator/cloud-credential-operator:
+---
+deploy/openshift-config-oerator/openshift-config-operator:
+deploy/openshift-insights/insights-operator:
+deploy/openshift-marketplace/marketplace-operator:
+deploy/openshift-operator-lifecycle-manager/catalog-operator:
+  operatorhub:
+    catsrc:
+      deploy/some-catalog:
+deploy/openshift-operator-lifecycle-manager/olm-operator:
+  sub:
+    operator:
+      deploy|ds/some-operator:
+  og:
+
+OperatorCondition
+csv
+
+deploy/openshift-operator-lifecycle-manager/packageserver:
+
+
+# imagecontentsourcepolicies
+      #manager: kubectl-create
+
+
+#ingresscontrollers
+

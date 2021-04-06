@@ -1,0 +1,42 @@
+apiVersion: v1
+metadata:
+  name: teh-3
+baseDomain: snappcloud.io
+clusterID: os-test
+platform:
+  openstack:
+    cloud: mycloud
+    externalNetwork: external
+    computeFlavor: m1.xlarge
+    lbFloatingIP: 128.0.0.1
+    externalDNS: ['8.8.8.8'] #192.168.255.1
+
+controlPlane:
+  name: master
+  platform:
+    openstack:
+      type: s8c-16gb
+  replicas: 1
+
+compute:
+- name: worker
+  platform:
+    openstack:
+      type: s12c-32gb
+      rootVolume:
+        size: 30
+        type: tripleo
+  replicas: 0
+
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  serviceNetwork:
+  - 172.30.0.0/16
+  networkType: OpenShiftSDN
+fips: false
+pullSecret: '{"auths": ...}'
+sshKey: ssh-ed25519 AAAA...

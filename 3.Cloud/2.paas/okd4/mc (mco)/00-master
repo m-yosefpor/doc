@@ -1,0 +1,37 @@
+storage:
+  /etc/pki/ca-trust/source/anchors/openshift-config-user-ca-bundle.crt
+  /etc/tmpfiles.d/cleanup-cni.conf
+  ---
+  /etc/kubernetes/static-pod-resources/configmaps/cloud-config/ca-bundle.pem
+  /etc/kubernetes/static-pod-resources/etcd-member/root-ca.crt
+  /etc/kubernetes/kubelet-plugins/volume/exec/.dummy
+  /etc/kubernetes/manifests/recycler-pod.yaml
+  /etc/kubernetes/ca.crt
+  /etc/kubernetes/kubelet-ca.crt
+  ---
+  /usr/local/bin/configure-ovs.sh
+  /etc/containers/storage.conf
+  /etc/systemd/system.conf.d/10-default-env-godebug.conf
+  /etc/modules-load.d/iptables.conf
+  /etc/systemd/system.conf.d/kubelet-cgroups.conf
+  /etc/NetworkManager/dispatcher.d/90-long-hostname
+  /etc/NetworkManager/conf.d/sdn.conf
+  /var/lib/kubelet/config.json
+  /etc/sysctl.d/forward.conf
+  /etc/sysctl.d/inotify.conf
+  /usr/local/bin/recover-kubeconfig.sh
+  /usr/local/sbin/set-valid-hostname.sh
+systemd:
+  crio.service
+  kubelet.service
+  machine-config-daemon-firstboot.service
+  machine-config-daemon-pull.service
+  node-valid-hostname.service
+  openvswitch.service
+  nodeip-configuration.service
+  ovs-configuration.service
+  ovs-vswitchd.service
+  ovsdb-server.service
+  pivot.service
+  rpm-ostreed.service
+  zincati.service
