@@ -165,10 +165,9 @@ co/operator-lifecycle-manager:
   deploy/openshift-operator-lifecycle-manager/olm-operator:
     sub:
       operator:
-        deploy|ds/some-operator:
     og:
-    csv:
-      deploy|ds/some-operator:
+      csv:
+        deploy|ds/some-operator:
 
 
 
@@ -185,7 +184,12 @@ co/operator-lifecycle-manager:
 
 #ingresscontrollers
 
+############################### not co
+deploy/gitops-operator-system/gitops-operator-controller-manager:
+
 ############################### self deployed
 deploy/clusterresourceoverride-operator/clusterresourceoverride-operator:
   clusterresourceoverride.operator.autoscaling.openshift.io/v1:
     deploy/clusterresourceoverride-operator/clusterresourceoverride:
+
+
