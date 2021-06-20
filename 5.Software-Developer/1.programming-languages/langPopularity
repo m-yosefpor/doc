@@ -1,0 +1,26 @@
+C: OS, DB, lb-proxy
+C++:  storage, db, lb-proxy / Game / ML libraries
+rust: storage, db, lb-proxy,
+golang:
+    Truly great, cloud
+js: browsers, web
+ts:
+    Web UI softwares
+c#:
+    windows
+java:
+    android, bigdata(hadoop,kafka,)
+kotlin:
+    android
+objective-c, swift:
+    IoS
+python: ml-scripting, simple/scripting, calculator/uni
+
+
+dead:
+    php: integrated with html, no more usage
+    R: python replaced
+    Matlab: python libraries (simulink and engineering specific tools however is still in use)
+    Ruby:
+
+
