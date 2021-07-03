@@ -150,15 +150,27 @@ gc: go
 allowed: c
 not allowed: v
 ################################## I wish golang was like
-memory safe -> no gc // v
-fast // v, c, rust
-no global state (functions) // v
+- memory safe -> no gc // v
+- fast // v, c, rust
+- no global state (functions) // v
 --
-err != nil // v??? isn't it unnecesasrily complex
+- implicit type for slice and map literals. (however may introduce unexpected behavior. Consider if sb adds a float to the list, then the implicit will change to float for all prev ints)
+- err != nil // v??? isn't it unnecesasrily complex
+- A.B.C.D # nil pointer derefrence, should set getter. Rust macro?!
+- A.B().C().D() # error handling return err for all # maybe for adding context it's ok to be explicit
+
+simpler syntax "for i,v := range" // v: for i,v in names
+
+----
+- in operator # can define isIn in utils (even with nil interface if required)
+- union: can be map[]struct{}
+
 one way declaration // v??? messed with array declaration
-simpler for i,v := range // v
 for     i in 0..4 // rust , v
 map for // v
+
+
+-------
 func -> fn // v
 
 #### I can alias the followings, but it's not standard
@@ -170,4 +182,4 @@ enfore package main
 enforce fn main
 doesn't mess with golang naming: module/package,
 immut by default?
-only one way declaration: what about arrays? int[]{1,2} vs {int(1), 2}.. someone might forget first array, esp if 
+only one way declaration: what about arrays? int[]{1,2} vs {int(1), 2}.. someone might forget first array, esp if
