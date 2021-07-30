@@ -1,0 +1,12 @@
+okd4-worker-worker-0.node.teh-1-consul
+
+nslookup  okd4-worker-worker-1.node.teh-1-ha 127.0.0.1:8600
+curl --request PUT --data @external.json http://consul.apps.private.okd4.teh-1.snappcloud.io/v1/catalog/register
+
+ curl -s --request PUT --data @web.json http://consul.apps.private.okd4.teh-1.snappcloud.io/v1/catalog/deregister
+
+
+ nslookup  learn.service.teh-1-ha 127.0.0.1:8600
+
+
+https://github.com/hashicorp/consul-esm/issues/44

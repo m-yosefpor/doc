@@ -1,0 +1,15 @@
+```
+Internal network
++ Easier Security
+- BM/external intergration
+Tenant network:
++ BM/external integration
+- Have to handle security based on ip range
+------------
+Same Projects:
+- Error prone
++ Easier volume migration
+Different Projects:
++ Better Isolation
+- More manual work for volume migration
+```

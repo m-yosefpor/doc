@@ -1,0 +1,7 @@
+scaling:
+- More valuable information, increase fs.inotify.max_user_watches and net.ipv4.neigh.default.gc_thresh* which improves stability.
+
+dynamic grafana panels:
+
+if less than 100 points in screen, turn on `points` with radius=1
+also dynamic resolution: 10 points in each section

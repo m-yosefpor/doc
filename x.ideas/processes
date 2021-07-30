@@ -1,0 +1,12 @@
+stable, versioning.. process:
+every two weeks
+
+test deploy in staging
+fix issues and ensure stability
+tag a new version
+change log??
+cicd
+tests
+auto release
+
+

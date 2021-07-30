@@ -193,3 +193,44 @@ deploy/clusterresourceoverride-operator/clusterresourceoverride-operator:
     deploy/clusterresourceoverride-operator/clusterresourceoverride:
 
 
+
+
+
+
+
+
+
+
+
+################
+###############
+ds: kubernetes.io/os=linux
+```
+openshift-cluster-node-tuning-operator   tuned
+openshift-dns                            dns-default
+openshift-image-registry                 node-ca
+openshift-machine-config-operator        machine-config-daemon
+openshift-monitoring                     node-exporter
+openshift-multus                         multus
+openshift-multus                         network-metrics-daemon
+openshift-ovn-kubernetes                 ovnkube-node
+openshift-ovn-kubernetes                 ovs-node
+```
+
+ds : role.kubernetes.io/master=
+```
+openshift-controller-manager             controller-manager
+openshift-machine-config-operator        machine-config-server
+openshift-multus                         multus-admission-controller
+openshift-ovn-kubernetes                 ovnkube-master
+```
+
+
+static pods:
+```
+etcd-pod.yaml
+kube-apiserver-pod.yaml
+kube-controller-manager-pod.yaml
+kube-scheduler-pod.yaml
+recycler-pod.yaml
+```

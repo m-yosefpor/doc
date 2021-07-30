@@ -1,0 +1,10 @@
+allowVolumeExapnsion
+
+snapshotclass
+v1beta1 crd
+un annotation admin-view flano nabayad bezanim ru crd hash?
+chon joftesh fork kardim, mishe extra metadata ro fix kard / ro tu keys
+fix entrypoint provisoner (health-exporter, event-exporter)
+
+TODO:
+    count/volumesnapshots.snapshot.storage.k8s.io: "10"

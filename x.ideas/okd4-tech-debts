@@ -1,0 +1,38 @@
+argocd reencrypt route has issues
+
+
+```
+    mode tcp
+    option httpchk GET /readyz
+    http-check expect status 200
+%{ for i, s in backend_ips ~}
+    server master-${i} ${s}:6443 check inter 5s rise 2 fall 3 check-ssl verify none
+    server master-${i} ${s}:6443 check
+%{ endfor ~}
+###
+```
+
+
+next step:
+2. force craate new node with new ignition
+3. force reboot node with new ignition
+
+
+√ script should be rerun and nodes should be destroyed if failed in any step
+node stuck when draining (pod delete)
+multiple draining node takes time (pdb)
+terraform/openstack dumb scheduling (if multiple nodes at one time)
+where do I want to schedule it  + live-migrate takes time as it need labeling and other stuff
+
+
+force igniton to run on next boot
+
+
+Another app is currently holding the xtables lock
+
+
+maxUnavailable field on the machine configuration pool and marks them as unavailable. By default, this value is set to 1 (use explicit)
+M
+
+DRY vars: ansible, bash, terraform
+

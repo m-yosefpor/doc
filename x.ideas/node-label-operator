@@ -1,0 +1,40 @@
+https://github.com/openshift-kni/node-label-operator
+
+node label operator -> ns label operator, enforce namespace name:
+
+exclude: openshift-.*, csi, glusterfs, ...
+
+smapp-production-<any thing>
+
+approval? every one starts naming their projects.
+another way is to create a serviceDesk for labling, and disallow quota increase for `Other` namespaces.
+service desk automaticall applies, envrionment and team label.
+
+clusterresourcequota then can be used with team member label.
+
+quota increase service desk.
+
+
+-----
+doing sth for updating node labels on live-migrate?!!!
+
+
+```
+apiVersion: node-labels.openshift.io/v1beta1
+kind: OwnedLabels
+metadata:
+  name: edge-role
+spec:
+  domain: node-role.kubernetes.io
+  namePattern: edge
+---
+apiVersion: node-labels.openshift.io/v1beta1
+kind: Labels
+metadata:
+  name: edge-role
+spec:
+  nodeNamePatterns:
+    - okd4-edge-edge-.+
+  labels:
+    node-role.kubernetes.io/edge: ""
+```

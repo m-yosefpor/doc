@@ -1,0 +1,27 @@
+defarag
+compact
+space space
+
+
+alias etcd=" ETCDCTL_API=3 etcdctl --endpoints="etcd-0.internal.$REGION.staging-snappcloud.io:2379,etcd-1.internal.$REGION.staging-snappcloud.io:2379,etcd-2.internal.$REGION.staging-snappcloud.io:2379" --cacert=/etc/etcd/ca.crt --cert=/etc/etcd/peer.crt --key=/etc/etcd/peer.key"
+
+
+max-request-bytes
+
+
+etcd issue next steps:
+- find a solution to read/delete etcd objects when etcd node is down
+- document read/delete etcd objects etcdfs+auger (when api-server is down)
+- limit number of object quota for all kind of objects
+- swapoff etcd nodes
+- reduce limit size of each object from 1.5MiB to 500KB
+- set aliases for etcdctl in etcd nodes
+- fix /etc/resolve.conf order of etcd nodes
+- set backend space quota for etcd
+- document etcd fragmantation for DR
+- document etcd compaction for DR
+
+nice to have:
+- send a PR/create a fork of etcdfs to enable auger decoding/encoding
+- use periodic etcd fragmantation
+- use periodic etcd compaction

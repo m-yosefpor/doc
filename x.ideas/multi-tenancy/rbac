@@ -1,0 +1,24 @@
+roles:
+```
+view
+edit
+admin
+elastic-operator-view
+elastic-operator-edit
+prometheus-operator-view
+prometheus-operator-edit
+registry-viewer
+registry-editor
+registry-admin
+```
+```
+view-shared-resources
+```
+
+... okd4
+```
+monitoring-edit
+monitoring-view
+quota-edit
+quota-view
+```

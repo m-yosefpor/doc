@@ -1,0 +1,65 @@
+namespaced api-resources.
+set count limit (etcd DoS). maybe set a total count somehow
+```
+bindings                                                                                 true         Binding
+configmaps                        cm                                                     true         ConfigMap
+endpoints                         ep                                                     true         Endpoints
+events                            ev                                                     true         Event
+limitranges                       limits                                                 true         LimitRange
+persistentvolumeclaims            pvc                                                    true         PersistentVolumeClaim
+pods                              po                                                     true         Pod
+podtemplates                                                                             true         PodTemplate
+replicationcontrollers            rc                                                     true         ReplicationController
+resourcequotas                    quota                                                  true         ResourceQuota
+secrets                                                                                  true         Secret
+serviceaccounts                   sa                                                     true         ServiceAccount
+services                          svc                                                    true         Service
+controllerrevisions                                apps                                  true         ControllerRevision
+daemonsets                        ds               apps                                  true         DaemonSet
+deployments                       deploy           apps                                  true         Deployment
+replicasets                       rs               apps                                  true         ReplicaSet
+statefulsets                      sts              apps                                  true         StatefulSet
+localsubjectaccessreviews                          authorization.k8s.io                  true         LocalSubjectAccessReview
+horizontalpodautoscalers          hpa              autoscaling                           true         HorizontalPodAutoscaler
+machineautoscalers                ma               autoscaling.openshift.io              true         MachineAutoscaler
+cronjobs                          cj               batch                                 true         CronJob
+jobs                                               batch                                 true         Job
+credentialsrequests                                cloudcredential.openshift.io          true         CredentialsRequest
+leases                                             coordination.k8s.io                   true         Lease
+endpointslices                                     discovery.k8s.io                      true         EndpointSlice
+events                            ev               events.k8s.io                         true         Event
+ingresses                         ing              extensions                            true         Ingress
+dnsrecords                                         ingress.operator.openshift.io         true         DNSRecord
+network-attachment-definitions    net-attach-def   k8s.cni.cncf.io                       true         NetworkAttachmentDefinition
+egressfirewalls                                    k8s.ovn.org                           true         EgressFirewall
+machinehealthchecks               mhc,mhcs         machine.openshift.io                  true         MachineHealthCheck
+machines                                           machine.openshift.io                  true         Machine
+machinesets                                        machine.openshift.io                  true         MachineSet
+baremetalhosts                    bmh,bmhost       metal3.io                             true         BareMetalHost
+pods                                               metrics.k8s.io                        true         PodMetrics
+alertmanagers                                      monitoring.coreos.com                 true         Alertmanager
+podmonitors                                        monitoring.coreos.com                 true         PodMonitor
+probes                                             monitoring.coreos.com                 true         Probe
+prometheuses                                       monitoring.coreos.com                 true         Prometheus
+prometheusrules                                    monitoring.coreos.com                 true         PrometheusRule
+servicemonitors                                    monitoring.coreos.com                 true         ServiceMonitor
+thanosrulers                                       monitoring.coreos.com                 true         ThanosRuler
+operatorpkis                                       network.operator.openshift.io         true         OperatorPKI
+ingresses                         ing              networking.k8s.io                     true         Ingress
+networkpolicies                   netpol           networking.k8s.io                     true         NetworkPolicy
+ingresscontrollers                                 operator.openshift.io                 true         IngressController
+catalogsources                    catsrc           operators.coreos.com                  true         CatalogSource
+clusterserviceversions            csv,csvs         operators.coreos.com                  true         ClusterServiceVersion
+installplans                      ip               operators.coreos.com                  true         InstallPlan
+operatorgroups                    og               operators.coreos.com                  true         OperatorGroup
+subscriptions                     sub,subs         operators.coreos.com                  true         Subscription
+packagemanifests                                   packages.operators.coreos.com         true         PackageManifest
+poddisruptionbudgets              pdb              policy                                true         PodDisruptionBudget
+rolebindings                                       rbac.authorization.k8s.io             true         RoleBinding
+roles                                              rbac.authorization.k8s.io             true         Role
+volumesnapshots                                    snapshot.storage.k8s.io               true         VolumeSnapshot
+profiles                                           tuned.openshift.io                    true         Profile
+tuneds                                             tuned.openshift.io                    true         Tuned
+ippools                                            whereabouts.cni.cncf.io               true         IPPool
+overlappingrangeipreservations                     whereabouts.cni.cncf.io               true         OverlappingRangeIPReservation
+```

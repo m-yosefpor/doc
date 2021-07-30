@@ -1,0 +1,15 @@
+abar_okd_customization
+
+do all steps as a user with his permissions
+
+
+can users edit netpols?
+can users set tolerations, and nodeSelector? (nodeSelector should be overrride, check this in okd4)
+
+
+create quota for all ns
+resource override doesn't work
+
+
+set only for non-terminating pods?!
+https://gitlab.snapp.ir/snappcloud/helm/-/merge_requests/333/diffs

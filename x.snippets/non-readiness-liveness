@@ -1,0 +1,3 @@
+Have a warning with rego? having kube-score in pipeline?!
+
+oc get dc -ojson --all-namespaces | jq -r '.items[] as $dc | $dc.spec.template.spec.containers[] | select(has("readinessProbe") and has("livenessProbe") |not) | "($dc.metadata.namespace) ($dc.metadata.name) ([.name]) "'

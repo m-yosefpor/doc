@@ -1,0 +1,5 @@
+most frequent images
+```
+ oc get dc,deploy,sts -ojson --all-namespaces | jq -r '.items[].spec.template.spec.containers[].image' | grep -v "docker-registry.default.svc" | grep -v "registry.apps.private." | cut -d':' -f1 | rev | cut -d'/' -f1 | rev | sort | uniq -c | sort -nr
+```
+

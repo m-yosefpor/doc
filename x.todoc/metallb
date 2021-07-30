@@ -1,0 +1,5 @@
+- Are routers configured to support multipath? yes, up to 16 nodes (6 nodes for switch, testing for now)
+- Which kind of hashing algorithm our routers support for load balancing? Do they support ECMP (resilient LAG)? Should we use them, or just use 3 or 5 tuple? yes,
+- Which configuration should we use to setup a BGP peering session with routers? (our ASN=routers ASN , routers IPs)
+- As the routes are advertised with /32 (and probably transit provider doesn't support more specific than /24), which BGP communites and localperf should we use to tell peer routers to stop advertising that, and just advertise the /24 cidr?
+- Are you using smurf protection? should we stop advertising .255 and .0 IPs?

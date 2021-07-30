@@ -1,0 +1,89 @@
+```
+oc get ns -ojson | jq ".items[].metadata.labels.team" | grep null
+```
+
+
+```
+... (smapp chapter -> ali.karami)
+smapp -> ali.karam
+... (snappbox, bahador.farahani)
+snappbox -> bahador.farahani
+... (bravo -> mohammad.abdolirad)
+dispatching -> parham.alvani ?
+offering ->  amirhossein.jamshidi
+shared-services -> rashad.ansari
+operation -> armin.sameti
+seculatory -> shahab.rezaee
+ride-lifecycle -> ghobal.palvaneh
+...
+fintech -> Majid hesami (tech lead: arman.ajabkhani)
+... ( ? -> iman.mohammadi)
+pwa -> iman.mohammadi
+... (infra -> hamid.emamian)
+ode -> mohammad.shahgholzadeh
+devops -> vahid.fardi, majid.akbari
+sre -> mehdi.pourghasemi
+dba
+sysops
+....alpha -> nima.ghaedsharafi
+alpha -> nima.ghaedsharafi
+...
+superapp -> nader.rashed
+security -> hassan.abdi
+```
+
+
+
+argocd whitelist quota in rbac
+
+```
+spec:
+  clusterResourceWhitelist:
+  - group: ""
+    kind: Namespace
+  description: Example Project
+  destinations:
+  - namespace: abar-internal
+    server: https://kubernetes.default.svc
+  namespaceResourceBlacklist:
+  - group: ""
+    kind: ResourceQuota
+  - group: ""
+    kind: LimitRange
+  - group: ""
+    kind: PodMonitor
+  roles:
+  - description: Read-only privileges to my-project
+    groups:
+    - cloud_engineer_members
+    name: read-only
+    policies:
+    - p, proj:my-project:read-only, applications, get, my-project/*, allow
+  - description: Sync privileges for prometheus-operator
+    name: ci-role
+    policies:
+    - p, proj:my-project:ci-role, applications, sync, my-project/prometheus-operator,
+      allow
+  sourceRepos:
+  - '*'
+```
+
+
+design:
+- every project has a very small mount of quota by default, if sb needs a quota increase, they should join a team
+
+join a project to a team:
+- create a clusterresourcequota with a $TEAM name in helm if not exists (separate repo with MR?)
+- approval of the team ower for the new project (service desk? CRD?) quota of the projects is counted towards the team quota. You can view the amount of quota and used with `oc get appliedclusterresourcequota -oyaml` (shouldn't we have it in other ways to obfuscate it?)
+```
+NS="smapp-routing"
+TEAM="smapp"
+oc label ns $NS snappcloud.io/team=$TEAM
+oc delete resourcequota project-resource-limits -n $NS
+```
+- by default there is no quota set for the project. However we **strongly recommend** to create a project quota to avoid a bug in a project to consume all the team quota. You can edit this yourselves on demand later. (enforce?)
+- having grafana dashboards for each team to see what projects use the most resources.
+- having routes overview, etc dashboards with namespace selector.
+- rbac of this dashboards can come from a team CRD.
+- grafana can be integrated with snappcloud gitops-operator
+

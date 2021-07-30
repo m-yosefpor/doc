@@ -1,0 +1,46 @@
+k8s known issues, which does not have any solution/workarounds yet:
+- small files issue
+- disk io qos in k8s layer (cgroup v2)
+.... not being declarative
+- cinder state stuck in reserved/detaching.. what if ceph-csi?
+- volumeattachment not found (fast scale down/up).. maybe solved in newer versions
+- volume attached but not mounted.. maybe solved in newer versions
+
+
+https://k8s.af
+
+
+............. (mitigated)
+- nf_conntrack -> increased a lot + monitoring/alert (many issues :D)
+- ndot:5 -> node local caching + negative caching (no 0 ttl) + block AAAA (many issues)
+- hpa -> never use
+- clusterautoscaler -> never user
+- automatic upgrade -> pin up to patch version (dnsmasq issue, terraform template issue, ksm issue)
+- pod resource requests and limits -> clusterresourceoverride operator, 1:3 limit/req ratio
+- pod priority and descheduler -> don't use.. also set quota and limit for ALL projects (even our infra) (fluentd preempted routers)
+- create infra node roles which citical pods can fallback (or taint for critical, etc)
+- scale-up consideration: be ware.. kubelet qos, multihashing, nfconntrack_hashsize_queue, haproxy reload scripts(many issues)
+- pvc qos -> always use the ones which support qos
+- previleged pods -> scc
+- http flood - backend app of routes-> rate limiting (we have not enforced yet)
+- any flood - internal svc -> we have project network isolation
+.................. (somehow / maybe mitigated)
+- cfs throttling -> throttling dashboard/alerts, increase the request/limit (many issues), GOMAXPROC
+- emptydir -> alert.. should be limitabled
+- pod BW consumption - enforce on pod with mutation (?)
+- many files pvc- docker freez: Docker stucks in chowing lots of files (minio) ->  use crio
+................. (no solution yet)
+- many files pvc- long startup (recursive chowning, chmoding and chconing! (minio,jira,confluence)
+- pod io wait, cause node highload avg (devops backup)
+- many k8s operations (controller,scheduler,api): Don't run your cronjob every minute! (ode)
+- dns flood (eck-operator) -> node local? OOM/throttled to send to central .. whatabout per pod?
+- http flood - api-server
+- http flood - router (smapp app)
+- packet flood - ovs, node
+............................ (always there)
+- major changes -> release processes: staging, canary, approval, rollback/backup
+
+............................. (??)
+docker no-volume plugin
+etcd-number-of-objects/size of each, space quota, etc
+- users set taint?

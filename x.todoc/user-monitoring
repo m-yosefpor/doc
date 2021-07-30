@@ -1,0 +1,1 @@
+oc policy add-role-to-user monitoring-edit parham.alvani -n nats-testing

@@ -1,0 +1,36 @@
+ssh master-x
+sudo -i
+vi /etc/origin/master/master-config.yaml
+```
+    - PodPriority=true
+```
+
+/usr/local/bin/master-restart api && sleep 5
+/usr/local/bin/master-restart controllers && sleep 5
+
+```
+  apiServerArguments:
+    runtime-config:
+    - scheduling.k8s.io/v1alpha1=true
+```
+
+
+
+
+1. disable ip external in api server
+```
+sudo vi /etc/origin/master/master-config.yaml
+# /networkConfig
+#add
+  ingressIPNetworkCIDR: 0.0.0.0/32
+sudo /usr/local/bin/master-restart api && sleep 10
+sudo /usr/local/bin/master-restart controllers && sleep 15
+```
+2. open port
+```
+sudo firewall-cmd --zone=public --add-port=7946/tcp
+```
+3. disable port security for metallb nodes
+```
+openstack port set --no-security-group --disable-port-security $port_id
+```

@@ -1,0 +1,2 @@
+root: `sudo rm -rf $(ls | grep "@")`
+sdb: `sudo docker system prune -a`

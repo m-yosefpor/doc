@@ -1,0 +1,10 @@
+(update and upgrade)
+1. components: operators, are not upgradable, unless upgrading cvo..cvo -> co -> op -> deploys (harder than changing image and yaml)
+2. OS: can not upgrade base image in terraform.. all instances should be recreated.. the zincati takes care of updates (and maybe mco as lock-manager?)
+3. cluster version: automatic upgrades are super hard.. any customization disables auto-upgrade
+
+
+
+auto update vs version locking?
+disable auto update??? https://github.com/coreos/fedora-coreos-tracker/issues/502
+

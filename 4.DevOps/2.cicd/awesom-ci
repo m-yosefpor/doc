@@ -1,0 +1,56 @@
+security:
+- dependabot
+- gpg sign enforce
+- sign off enforce
+- mr label
+- mention owners
+- mr title enforce
+
+style:
+- no-new-line-end
+- no trailing
+
+syntax:
+- ansible
+- terraform
+- prometheus config
+- nginx/haproxy-config
+- helm
+- yaml, json, html, markdown
+
+lint:
+- ansible
+- terraform
+- golang
+- helm
+
+build:
+- linux, darwin, windows, snapd
+- docker image
+
+code-analysis:
+- sonarqube?
+
+mr settings:
+- squash
+- fast-forward
+- require-resolve discussion
+- require pipline pass
+- require approval
+- disallow author approval
+- revoke approval on new commits
+- gpg sign enforce
+
+dry-run:
+- k8s, helm
+- terraform
+
+test:
+- unit tests: go test
+- integration test
+- e2e test
+
+release:
+- changelog
+- tag semver
+- release + release-notes + asset links

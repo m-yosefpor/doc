@@ -1,0 +1,14 @@
+glusterfs-staging count=0
+glusterfs-teh-2 destroy
+can user set tollerations?
+Add preferSchedulingAffinity in an mutation webhook for all to compute, require to compute, free-compute, 3x free-compute
+Add priority for geq 7 core pods
+add affinity to new apps: gemini, snapshot, user-argocd
+add resource to snapshot (sidecar and controller)
+destroy teh-1 infra node-6,
+change portal affinity
+change teh-2 node-4 to compute
+........
+1 infra node fallback (needed?)
+3 spare node fallback
+1 spare node
