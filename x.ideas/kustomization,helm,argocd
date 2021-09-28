@@ -1,0 +1,23 @@
+kustomize, but not helm:
+- support cusmization to any level, but in helm can not edit anything unless provided some vars for it.
+
+
+helm, but not kustomize:
+- for
+- if
+- programming (tpl calulating vars, arithmetics, etc)
+
+
+
+
+
+helm and argocd drawbacks:
+- values.yaml can not be templated, or at least a map.yaml to provide vars to dependency charts
+- support cusmization to any level, but in helm can not edit anything unless provided some vars for it. -> argocd: kustomized-helm
+ or post-hooks for manuals
+- having vars as a.b.c.d instead of many indents
+- many empty files (optional valueFiles). no option to ignore missing valuefiles:
+     use value structs instead???? not possible for proxy charts
+     ignore errors -> custom wrapper??
+- secret management (hacky with sops), no multitenancy -> hacky wrapper
+

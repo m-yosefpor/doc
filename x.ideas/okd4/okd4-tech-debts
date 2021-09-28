@@ -36,3 +36,7 @@ M
 
 DRY vars: ansible, bash, terraform
 
+
+
+
+reencrypt route skip tls verify (invalid cert for thanos and argocd)

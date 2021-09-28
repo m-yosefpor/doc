@@ -1,0 +1,73 @@
+managed-services:
+    s3 object storage (minio)
+        benefits:
+        - more stable
+        - more efficient
+        - no management needed (incident, upgrades, resources)
+        limitations:
+        - if you want UI, can have minio with S3 GW
+    monitoring (prometheus, grafana): SRE query-frontend to our querier?
+        benefits:
+        - again
+        limitations:
+        - 14 days
+        - scrape interval
+    log stack (elk): * forward all to SRE?
+        limitations:
+        - 1 day
+        - alerting
+
+operated-services:
+    cache (redis)
+    dbs (sql, no-sql)
+    elastic
+
+#####################################
+build:
+    Dockerfile
+    gitlab-ci
+    registry
+
+deployment:
+    deployment
+    statefulSet
+
+CD:
+    argocd
+
+
+routing:
+    svc
+    svc-lb
+    route
+
+config:
+    hpa
+    configmap, secret
+
+observability:
+    monitoring:
+
+    ```yaml
+        labels:
+            snappcloud.io/monitoring: enabled *
+            prometheus.io/port: '9091' *
+            prometheus.io/path: '/metrics'
+            prometheus.io/scheme: 'HTTP'
+    ```
+        console
+        grafana
+
+    logging:
+
+    ```yaml
+        labels:
+            snappcloud/logging: enabled
+    ```
+    tracing??
+
+
+
+multiple-regions:
+    helm charts, argocd
+    gslb

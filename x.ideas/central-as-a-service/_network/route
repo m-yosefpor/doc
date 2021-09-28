@@ -1,0 +1,29 @@
+    policy (private, inter-dc, public) (tick)
+    ssl termination, automatic letsencrypt certificates (tick)
+    sticky sessions, path based routing (tick)
+    flow control:
+        A/B Weighted (tick)
+        mirroring (error)
+    resiliency:
+        health checks (tick)
+        timeout (tick)
+        circuit breaker (error)
+        outlier detection (error)
+        retries (error)
+    IP whitelisting (tick)
+    ratelimting:
+        connection per IP (tick)
+        request per IP (tick)
+        header/token based (error)
+    auth
+        forward auth (error)
+        jwt authentication (error)
+    visibility:
+        metrics (tick)
+        logs (tick)
+        tracing (error)
+    modifications:
+        Scheme redirection (tick)
+        path replace (error)
+        add/remove headers (error)
+        fault injection (error)

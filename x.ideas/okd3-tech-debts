@@ -34,3 +34,5 @@ sudo firewall-cmd --zone=public --add-port=7946/tcp
 ```
 openstack port set --no-security-group --disable-port-security $port_id
 ```
+
+PLEG is not healthy: pleg was last seen active -> restart docker

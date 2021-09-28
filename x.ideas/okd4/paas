@@ -1,0 +1,97 @@
+##########################
+Golang code
+Test files
+Container image: Dockerfile
+Package: Helm
+CI
+--
+workload:
+    run: deployment, sts, ds, cj
+    scale: hpa, vpa
+    configure: cm, secret
+    resiliency: pdb
+network:
+    internal: svc, virtualService
+    external: ingress, gateway
+    multi-region: gslb
+
+storage:
+    volume:
+        PersistentVolumeClaim
+        VolumeSnapshot
+        VolumeSnapshotGroup
+    s3:
+        Bucket
+        ## todo: s3 api should be modified for creating buckets, creating users, etc.
+    db:
+        pg:
+        mysql:
+        es:
+        redis:
+        mongo: #??
+        tidb: #??
+    oci-registry:
+        is:
+mq:
+    rabbitmq:
+    kafka:
+    nats: #??
+
+observability:
+    logging:
+        collect: annotation? (retention day)
+        process: #??
+        dashboard: #??
+        foward: ClusterLogForwarding ###
+        alert: #??
+        # --- banzai
+        # Logging #?/
+        # Output
+        # Flow
+    monitoring:
+        collect: PodMoniotor, ServiceMonitor (annotation?)
+        alert: PrometheusRule, AlertmanagerConfig
+        dashboard:  GrafanaDashboard
+    tracing: #??
+
+CD:
+    gitops:
+        Application
+        appset
+
+Policy:
+    rbac:
+        user:  ## refrence only
+        group: ## refrence only
+        rolebinding: ## first only predefined roles
+        role:
+        sa: # predefined sa: monitoring-datasource, image-pusher #?? ,
+    netpol:
+    limit:
+    quota:
+    integration:
+        - oidc (with dex)
+        - kube-rbac-proxy
+        - openshift-oauth-proxy
+        - any oidc proxy??
+
+# - apiGroup: rbac.authorization.k8s.io
+#   kind: User
+#   name: sadegh.tabasi
+
+
+
+
+
+
+
+
+Advanced:
+
+IaaS (kubevirt):
+
+istio:
+    VirtualService
+    DestinationRule
+    ServiceEntry
+    Gateway

@@ -1,0 +1,17 @@
+ds on k8s which mounts files: https://github.com/thomastaylor312/advanced-helm-demos/tree/master/cluster-config
+
+regsitries???
+
+Only dropins which are not critical??
+
+
+image:
+  - k8s.grc.io/pause ??
+  - bash with some idempotent script (pbr, etc) and   sleep 100000000? or while true sleep run ??
+
+
+I think we can not mount ON the host, but only from the host. Esp how you want to mount CM? it is a volume itself.
+duplicate mount path??? a hostpath and CM (I don't think it could work.)
+
+something custom operator like MCO or node tuning??
+

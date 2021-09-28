@@ -1,3 +1,12 @@
+teams: (by label)
+  - ns1
+  - ns2
+
+team <-> cluster-quota <-> grafana-org <-> argocd-project <-> groups(users-list)
+project <-> ns <-> grafana-datasource <-> grafana-folder
+
+
+
 ```
 oc get ns -ojson | jq ".items[].metadata.labels.team" | grep null
 ```
@@ -73,15 +82,28 @@ design:
 - every project has a very small mount of quota by default, if sb needs a quota increase, they should join a team
 
 join a project to a team:
-- create a clusterresourcequota with a $TEAM name in helm if not exists (separate repo with MR?)
-- approval of the team ower for the new project (service desk? CRD?) quota of the projects is counted towards the team quota. You can view the amount of quota and used with `oc get appliedclusterresourcequota -oyaml` (shouldn't we have it in other ways to obfuscate it?)
+
+- If team does not already exists, create a clusterresourcequota with a $TEAM name in helm if not exists (separate repo with MR?)
+
+- add the project to the team after approval of the team owner for the new project (service desk? CRD?) quota of the projects is counted towards the team quota. You can view the amount of quota and used with `oc get appliedclusterresourcequota -oyaml` (shouldn't we have it in other ways to obfuscate it?)
 ```
 NS="smapp-routing"
 TEAM="smapp"
 oc label ns $NS snappcloud.io/team=$TEAM
-oc delete resourcequota project-resource-limits -n $NS
 ```
-- by default there is no quota set for the project. However we **strongly recommend** to create a project quota to avoid a bug in a project to consume all the team quota. You can edit this yourselves on demand later. (enforce?)
+
+
+user-docs:
+
+Ask in cloud support to add the new project to a team (requirs team lead approval). Quota of the projects is counted towards the team quota. You can view the amount of team quota used with `oc describe appliedclusterresourcequota`
+
+You can edit quota for a project your self after joining a team with `oc edit quota`
+
+
+
+
+
+
 - having grafana dashboards for each team to see what projects use the most resources.
 - having routes overview, etc dashboards with namespace selector.
 - rbac of this dashboards can come from a team CRD.

@@ -1,0 +1,14 @@
+
+
+monitoring:
+    label as mentioned in previous part (link)
+    serviceMonitor, podMonitor
+    promtheusRule (recording rules, alert)
+    alertmanagerConfig
+    grafana as mentioned in previous part (link)
+    scraping
+
+
+logging:
+    label as mentioned in previous part (link)
+    clusterLogForwarder

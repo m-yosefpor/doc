@@ -1,0 +1,4 @@
+generate metrics readme
+```
+wget -O- http://127.0.0.1:8080/metrics  2> /dev/null | grep "# HELP"  | grep -v "HELP process_" | grep -v "HELP go_" |  awk '{print "| " $3 " | " substr($0, index($0, $4))}'
+```

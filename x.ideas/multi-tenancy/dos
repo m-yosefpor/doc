@@ -63,3 +63,10 @@ tuneds                                             tuned.openshift.io           
 ippools                                            whereabouts.cni.cncf.io               true         IPPool
 overlappingrangeipreservations                     whereabouts.cni.cncf.io               true         OverlappingRangeIPReservation
 ```
+
+
+
+api server burst
+etcd number of objects
+
+every other central-as-a-service impact

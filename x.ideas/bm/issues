@@ -1,1 +1,3 @@
 BM  issues: reboot time
+
+In BM maintenance, we can not relocate masters if they are BMs

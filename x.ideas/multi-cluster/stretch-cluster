@@ -1,0 +1,5 @@
+etcd is very sensitive to latencies.
+
+Solve:
+- easy networking (overlay with network policy) with service discovery -> submariner??
+- single pane of glass

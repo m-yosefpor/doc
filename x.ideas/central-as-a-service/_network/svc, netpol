@@ -1,0 +1,3 @@
+netpol
+svc discovery
+kuberesolver (github for grpc)

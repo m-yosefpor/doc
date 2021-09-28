@@ -1,0 +1,81 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+
+
+############# add extra metadata
+
+#Add annotations to add all resources.
+commonAnnotations:
+  example1: example1
+# Add labels and selectors to all resources.
+# If the label key already is present on the resource, the value will be overridden.
+commonLabels:
+  example1: example1
+
+namePrefix: example1
+nameSuffix: example1
+
+############### modification
+
+namespace: example1
+
+images:
+- name: postgres
+  newName: my-registry/my-postgres
+  newTag: v1
+- name: alpine
+  digest: sha256:24a0c4b4a4c0eb97a1aabb8e29f18e917d05abfe1b7a7c07857230879ce7d3d3
+
+# As this declaration does not take in a kind: nor a group:
+# it will match any group and kind that has a matching name and that is one of:
+# Deployment ReplicationController ReplicaSet StatefulSet
+
+replicas:
+- name: deployment-name
+  count: 5
+
+### genereal
+patches:
+- path: patch.yaml
+  target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: deploy.*
+    labelSelector: "env=dev"
+    annotationSelector: "zone=west"
+
+patchesStrategicMerge: [] # no need, use patches
+
+############### templating
+
+vars:
+- name: SOME_SECRET_NAME
+  objref:
+    kind: Secret
+    name: my-secret
+    apiVersion: v1
+
+
+################ files
+
+# list of path or URL of files
+resources:
+- manager.yaml
+
+# Each entry in this list should be a relative path to a file for custom resource definition (CRD).
+crds: []
+
+
+
+############### generate based on files (helm Get)
+
+# These labels are added to all configmaps and secrets.
+generatorOptions: {}
+
+# Each entry in this list results in the creation of one ConfigMap resource
+# (it’s a generator of n maps)
+configMapGenerator: []
+
+secretGenerator: []

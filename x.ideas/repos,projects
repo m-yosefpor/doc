@@ -1,3 +1,7 @@
+argocd, kustomize: https://dev.to/camptocamp-ops/use-kustomize-to-post-render-helm-charts-in-argocd-2ml6
+
+
 https://github.com/octarinesec/kube-scan
 https://github.com/wagoodman/dive
 https://documentation.suse.com/sles/15-SP2/html/SLES-all/cha-squid.html
+https://github.com/afshinpaydar/kubedeploy

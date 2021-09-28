@@ -10,3 +10,7 @@ curl --request PUT --data @external.json http://consul.apps.private.okd4.teh-1.s
 
 
 https://github.com/hashicorp/consul-esm/issues/44
+
+
+
+Architecture of HA consul and Coredns forwardings

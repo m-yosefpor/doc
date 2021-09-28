@@ -28,9 +28,11 @@ https://k8s.af
 - cfs throttling -> throttling dashboard/alerts, increase the request/limit (many issues), GOMAXPROC
 - emptydir -> alert.. should be limitabled
 - pod BW consumption - enforce on pod with mutation (?)
-- many files pvc- docker freez: Docker stucks in chowing lots of files (minio) ->  use crio
+- many files pvc- docker freez: Docker stucks in chowing lots of files (minio) ->  use crio: SELINUX: https://github.com/kubernetes/enhancements/issues/1710
 ................. (no solution yet)
-- many files pvc- long startup (recursive chowning, chmoding and chconing! (minio,jira,confluence)
+- many files pvc- long startup (recursive chowning, chmoding and chconing! (minio,jira,confluence):
+  SELINUX: https://github.com/kubernetes/enhancements/issues/1710
+  enforce OnRootMismatch
 - pod io wait, cause node highload avg (devops backup)
 - many k8s operations (controller,scheduler,api): Don't run your cronjob every minute! (ode)
 - dns flood (eck-operator) -> node local? OOM/throttled to send to central .. whatabout per pod?
@@ -44,3 +46,16 @@ https://k8s.af
 docker no-volume plugin
 etcd-number-of-objects/size of each, space quota, etc
 - users set taint?
+
+security:
+- userns -> anyuid
+- cgroup ns
+- cgroup v2
+-
+
+
+
+
+Namespaced CRDs:
+- users can not write and use operators
+- multiple operators (with different CRD/version) will collide even if they have limited to some namespaces lig OperatorGroup

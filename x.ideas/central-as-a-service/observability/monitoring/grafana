@@ -1,0 +1,61 @@
+grafana operator (multitenancy, central grafana)
+
+
+an operator to:
+- each team have an org
+- each team have all their namespaces as data source created in the org
+- none of them can view/add datasource
+- all orgs have some default dashboards created for them (how? from main datasource, non-namespaced, add namespace label to queries)
+- enforce that noOne can relabel and change/remove namespace label (serviceMonitor relable??)
+- prometheusRule? recording? alert? defining custom alert receivers and have it for their rules (and only they own rules)
+
+
+name: $NS
+URL: https://thanos-querier.openshift-monitoring.svc.cluster.local:9092
+skip_tls verify on
+custom http header:
+- header: Authorization
+value: Bearer $(oc serviceaccounts get-token monitoring-datasource -n $NS)
+manage alerts: false
+http method: get
+disable metric lookups: on
+custom query parameters: `namespace=$NS`
+
+
+
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  name: {{ .Values.team }}
+  namespace: abar-internal
+spec:
+  name: {{ .Values.team }}.yaml
+  datasources:
+    - name: {{ .Values.team }}
+      type: prometheus
+      access: proxy
+      url: https://thanos-querier-custom.openshift-monitoring.svc.cluster.local:9092
+      isDefault: false
+      version: 1
+      editable: false
+      orgId: ??/
+      jsonData:
+        tlsSkipVerify: true
+        customQueryParameters: namespace={{ .Values.team }}
+        httpMethod: GET
+        # organization: {{ .Values.team }}
+        httpHeaderName1: Authorization
+      secureJsonData:
+        # monitoring_datasource_sa_token: $(oc serviceaccounts get-token monitoring-datasource -n {{ .Values.team }})
+        httpHeaderValue1: Bearer {{ .Values.monitoring_datasource_sa_token}}
+
+
+### dashboards does not support orgId, so users can't create them.
+
+org_id_mappings:
+  1: dispatching
+  2:
+
+deploy in abar-monitoring,
+edit csv grafana and add args: --scan-all
+deploy cluster-roles

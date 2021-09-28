@@ -53,14 +53,15 @@ co/network:
 co/dns:
   deploy/openshift-dns-operator/dns-operator:
     dns.operator.openshift.io:
-      ds/openshift-dns/dns-default:
+      ds/openshift-dns/dns-default: ######### TODO: CUSTOM
       - dns
       - dns-node-resolver
       - kube-rbac-proxy
+      cm/openshift-dns/dns-default: ######### TODO: CUSTOM
 co/ingress:
   deploy/openshift-ingress-operator/ingress-operator:
     ingresscontroller.operator.openshift.io:
-      deploy/openshift-ingress/router-default:
+      deploy/openshift-ingress/router-default: ######### CUSTOM
         ing: haproxy config
     ds/openshift-ingress-canary ingress-canary:
 --- ## storage
@@ -75,7 +76,7 @@ co/kube-storage-version-migrator:
   deploy/openshift-kube-storage-version-migrator-operator/kube-storage-version-migrator-operator:
     kubestorageversionmigrators.operator.openshift.io: deploy/openshift-kube-storage-version-migrator/migrator
 co/csi-snapshot-controller:
-  deploy/openshift-cluster-storage-operator/csi-snapshot-controller-operator:
+  deploy/openshift-cluster-storage-operator/csi-snapshot-controller-operator: ######### TODO: CUSTOM
     csisnapshotcontrollers.operator.openshift.io: deploy/openshift-cluster-storage-operator/csi-snapshot-controller
 --- ## machine
 co/machine-config:
@@ -84,9 +85,8 @@ co/machine-config:
       ImageContentSourcePolicy: w??
       mc: ignition
       mcp: ignition
-      controllerconfigs: ""
+      controllerconfigs (ctrcfg): ""
       kubeletconfigs: ""
-      ctrcfg: ""
     ds/openshift-machine-config-operator/machine-config-daemon: ""
 
 co/node-tuning:
@@ -110,16 +110,17 @@ co/image-registry:
   deploy/openshift-image-registry/cluster-image-registry-operator:
     imagepruners:
     configs.imageregistry.operator.openshift.io:
+      deploy/openshift-image-registry/image-registry:  ######### TODO: CUSTOM
 --- ## monitoring
 co/monitoring:
   deploy/openshift-monitoring/cluster-monitoring-operator:
     cm/openshift-monitoring/cluster-monitoring-config:
-      prometheus/k8s:
-      alertmanager/main:
-      deploy/openshift-monitoring/kube-state-metrics: ""
-      deploy/openshift-monitoring/openshift-state-metrics: ""
+      prometheus/openshift-monitoring/k8s: ######### TODO: CUSTOM
+      alertmanager/openshift-monitoring/main: ######### CUSTOM
+      deploy/openshift-monitoring/kube-state-metrics: ""  ######### CUSTOM
+      deploy/openshift-monitoring/openshift-state-metrics: "" ######### CUSTOM
       deploy/openshift-monitoring/prometheus-adapter: ""
-      ds/openshift-monitoring/node-exporter: ""
+      ds/openshift-monitoring/node-exporter: "" ######### CUSTOM
       deploy/openshift-monitoring/prometheus-operator:
         w:prometheus:
           c:sts/prometheus:
@@ -130,6 +131,8 @@ co/monitoring:
         w:prometheusrules:
         w:servicemonitors:
         w:thanosrulers:
+      deploy/openshift-user-workload-monitoring/prometheus-operator:
+        prometheus/openshift-user-workload-monitoring/k8s: ######### TODO: CUSTOM
 --- ## policy
 co/service-ca:
   deploy/openshift-service-ca-operator/service-ca-operator:
@@ -164,18 +167,14 @@ co/operator-lifecycle-manager-catalog:
 co/operator-lifecycle-manager:
   deploy/openshift-operator-lifecycle-manager/olm-operator:
     sub:
+      InstallPlan (owner):
       operator:
     og:
       csv:
         deploy|ds/some-operator:
+    operatorCondition:
 
 
-
-
-
-
-###
-#OperatorCondition
 
 
 # imagecontentsourcepolicies
@@ -209,12 +208,20 @@ ds: kubernetes.io/os=linux
 openshift-cluster-node-tuning-operator   tuned
 openshift-dns                            dns-default
 openshift-image-registry                 node-ca
+openshift-ingress-canary                 ingress-canary
 openshift-machine-config-operator        machine-config-daemon
 openshift-monitoring                     node-exporter
 openshift-multus                         multus
 openshift-multus                         network-metrics-daemon
+openshift-network-diagnostics            network-check-target
 openshift-ovn-kubernetes                 ovnkube-node
-openshift-ovn-kubernetes                 ovs-node
+----
+openshift-logging                        fluentd
+csi                                      csi-cinder-nodeplugin
+istio-system                             istio-nodeagent
+kube-system                              istio-cni-node
+monitoring                               node-exporter
+monitoring                               rbd-disk-info-exporter
 ```
 
 ds : role.kubernetes.io/master=
@@ -223,6 +230,8 @@ openshift-controller-manager             controller-manager
 openshift-machine-config-operator        machine-config-server
 openshift-multus                         multus-admission-controller
 openshift-ovn-kubernetes                 ovnkube-master
+---
+clusterresourceoverride-operator         clusterresourceoverride
 ```
 
 
