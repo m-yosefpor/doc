@@ -1,0 +1,13 @@
+
+watch all namespaces for applications, and a 1-1 mapping of namespace to argo projects
+each project automatically have rbacs access to namespaced resoruces of the namespace which it has been created in
+a project have a `serviceAccountName` field which is used for all operations of that app (like argowf), and we can grant access to that sa to manage cluster resources or other ns resources.
+repos are CRD which can be defined in multi-tenant way. each app have a list of repos.
+
+
+Applications
+spec:
+    serviceAccountName: sth
+    repoNames:
+    - myrepo1
+    - myrepo2

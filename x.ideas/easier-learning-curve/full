@@ -1,0 +1,28 @@
++Add
+
+Sample Code:
+- Samples
+
+Dockerfile:
+- From Git
+
+Sample manifests:
+- Container image
+- From Dockerfile
+- From Catalog
+    - (templates)
+    - Helm chart # remove (include in catalog)
+    - Operator backed # remove (include in catalog)
+
+
+Topology:
+    labels:
+    - app.kubernetes.io/part-of
+    - app.kubernetes.io/component
+    - app.kubernetes.io/instance
+    - app
+    annotations:
+    - app.openshift.io/connects-to: [{"apiVersion":"apps/v1","kind":"Deployment","name":"kube-state-metrics"}]
+
+Yaml ?
+event source?

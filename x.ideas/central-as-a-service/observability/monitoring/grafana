@@ -59,3 +59,8 @@ org_id_mappings:
 deploy in abar-monitoring,
 edit csv grafana and add args: --scan-all
 deploy cluster-roles
+
+
+
+
+A new feature for grafana: Manual changes on UI + save, update CR (optionally if enabled on CR)

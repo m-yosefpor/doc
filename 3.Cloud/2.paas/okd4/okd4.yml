@@ -1,5 +1,5 @@
 --- ## cluster
-deploy/openshift-cluster-version/cluster-version-operator:
+deploy/openshift-cluster-version/cluster-version-operator: (CVO)
   clusterversions.config.openshift.io:
   "*.config.openshift.io":
   "*.operator.openshiftio":
@@ -33,19 +33,6 @@ co/openshift-controller-manager:
 co/network:
   deploy/openshift-network-operator/network-operator:
     network.operator.openshift.io: #clusterNetworkCIDR, OVNKubernetes, serviceCIDR
-      ds/openshift-ovn-kubernetes/ovnkube-master: #master ds
-      - ovnkube-master
-      - nbdb
-      - northd
-      - sbdb
-      - ovn-dbchecker
-      - kube-rbac-proxy
-      ds/openshift-ovn-kubernetes/ovnkube-node:
-      - ovnkube-node
-      - ovn-controller
-      - kube-rbac-proxy
-      ds/openshift-ovn-kubernetes/ovs-node:
-      - ovs-daemons
       deploy/openshift-network-diagnostics/network-check-source:
       ds/openshift-multus/multus-admission-controller: #master ds
       ds/openshift-multus/multus:
@@ -88,6 +75,7 @@ co/machine-config:
       controllerconfigs (ctrcfg): ""
       kubeletconfigs: ""
     ds/openshift-machine-config-operator/machine-config-daemon: ""
+    ds/openshift-machine-config-operator/machine-config-server: "" ## ds on masters
 
 co/node-tuning:
   deploy/openshift-cluster-node-tuning-operator/cluster-node-tuning-operator:
@@ -117,9 +105,9 @@ co/monitoring:
     cm/openshift-monitoring/cluster-monitoring-config:
       prometheus/openshift-monitoring/k8s: ######### TODO: CUSTOM
       alertmanager/openshift-monitoring/main: ######### CUSTOM
-      deploy/openshift-monitoring/kube-state-metrics: ""  ######### CUSTOM
+      deploy/openshift-monitoring/kube-state-metrics: ""  ######### CUSTOM pod, deployment
       deploy/openshift-monitoring/openshift-state-metrics: "" ######### CUSTOM
-      deploy/openshift-monitoring/prometheus-adapter: ""
+      deploy/openshift-monitoring/prometheus-adapter: ""  # hpa-controller -> metrics-server -> prometheus-adabter -> promQL prometheus
       ds/openshift-monitoring/node-exporter: "" ######### CUSTOM
       deploy/openshift-monitoring/prometheus-operator:
         w:prometheus:
@@ -133,6 +121,9 @@ co/monitoring:
         w:thanosrulers:
       deploy/openshift-user-workload-monitoring/prometheus-operator:
         prometheus/openshift-user-workload-monitoring/k8s: ######### TODO: CUSTOM
+      deploy/openshif/thanos-querier:
+      deploy/grafana:
+
 --- ## policy
 co/service-ca:
   deploy/openshift-service-ca-operator/service-ca-operator:
@@ -157,6 +148,8 @@ co/marketplace:
   deploy/openshift-marketplace/marketplace-operator:
 co/openshift-samples:
   deploy/openshift-cluster-samples-operator/cluster-samples-operator:
+
+
 co/operator-lifecycle-manager-packageserver:
   deploy/openshift-operator-lifecycle-managerpackageserver:
 co/operator-lifecycle-manager-catalog:
@@ -243,3 +236,29 @@ kube-controller-manager-pod.yaml
 kube-scheduler-pod.yaml
 recycler-pod.yaml
 ```
+
+
+
+
+
+
+
+###  curl -s https://api.okd4.ts-1.staging-snappcloud.io:22623/config/master -k | jq ".systemd.units[].name"
+master systemd services:
+crio.service
+docker.socket
+kubelet-auto-node-size.service
+kubelet.service
+machine-config-daemon-firstboot.service
+machine-config-daemon-pull.service
+etc-NetworkManager-systemConnectionsMerged.mount
+node-valid-hostname.service
+nodeip-configuration.service
+openvswitch.service
+ovs-configuration.service
+ovs-vswitchd.service
+ovsdb-server.service
+pivot.service
+rpm-ostreed.service
+zincati.service
+afterburn-hostname.service

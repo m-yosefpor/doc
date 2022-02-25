@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-exporter
+  namespace: monitoring
+  annotations:
+    ### podMonitor
+    monitoring.snappcloud.io/enbaled:
+    monitoring.snappcloud.io/port:
+    monitoring.snappcloud.io/scheme:
+    monitoring.snappcloud.io/path:
+    ###
+    logging.snappcloud.io/enabled: "false"
+    ### hpa
+    hpa.snappcloud.io/minReplicas: "1"
+    hpa.snappcloud.io/maxReplicas: "3"
+    hpa.snappcloud.io/targetCPUUtilizationPercentage: "70"
+    hpa.snappcloud.io/targetMemoryUtilizationPercentage: "70"
+    ### pdb
+    pdb.snappcloud.io/minAvailable:
+    pdb.snappcloud.io/maxUnAvailable:
+  labels:
+    app: health-exporter
+    meta.snappcloud.io/service: "herald"
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: health-exporter
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  template:
+    metadata:
+      labels:
+        app: health-exporter
+    spec:
+      serviceAccountName: health-exporter
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - health-exporter
+            topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/compute
+                operator: In
+                values:
+                - "true"
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
+      containers:
+      - name: health-exporter
+        image: ghcr.io/snapp-incubator/health-exporter:main
+        volumeMounts:
+        - mountPath: /app/config.yaml
+          name: config
+          subPath: config.yaml
+        imagePullPolicy: Always
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        ports:
+        - containerPort: 9876
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 9876
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 9876
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+      volumes:
+        - name: config
+          configMap:
+            defaultMode: 420
+            name: health-exporter
+            items:
+            - key: config.yaml
+              path: config.yaml

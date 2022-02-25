@@ -1,0 +1,8 @@
+ddos protection (internal)
+
+dynamic Ratelimitng based on (avg, max, percentile, etc) in last hour + 50% ?
+updated each 10 minutes. min of this value and a value defined as min for service
+
+
+enable suddenly? start a new service?
+

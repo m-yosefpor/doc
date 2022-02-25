@@ -1,0 +1,98 @@
+reencrypt route can not skip tls backend (invalid cert for thanos and argocd -> disable internal tls)
+
+
+```
+    mode tcp
+    option httpchk GET /readyz
+    http-check expect status 200
+%{ for i, s in backend_ips ~}
+    server master-${i} ${s}:6443 check inter 5s rise 2 fall 3 check-ssl verify none
+    server master-${i} ${s}:6443 check
+%{ endfor ~}
+###
+```
+
+
+next step:
+2. force craate new node with new ignition
+3. force reboot node with new ignition
+
+
+√ script should be rerun and nodes should be destroyed if failed in any step
+node stuck when draining (pod delete)
+multiple draining node takes time (pdb)
+terraform/openstack dumb scheduling (if multiple nodes at one time)
+where do I want to schedule it  + live-migrate takes time as it need labeling and other stuff
+
+
+force igniton to run on next boot
+
+
+Another app is currently holding the xtables lock
+
+
+maxUnavailable field on the machine configuration pool and marks them as unavailable. By default, this value is set to 1 (use explicit)
+M
+
+DRY vars: ansible, bash, terraform
+
+
+##########
+many circular dependencies and complex inter-dependencies
+* critical components should have been all hostnet to avoid dependency on CNI
+* critical components which can not be hostnetwork, should have clusterFirst dns policy to avoid depenency to coredns
+
+CNI -> cilium is ok
+
+
+openshift-etcd-operator -> CNI
+etcd -> etcd-installer (no hostnet) -> CNI
+controller-manager, ... -> secrets/certs -> service-ca-operator (no hostnet) -> CNI
+
+################
+Managed components:
+- openshift-dns
+- CNI -> cilium self config ?
+...
+- openshift-monitoring
+- image-registry
+- openshift-logging
+
+##################
+customization impact upgrade:
+- changes files
+
+
+############
+upgrade:
+- fcos challenges
+- CNI challenges
+
+############
+MC, KubleteConfig: needs node drain
+- machine-config-sync:
+  - reload / restart is dangerous
+  - new boots will not have the configs, so if it impacts fundamental operations on node (like image pulls, dns lookups, etc), so it can not work
+- many alerts:
+  - our alerts have not beed tuned/desinged for this much dynamic workloads, there are not much built-in alerts:
+  - critical:
+    - scrapetargetdown: kubelet, kubernetes-cadvisor, node-exporter,  metallb-system
+      - -> up{}  threshold??
+      - -> node -> service monitor? (see OKD internal kubelet as an examples in openshift-monitoring ns)
+    - OKD-ThanosSidecarUnhealthy
+    warnings:
+    -  event:
+       -  pod unhealthy
+       -  failedKillPod
+       -  service/FailedToUpdateEndpointSlices,
+       -  node-controller Pod/NodeNotReady (for DaemonSets)
+       -  Pod/FailedMount
+       -  Pod/NetworkNotReady
+    -  reboot events
+    -  kubeNodeConditions, node NotReady
+    - http error rates ????
+- it takes time, and it needs a man to watch and monitor cluster states (mcl, co-nok, no-nok), grafana dashboards  (health+dns), and alerts during the whole process for many hours, latenight
+
+node recreate is easier than before, but still very difficult:
+- scheduling
+- bootsrap time: 15 min/node

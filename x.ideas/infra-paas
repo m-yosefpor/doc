@@ -1,18 +1,18 @@
 ##########################
-Golang code
-Test files
+Golang code:
+Test files:
 Container image: Dockerfile
 Package: Helm
-CI
---
+CI:
+---
 workload:
-    run: deployment, sts, ds, cj
-    scale: hpa, vpa
+    run: deployment, sts, ds??, cj
+    scale: hpa, vpa -> faas maybe help on this
     configure: cm, secret
-    resiliency: pdb
+    resiliency: pdb -> operator
 network:
-    internal: svc, virtualService
-    external: ingress, gateway
+    l4: svc, virtualService
+    http: ingress, gateway
     multi-region: gslb
 
 storage:
@@ -22,42 +22,46 @@ storage:
         VolumeSnapshotGroup
     s3:
         Bucket
-        ## todo: s3 api should be modified for creating buckets, creating users, etc.
-    db:
+        ## todo: s3 api should be modified for creating buckets, creating users, etc -> cosi -> how to extract accesskey, secretkey, bucketname
+    operated-db:
         pg:
-        mysql:
-        es:
+        mysql: #??
+        es: #?? -->
         redis:
         mongo: #??
         tidb: #??
     oci-registry:
         is:
+    db:
+        sql: create only a CR, and jump to use sql.teh-1.snappcloud.io #??
+        kv: create only a CR, and jump to use kv.teh-1.snappcloud.io #??
 mq:
     rabbitmq:
     kafka:
-    nats: #??
+    nats: #?? -> supports multi-tenancy
 
 observability:
     logging:
         collect: annotation? (retention day)
         process: #??
         dashboard: #??
-        foward: ClusterLogForwarding ###
         alert: #??
+        # ---
+        foward: ClusterLogForwarding ###?? namespaced with banzai-cloud logging?
         # --- banzai
         # Logging #?/
         # Output
         # Flow
     monitoring:
-        collect: PodMoniotor, ServiceMonitor (annotation?)
+        collect: PodMoniotor, ServiceMonitor (annotation?) # port name with annotation ??
         alert: PrometheusRule, AlertmanagerConfig
         dashboard:  GrafanaDashboard
     tracing: #??
 
 CD:
     gitops:
-        Application
-        appset
+        Application: # namespaced
+        appset:
 
 Policy:
     rbac:
@@ -78,11 +82,6 @@ Policy:
 # - apiGroup: rbac.authorization.k8s.io
 #   kind: User
 #   name: sadegh.tabasi
-
-
-
-
-
 
 
 

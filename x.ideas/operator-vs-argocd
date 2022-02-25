@@ -1,0 +1,7 @@
+operators:
+- installation and upgrade (can be done with helm)
+- monitoring & alerting (can be done with helm + pm-operator + gf-operator)
+- full life cycle: backup, restore, for sts apps ... (operators only)
+- k8s integration: self service multitenancy (authN & authZ, operators only)
+
+note: reconcile is also supported in k8s.. if you argue sb might modify deployment, I say sb might modify the CR.. consider it as a templating tool and you see there is no difference

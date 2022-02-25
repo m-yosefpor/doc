@@ -1,0 +1,44 @@
+BM issues: reboot time
+
+In BM maintenance, we can not relocate masters if they are BMs
+
+Staging? we can not easily have multiple staging..  for openstack the number of changes are low, only 1 suffice (office),
+but for OKD, we need many (~3) stagings!
+
+low isolation: load avg, cpu usage, highly affect other pods
+bugs: node not hangs, have to reboot
+
+
+pod per node:
+    work:
+        kubelet configs: max pod
+        node cidr:
+    performance:
+        kubelet parameters:
+        - burst
+        - qos
+        daemonset reources: (two sets)
+
+
+machine config pools:
+    openstack specific:
+        nodeip-configuration.service
+        other machine configs
+        no dhcp for routes:
+        - pbr
+        - routes
+        - bonding, ip
+    no separate mcp pool possible:
+    no ops metal3 for bmo:
+    - self metal3
+    enabling mahcine autoscaling:
+
+node tuning pools: possible
+firewall rules instead of openstack sg:
+    no nftables yet: custom fcos image
+
+
+schduler:
+- tuning
+- csi storage Storage Capacity Constraints -> upgrade 1.21, rebase our forks
+

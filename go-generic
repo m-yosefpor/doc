@@ -1,0 +1,13 @@
+min, max, avg, sum
+reverse, sort
+printArray
+union/intersection of maps
+Apply transformation function to slice/map, returning new slice/map
+
+
+
+
+constrains:
+    any
+    comparable
+    own constraints with defining interface(type)

@@ -1,0 +1,7 @@
+observability:
+    monitoring
+    logging (leveled, production vs staging)
+
+ha, horizontal scaling:
+    shared memory
+    repetative work (httpmon)

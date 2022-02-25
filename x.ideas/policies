@@ -1,0 +1,33 @@
+
+Policies:
+securityContext:
+- SCC:
+  - uid, gid, fsGroup, selinux, sysctl, seccomp, volumes, caps, ns -> mutate/validate
+  - '"OnRootMismatch"' -> mutate
+- add node-selector enforce (/)
+- toleration reject -> validate * (extend restrict control plane scheduling)
+- external ip -> validate
+- add netpol
+- quota and limit range
+- disallow netpol delete
+- overriding memory requests (equal?)
+- override cpu request (1:3)
+- disallow nodeport svc
+- disallow localhost ext name
+- disallow rwx ****
+- allowed pod priority
+- add ndots 3
+- pod affinity require -> mutate (scheduler weight?)
+- node/rack affinity -> mutate (scheduler weight?)
+- add imagepull always???
+---
+- require pdb -> validate (operator auto?)
+- require probe -> validate
+- probe same -> validate
+- require netpol -> validate
+- require multiple replicas
+- require limits
+- require label: meta.snappcloud.io/service
+- disallow latest tags
+- add label (env=?)
+- require prometheusRule ?

@@ -1,0 +1,1 @@
+based on avg_over_week(max_over_day(avg_over_30min))

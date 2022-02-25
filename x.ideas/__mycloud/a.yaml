@@ -1,0 +1,6 @@
+ideal cluster
+- everything on BM
+- no specific role nodes (maybe except for gpu), only compute and worker
+- cilium service mesh in ebpf mode, with full SMI support.
+- ceph-csi + rook
+- multi-cluster networking: a service can be exposed in multiple clusters

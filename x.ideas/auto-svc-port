@@ -1,0 +1,22 @@
+apiVersion: api.kubemod.io/v1beta1
+kind: ModRule
+metadata:
+  name: my-modrule
+spec:
+  type: Patch
+  match:
+    - select: '$.kind'
+      matchValues:
+      - Deployment
+      - DeploymentConfig
+      - StatefulSet
+    - select: '$.spec.template.spec.containers[0].port[*]'
+      matchValue: 'spcld-metrics'
+      negate: true
+  patch:
+    - op: add
+      ### Add to first container. They all share the same netns, so does it really matter?
+      path: /spec/template/spec/containers/0/port/-1
+      value: |-
+        name: spcld-metrics
+        containerPort: {{ .Target.metadata.annotations["prometheus.io/port"] }}

@@ -1,0 +1,76 @@
+curl -LO https://raw.githubusercontent.com/cloudnativelabs/kube-router/v1.2/daemonset/generic-kuberouter-only-advertise-routes.yaml
+
+
+
+####### cilium
+cilium_olm_rev="master"
+cilium_version="1.10.4"
+CLUSTER_NAME=$HOME/ignition-configs
+
+curl --silent --location --fail --show-error "https://github.com/cilium/cilium-olm/archive/${cilium_olm_rev}.tar.gz" --output /tmp/cilium-olm.tgz
+tar -C /tmp -xf /tmp/cilium-olm.tgz
+
+cp /tmp/cilium-olm-${cilium_olm_rev}/manifests/cilium.v${cilium_version}/* "${CLUSTER_NAME}/manifests"
+
+rm -rf -- /tmp/cilium-olm.tgz "/tmp/cilium-olm-${cilium_olm_rev}"
+
+
+l7Proxy:
+    enabled: false
+bpf:
+    preallocateMaps: true
+
+
+### native routing
+ipam:
+  mode: kubernetes
+tunnel: disabled # overlay vs native routeing
+
+autoDirectNodeRoutes: true # ?? if share a common cidir network
+### kube-proxy free
+kubeProxyReplacement: strict
+k8sServiceHost: REPLACE_WITH_API_SERVER_IP
+k8sServicePort: REPLACE_WITH_API_SERVER_PORT
+
+### dsr
+
+nodePort:
+    mode: hybrid # snat dsr hybrid
+
+
+### performance
+
+loadBalancer:
+    algorithm: maglev
+    acceleration: native
+maglev:
+    tableSize: 65521
+    hashSeed: $(head -c12 /dev/urandom | base64 -w0)
+
+
+
+
+#### host services
+hostServices:
+    enabled: true
+
+### cluster mesh
+cluster:
+    name: okd4-ts-1
+    id:  okd4-ts-1
+## can be easily added later
+hubble:
+    relay:
+        enabled: true
+    ui:
+        enabled: true
+
+
+  --set bgp.enabled=true \
+  --set bgp.announce.loadbalancerIP=true
+  --set bgp.announce.podCIDR=true
+
+  Helm options cluster.name and cluster.id
+
+####
+Namely clusterNetwork should match nativeRoutingCIDR, clusterPoolIPv4PodCIDR and clusterPoolIPv4MaskSize. Also make sure that the clusterNetwork does not conflict with machineNetwork (which represents the VPC CIDR in AWS).

@@ -59,3 +59,26 @@ security:
 Namespaced CRDs:
 - users can not write and use operators
 - multiple operators (with different CRD/version) will collide even if they have limited to some namespaces lig OperatorGroup
+
+
+
+many of operators does not emmit enough events, instead they only log (appset controller, ...) which is not possible for users to debug, only requires a cluster-admin then.
+
+
+
+
+
+
+- api changes (renames)
+- big nodes: kubelet , draining https://learnk8s.io/kubernetes-node-size
+
+upcomming:
+  security:
+  - userns -> anyuid
+  - cgroup ns
+  - cgroup v2
+  burstable cfs
+  qos on network in podSpec (annotation?)
+  qos on blkio in podSpec (cgroupv2)
+  - ephermeral containers for debugging distroless containers
+

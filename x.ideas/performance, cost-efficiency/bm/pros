@@ -1,0 +1,55 @@
+Envrionment: Baremetal vs. Openstack? (suggestion: Openstack)
+
+    pros
+        less complexity of dealing with complex openstack
+        less overhead of virtualization, SDN, etc
+     cons
+        big failure domain our nodes are big (cost: expensive network card, storage)
+        can't slice big nodes for small components: lb, masters, etcd (isolation), router
+    not relevant anymore:
+        k8s can't handle lots of pods per node, and as we have large BMs, we could have +500 pod per node: pod_per_node
+
+(tick) installation method:  UPI vs. IPI? (suggestion: UPI)
+
+    pros
+        very simple to install a cluster (with a single command, and writing a install-config.yaml file)
+        in UPI we have to setup DNS records, and configure correct security groups for hosts. (we are customizing them anyway, so we need to do them even for IPI)
+    cons
+        IPI uses terraform underneath, but it is not much customizable, as we do not have access to HCL code, and we can only customize values in install-config.yaml, so we are bound to its options, and can not modify our nodes more than provided in the config file, if needed in future (esp day2 operations and changes).
+        IPI enforces a network toplogy, which requires access to external network, and routers, which differs from our current topology. Also mohammad.naghavihas a lot of experience with this IPI toplogy in XaaS, and he highly recommended not to use that, as routers are likely to create lots of issues, including HA issues, DR issues (not self healing), data load will pass through routers on controllers (which harm control/data plane separbility).
+        IPI does not provide a way to setup a s3 backend for it, we can upload the file manually to s3 though, but any changes to infrastructure, is not possible with changing HCL code as we do not have access to.
+
+(tick)
+
+
+
+R&D OKD BM nodes:
+
+    metal3
+    kubevirt
+    rook + ceph-csi
+    pros:
+        simple provision
+        performance
+        cluster autoscaling:
+            double encapsulation
+            virtualization overhead
+        overhead (BM 10% free, VM 10% free, two OS, ...)
+        upgrade (kerenel BM, ceph, openstack version)
+        easier administration
+        authN & authZ
+    cons:
+        alpha
+        needs training
+
+
+
+
+WORSE CONS:
+- No network range/interface/ vlan-id
+
+other:
+- No live-migration
+- No internal virtual network
+- No image -> metal3?
+- No volume resize (on ceph)

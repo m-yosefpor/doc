@@ -1,0 +1,22 @@
+There might be a buggy release (which is frequent currently with okd4) which most probably forces us to use custom deployment in future any way (I'm almost sure). e.g. s3 GC had issues in prev version and we could not afford to wait for the next OKD release if we had used s3!
+
+We can not customize it, even a bit
+
+OKD4 upgrade is risky, and more components to upgrade all at once cause it riskier. It might be safer to be able to upgrade separately.
+
+We did used manual deployment in argocd, for thanos and routers, and it has been a much better experience so far than other managed operators.
+
+at the end, we really need this HA feature of registry and has no other choice to use s3. It has impacted users so far, and as we more frequently drain nodes, it is necessary.
+
+I really tried to embrace this operator pattern in OKD4, even tried to fix a couple of our issues in the upstream, or used hacky workarounds to be able to still use them, but it didn't work. This pattern will work only for small OKD deployments or developers which does not do frequent changes in OKD cluster, or have little experience in managing OKD. But for our use-case, we either should fork the CVO and most SLOs (second level operators / cluser operators), or use manual deployment in argocd as much aa possible (which I think is easier)
+
+SLOs which we should try to replace them with argocd apps:
+
+CIO (already done for public and inter-dc)
+CMO (done for thanos only, would be really good if we can do it for other components as well)
+CIRO: we should do it now
+CSO: we use manual csi
+........
+the follow is not possible yet, but I wish we could:
+CDO
+CNO
