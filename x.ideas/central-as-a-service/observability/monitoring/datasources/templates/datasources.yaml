@@ -19,10 +19,12 @@ spec:
       orgId: {{ $team.orgId }}
       jsonData:
         tlsSkipVerify: true
-        customQueryParameters: namespace={{ $ns.name }}
-        httpMethod: GET
+        # customQueryParameters: namespace={{ $ns.name }}
+        httpMethod: POST
         httpHeaderName1: Authorization
+        httpHeaderName2: namespace
       secureJsonData:
         httpHeaderValue1: Bearer {{ $ns.token }}
+        httpHeaderValue2: {{ $ns.name }}
 {{- end }}
 {{- end }}

@@ -6,13 +6,13 @@ Package: Helm
 CI:
 ---
 workload:
-    run: deployment, sts, ds??, cj
+    run: deployment, sts, ds??, cj, argoproj/rollouts
     scale: hpa, vpa -> faas maybe help on this
     configure: cm, secret
     resiliency: pdb -> operator
 network:
     l4: svc, virtualService
-    http: ingress, gateway
+    http: ingress, gateway, smi
     multi-region: gslb
 
 storage:
