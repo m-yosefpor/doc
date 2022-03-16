@@ -1,0 +1,19 @@
+int -> i32 // no
+
+var a int // vs // a := 0
+
+
+
+padding compiler always sort by largest
+remove implicit construct filed literala A{1,2}
+
+
+unit -> u32
+float64 -> f64
+func -> fn
+
+
+
+
+------------ love
+strong type
