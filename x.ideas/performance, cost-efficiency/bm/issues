@@ -1,12 +1,31 @@
-BM issues: reboot time
+BM issues:
+    reboot time:
+        bugs: node not hangs, have to reboot
+        changes:
+            mcp:
+                upgrades
+            kargs:
+        solutions:
+        - disable interfaces for faster boot
+        - disable bond1?
+        - use ssd for sda
+        - anything for HP??
 
-In BM maintenance, we can not relocate masters if they are BMs
 
-Staging? we can not easily have multiple staging..  for openstack the number of changes are low, only 1 suffice (office),
+
+
+
+build?
+
+masters:
+    - In BM maintenance, we can not relocate masters if they are BMs
+    + etcd volume on ceph is painful. It's more of a Volume problem than storage
+
+- Staging? we can not easily have multiple staging..  for openstack the number of changes are low, only 1 suffice (office),
 but for OKD, we need many (~3) stagings!
 
-low isolation: load avg, cpu usage, highly affect other pods
-bugs: node not hangs, have to reboot
+edge: low isolation: load avg, cpu usage, highly affect other pods, also we can not give a BM all to an edge
+
 
 
 pod per node:
@@ -41,4 +60,3 @@ firewall rules instead of openstack sg:
 schduler:
 - tuning
 - csi storage Storage Capacity Constraints -> upgrade 1.21, rebase our forks
-
