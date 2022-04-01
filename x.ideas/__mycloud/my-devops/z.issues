@@ -1,0 +1,17 @@
+* single staging for each app, hard for users to test locally (e.g kind) as depenencies like redis, etc.
+* build time is alot, and users should rebuild and deploy for every small change. Also they cannot test they're branches before merge to dev branch
+    - caching dockerfile
+    - proxy
+    - same base for same apps
+
+
+* image-update issues:
+    - it also checked currently deployed tag included instead of only considering registry images???
+    - if an invalid app is already running (e.g. latest), it doesn't understand anymore
+    - if invalid tags are in repo, it doesn't ignore them all (regex??)
+    - if app is created with upsert, the helm chart want to be synced to its original form, and it doesn't update the image tag anymore until it is synced once again.
+* secret management:
+    - create a secret (per ns?) and an operator will create a secret in the cluster:
+        kind: CSecret
+        spec:
+            decoderRef: someSecret

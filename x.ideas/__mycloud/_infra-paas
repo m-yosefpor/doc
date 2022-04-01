@@ -6,7 +6,8 @@ Package: Helm
 CI:
 ---
 workload:
-    run: deployment, sts, ds??, cj, argoproj/rollouts
+    run: deployment, sts, ds?? (admin)
+    batch: cj, argoproj/rollouts, volcano
     scale: hpa, vpa -> faas maybe help on this
     configure: cm, secret
     resiliency: pdb -> operator
@@ -21,7 +22,7 @@ storage:
         VolumeSnapshot
         VolumeSnapshotGroup
     s3:
-        Bucket
+        Bucket (cosi?)
         ## todo: s3 api should be modified for creating buckets, creating users, etc -> cosi -> how to extract accesskey, secretkey, bucketname
     operated-db:
         pg:
