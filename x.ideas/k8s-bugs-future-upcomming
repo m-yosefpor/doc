@@ -1,10 +1,7 @@
+# k8saf k8s-af
 k8s known issues, which does not have any solution/workarounds yet:
-- small files issue
-- disk io qos in k8s layer (cgroup v2)
-.... not being declarative
-- cinder state stuck in reserved/detaching.. what if ceph-csi?
-- volumeattachment not found (fast scale down/up).. maybe solved in newer versions
-- volume attached but not mounted.. maybe solved in newer versions
+
+
 
 
 https://k8s.af
@@ -21,24 +18,30 @@ https://k8s.af
 - create infra node roles which citical pods can fallback (or taint for critical, etc)
 - scale-up consideration: be ware.. kubelet qos, multihashing, nfconntrack_hashsize_queue, haproxy reload scripts(many issues)
 - pvc qos -> always use the ones which support qos
-- previleged pods -> scc
+- previleged pods -> scc, userns
 - http flood - backend app of routes-> rate limiting (we have not enforced yet)
 - any flood - internal svc -> we have project network isolation
 .................. (somehow / maybe mitigated)
 - cfs throttling -> throttling dashboard/alerts, increase the request/limit (many issues), GOMAXPROC
-- emptydir -> alert.. should be limitabled
+- emptydir -> ephemeral-storage limit
 - pod BW consumption - enforce on pod with mutation (?)
 - many files pvc- docker freez: Docker stucks in chowing lots of files (minio) ->  use crio: SELINUX: https://github.com/kubernetes/enhancements/issues/1710
-................. (no solution yet)
-- many files pvc- long startup (recursive chowning, chmoding and chconing! (minio,jira,confluence):
+  fsgroupChnagePolicy: onRootMismatch
+  SELINUX policy
+  higher iops
+- many files pvc- long startup (recursive chowning, chmoding and chconing! (minio,jira,confluence:
   SELINUX: https://github.com/kubernetes/enhancements/issues/1710
   enforce OnRootMismatch
+................. (no solution yet)
 - pod io wait, cause node highload avg (devops backup)
 - many k8s operations (controller,scheduler,api): Don't run your cronjob every minute! (ode)
 - dns flood (eck-operator) -> node local? OOM/throttled to send to central .. whatabout per pod?
 - http flood - api-server
 - http flood - router (smapp app)
 - packet flood - ovs, node
+- disk io qos in k8s layer (cgroup v2)
+- cinder state stuck in reserved/detaching.. what if ceph-csi (what about qos?)?
+- metric cardinality scaling
 ............................ (always there)
 - major changes -> release processes: staging, canary, approval, rollback/backup
 
@@ -81,4 +84,3 @@ upcomming:
   qos on network in podSpec (annotation?)
   qos on blkio in podSpec (cgroupv2)
   - ephermeral containers for debugging distroless containers
-

@@ -17,3 +17,17 @@ func -> fn
 
 ------------ love
 strong type
+
+
+
+===========
+go-af goaf
+--
+1. nil pointer derefrence
+
+
+
+c-af:
+
+1. overflow
+2. auto-casts

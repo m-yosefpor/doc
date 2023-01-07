@@ -40,3 +40,9 @@ server groups
 for x in "server" "flavor" "volume" "port" "subnet" "network" "security group" "keypair"; do
   openstack $x delete $(openstack $x list | grep -v virtual-undercloud | awk '{print $2}')
 done
+
+
+##### okd4
+for x in "server" "volume" "port" "security group" "server group" "keypair" "image"; do
+  openstack $x delete $(openstack $x list | grep -v virtual-undercloud | awk '{print $2}')
+done

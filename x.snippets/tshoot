@@ -1,0 +1,1 @@
+sudo tshark -i eth3 -f 'port 80 or 443' -R 'http.host matches "pingouin.*"' -S -V -l -T fields -e ip.src -e ip.src_host -e http.host -e http.referer -e http.request -e http.request.full_uri -e http.request.method -e http.request.uri -e http.user_agent -e http.x_forwarded_for -E header=y -Eseparator=, -Equote=d

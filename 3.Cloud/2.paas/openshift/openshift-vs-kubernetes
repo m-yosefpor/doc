@@ -1,0 +1,30 @@
+openshift vs kubernetes
+
+
+
+oc vs kubectl:
+
+oc adm *
+    oc adm cordon
+    oc adm drain
+
+oc policy
+    oc policy who-can view pods
+oc project = kube-ns plugin k ns
+oc new-project = kube hns (?)
+
+
+project template (adding labels, defaults, etc) = kyverno generative? = ns-config operator (maybe don't want reconcile)
+
+
+
+
+route vs ingress -> gateway-api
+
+dc vs deploy ->
+    trigger (argocd-image-updater + argocd?)
+    auto rollback -> dangorous
+
+
+bc -> custom build operator crds (argowf?)
+is, istag? -> ???

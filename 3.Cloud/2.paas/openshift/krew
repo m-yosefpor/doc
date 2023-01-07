@@ -1,0 +1,62 @@
+kubectl krew install modify-secret ice neat tree iexec who-can ns stern
+##
+ice
+
+modify-secret
+neat # --neat flag in kubectl
+tree
+
+iexec # try bash first, then sh = oc rsh, but better
+stern # add a "l" plugin with "kubectl stern --tail=100 "$@" # kail, #mtail
+
+who-can = oc policy who-can view pods
+ns == oc project
+
+ssh # kvaps kubectl-ssh # my ssh
+
+---
+l
+x = iexec
+g = get
+d = describe # for delete always full world to avoid mistake
+e = edit
+c = create
+a = apply
+
+---
+# aliases
+
+---
+cert-manager
+ingress-nginx
+kyverno
+opencost -> kubecost
+score
+---
+access-matrix
+
+accurate, hns
+
+
+
+
+explore
+
+ktunnel
+
+
+
+example (with custom yamls?)
+fuzzy# an extra keyword, does not match first (take arg)
+get-all (ketall)
+https://github.com/kajanth/kubectl-all
+node-shell
+popeye
+kube-capacity
+reap
+
+----
+https://github.com/towolf/kubectl-nsenter
+
+
+https://github.com/moshloop/kubectl-ansible

@@ -262,3 +262,9 @@ pivot.service
 rpm-ostreed.service
 zincati.service
 afterburn-hostname.service
+
+
+
+
+'
+https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/

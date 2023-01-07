@@ -8,9 +8,9 @@ CI:
 workload:
     run: deployment, sts, ds?? (admin)
     batch: cj, argoproj/rollouts, volcano
-    scale: hpa, vpa -> faas maybe help on this
-    configure: cm, secret
-    resiliency: pdb -> operator
+    autoscale: hpa, vpa -> faas maybe help on this
+    configure: cm, secret, agesecret/agekey
+    resiliency: pdb (admin) -> operator
 network:
     l4: svc, virtualService
     http: ingress, gateway, smi
@@ -36,6 +36,7 @@ storage:
     db:
         sql: create only a CR, and jump to use sql.teh-1.snappcloud.io #??
         kv: create only a CR, and jump to use kv.teh-1.snappcloud.io #??
+        kv-cache: same
 mq:
     rabbitmq:
     kafka:

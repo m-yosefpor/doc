@@ -10,8 +10,8 @@
     - if an invalid app is already running (e.g. latest), it doesn't understand anymore
     - if invalid tags are in repo, it doesn't ignore them all (regex??)
     - if app is created with upsert, the helm chart want to be synced to its original form, and it doesn't update the image tag anymore until it is synced once again.
-* secret management:
+* secret management: (done)
     - create a secret (per ns?) and an operator will create a secret in the cluster:
-        kind: CSecret
+        kind: AgeSecret
         spec:
             decoderRef: someSecret
