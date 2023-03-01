@@ -37,7 +37,7 @@ storage:
         sql: create only a CR, and jump to use sql.teh-1.snappcloud.io #??
         kv: create only a CR, and jump to use kv.teh-1.snappcloud.io #??
         kv-cache: same
-mq:
+operated-mq:
     rabbitmq:
     kafka:
     nats: #?? -> supports multi-tenancy
@@ -72,6 +72,10 @@ Policy:
         rolebinding: ## first only predefined roles
         role:
         sa: # predefined sa: monitoring-datasource, image-pusher #?? ,
+        additional roles:
+        - grafanaUser
+        - argocdUser
+        - logging (integrated)
     netpol:
     limit:
     quota:

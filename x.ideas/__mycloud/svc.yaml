@@ -63,3 +63,35 @@ spec:
       attempts: 3
       perTryTimeout: 2s
       retryOn: gateway-error,connect-failure,refused-stream
+-----
+
+ui workflow:
+
+lb as a service -> L4 / L7 -> internal /external -> frontend -> backend
+
+
+
+
+apiVersion: networking.snappcloud.io/v1
+kind: L4LB
+metadata:
+  name: example
+spec:
+  type: ClusterIP # Headless, LB
+  clusterIP: # auto-gen
+  loadBalancerIP: # auto-gen
+  ports:
+  - name: metrics
+    protocol: TCP
+    port: 80
+    targetPort: 8080
+  backends:
+    - type: external
+      name: sth
+      ip: sth
+    - type: pod
+      name: sthelse
+      # namespace:, region
+      selector:
+        app.kubernetes.io/name: argocd-application-controller
+        app.kubernetes.io/instance: argocd
