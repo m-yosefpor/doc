@@ -1,4 +1,4 @@
-auto metrics for rps/status-code/p95/avg
+auto metrics for rps(status-cod)/p95/avg
 auto dependency graph
 auto trace (add a layer only?)
 auto multi-ep selectivity health check / circuit breaker / ratelimit / https (client/server)

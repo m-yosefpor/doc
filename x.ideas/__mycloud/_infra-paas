@@ -6,15 +6,16 @@ Package: Helm
 CI:
 ---
 workload:
-    run: deployment, sts, ds?? (admin)
-    batch: cj, argoproj/rollouts, volcano
+    run: deployment, sts, ds(admin)
+    batch: cj, rollouts(ro) (with ref), volcano
     autoscale: hpa, vpa -> faas maybe help on this
-    configure: cm, secret, agesecret/agekey
+    configure: cm, agesecret/agekey, secret??
     resiliency: pdb (admin) -> operator
 network:
-    l4: svc, virtualService
-    http: ingress, gateway, smi
-    multi-region: gslb
+    l4: svc, externalService (virtualService??)
+    http: httpproxy/ingress (gateway???, smi???)
+    multi-region/dns: gslb, DNS?
+    CDN: annotation on httpproxy??
 
 storage:
     volume:
@@ -22,48 +23,62 @@ storage:
         VolumeSnapshot
         VolumeSnapshotGroup
     s3:
-        Bucket (cosi?)
-        ## todo: s3 api should be modified for creating buckets, creating users, etc -> cosi -> how to extract accesskey, secretkey, bucketname
+        S3UserClaim (s3u)
+        S3Bucket (s3b)
     operated-db:
         pg:
+            postgresclusters:
         mysql: #??
-        es: #?? -->
+        es:
+            es:
+            kb:
+            esa: ??
         redis:
+            redis:
+            redisclusters:
         mongo: #??
         tidb: #??
     oci-registry:
         is:
+        istag:
     db:
         sql: create only a CR, and jump to use sql.teh-1.snappcloud.io #??
         kv: create only a CR, and jump to use kv.teh-1.snappcloud.io #??
         kv-cache: same
 operated-mq:
     rabbitmq:
+        rabbitmqcluster(rmq):
     kafka:
+        kafkas (k)
+        kafkatopics (kt)
+        kafkausers (ku)
+        kafkabridges      (kb)
+        kafkaconnectors   (kctr)
+        kafkaconnects     (kc)
+        kafkamirrormaker2s(kmm2)
+        kafkamirrormakers (kmm)
+        kafkarebalances   (kr)
     nats: #?? -> supports multi-tenancy
+
 
 observability:
     logging:
-        collect: annotation? (retention day)
-        process: #??
-        dashboard: #??
-        alert: #??
-        # ---
-        foward: ClusterLogForwarding ###?? namespaced with banzai-cloud logging?
-        # --- banzai
-        # Logging #?/
-        # Output
-        # Flow
+        collect+process: flow
+        output: output
+        dashboard: grafanadashboard(!!add org)
+        alert: #?? (on dashboard?)
     monitoring:
         collect: PodMoniotor, ServiceMonitor (annotation?) # port name with annotation ??
         alert: PrometheusRule, AlertmanagerConfig
         dashboard:  GrafanaDashboard
+        grafanauser?? (integrate with k8s rbacs !!grafana create users after login! (fake login?))
     tracing: #??
 
 CD:
     gitops:
-        Application: # namespaced
+        Application (app): # namespaced
         appset:
+        argocdusers?? (integrate with k8s rbac, though how to map appproj->ns?)
 
 Policy:
     rbac:
