@@ -9,7 +9,7 @@ https://k8s.af
 
 ............. (mitigated)
 - nf_conntrack -> increased a lot + monitoring/alert (many issues :D)
-- ndot:5 -> node local caching + negative caching (no 0 ttl) + block AAAA (many issues)
+- ndot:5 -> node local caching + negative caching (no 0 ttl) + block AAAA (many issues), ndots4, use fqdn
 - hpa -> never use
 - clusterautoscaler -> never user
 - automatic upgrade -> pin up to patch version (dnsmasq issue, terraform template issue, ksm issue)
@@ -46,7 +46,6 @@ https://k8s.af
 - major changes -> release processes: staging, canary, approval, rollback/backup
 
 ............................. (??)
-docker no-volume plugin
 etcd-number-of-objects/size of each, space quota, etc
 - users set taint?
 
