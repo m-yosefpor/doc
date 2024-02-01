@@ -2,7 +2,9 @@
 k8s known issues, which does not have any solution/workarounds yet:
 
 
-
+KNI:
+- one of the main issues of k8s to replace sth like openstack.
+- having static IPs for pods
 
 https://k8s.af
 
@@ -59,8 +61,11 @@ security:
 
 
 Namespaced CRDs:
-- users can not write and use operators
+- users can not write and use operators (it's ok I think)
 - multiple operators (with different CRD/version) will collide even if they have limited to some namespaces lig OperatorGroup
+
+
+
 
 
 
@@ -83,3 +88,9 @@ upcomming:
   qos on network in podSpec (annotation?)
   qos on blkio in podSpec (cgroupv2)
   - ephermeral containers for debugging distroless containers
+
+
+k8s issues public:
+
+generating many events and making etcd full
+high api load, or deploy pod creation, job creation, large ep, fast route/ep changing (causing high reloads), etc

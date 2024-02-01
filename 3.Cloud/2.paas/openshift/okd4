@@ -30,7 +30,8 @@ cluster-ingress-operator (CIO)
 cluster-image-registry-operator
     image-registry
     	#docker-registry
-cluster-logging-operator (CLO)
+
+cluster-logging-operator (CLO) XXXX
 	elasticsearch-operator
 		elasticsearch
 	kibana
@@ -82,3 +83,132 @@ baremetal-operator
 
 	kuryr #
 	ovnkubernetes#
+
+
+-----
+we actually can disable them. I took a look into their code.
+
+they have applied an annotation to resources such as
+annotations:
+    capability.openshift.io/name: Storage
+https://sourcegraph.com/github.com/openshift/cluster-version-operator@5d3c08beff0c7e33f5c1db4e33ad80efa44a379a/-/blob/vendor/github.com/openshift/library-go/pkg/manifest/manifest.go?L314
+
+then clusterVersionOperator only applies the resources which have enabled cap. The cap comes from the status + newly added additionalCap
+https://sourcegraph.com/github.com/openshift/cluster-version-operator/-/blob/lib/capability/capability.go?L153
+https://sourcegraph.com/github.com/openshift/cluster-version-operator@5d3c08beff0c7e33f5c1db4e33ad80efa44a379a/-/blob/pkg/cvo/sync_worker.go?L452
+
+
+so:
+so:
+1. scale down cvo deployment
+2. use edit-status krew plugin with oc edit-status to remove from enablaed caps. and then set desired spec
+3. remove namespaces and all the resources which are not needed (e.g. oc delete ns openshift-cluster-storage-operator) (and other cleanups, we shall get ALL the manifest with such annotations)
+4. remove co (oc delete co storage)
+5. scale up cvo
+
+
+
+
+authentication         True        False         False      9h
+cloud-controller-manager[x: 4.16] True        False         False      30d
+cloud-credential[x: 4.15]        True        False         False      30d
+config-operator          True        False         False      30d
+console                  True        False         False      10d
+dns                      True        False         False      7d13h
+etcd                     True        False         False      3d1h
+image-registry           False       False         True       23d     Available: The deployment does not have available replicas...
+ingress[x (route CRD)]                  True        False         False      29d
+kube-apiserver           True        False         False      30d
+kube-controller-manager  True        False         False      30d
+kube-scheduler           True        False         False      30d
+kube-storage-version-migrator[x]  True        False         False      7d12h
+machine-approver[x]        True        False         False      30d
+machine-config          True        False         False      9h
+marketplace             True        False         False      30d
+monitoring               False       True          True       9d      Rollout of the monitoring stack failed and is degraded. Please investigate the degraded status error.
+network                  True        False         False      30d
+node-tuning              True        False         False      30d
+openshift-apiserver      True        False         False      9h
+openshift-controller-manager True        False         False      30d
+operator-lifecycle-manager   True        False         False      30d
+operator-lifecycle-manager-catalog True        False         False      30d
+operator-lifecycle-manager-packageserver True      False         False      30d
+service-ca               True        False         False      30d
+
+
+scale etcd-operator=0
+oc edit-status etcds.operator cluster
+scale=1
+
+https://bugzilla.redhat.com/show_bug.cgi?id=2057644
+
+
+
+a brief on how certs are managed on openshift:
+
+- the openshift bootstrapper creates a kubeconfig /etc/kubernetes/kubeconfig
+
+this has a non-expiring client certificate, which points to local host of the same master to communicate with apiserver. The rbac for this user is to only create CSRs. kubelet has configured to work with another client certficate on /sth./sth.pem (see kubelet service). However this is an expiring certficaite so it needs rotation. the kubelet uses the /etc/kubernetes/kubeconfig to request for a new csr, then someone approves the csr (our operator or manually), then a k8s controller in kube-controller-manager watches this approved csr, signs it with cluster CA private key for a limited amount of time, and then sends it to kubelet(?). the kubelet uses that cert to register the node and make the node ready.
+
+
+
+etcdctl_ca
+
+/etc/kubernetes/static-pod-certs/configmaps/etcd-serving-ca/ca-bundle.crt
+
+etcdctcert
+/etc/kubernetes/static-pod-certs/secrets/etcd-all-certs/etcd-peer-okd4-masters-0.crt
+/etc/kubernetes/static-pod-certs/secrets/etcd-all-certs/etcd-peer-okd4-masters-0.key
+
+/etc/kubernetes/static-pod-certs/configmaps/etcd-serving-ca/ca-bundle.crt
+
+/etc/kubernetes/static-pod-resources/kube-apiserver-certs
+
+
+/etc/kubernetes/static-pod-certs
+/etc/kubernetes/static-pod-certs/configmaps/check-endpoints-kubeconfig/kubeconfig
+
+
+/etc/kubernetes/static-pod-resources/configmaps/kube-apiserver-cert-syncer-kubeconfig/kubeconfig
+
+
+
+
+
+
+
+
+
+/etc/kubernetes/ca.crt
+
+
+
+ETCD
+API server
+
+controller manager
+kubelet
+
+
+
+=======
+      --bootstrap-kubeconfig=/etc/kubernetes/kubeconfig:
+				sa: system:serviceaccount:openshift-machine-config-operator:node-bootstrapper
+					ca?
+					token?
+					role(?): create/get/... CSR
+
+/etc/mcs/bootstrap-token + /token -> address in ign
+
+
+  volumes:
+  - name: node-bootstrap-token
+    secret:
+      defaultMode: 420
+      secretName: node-bootstrapper-token
+
+
+sa: node-bootstrapper
+
+
+=======

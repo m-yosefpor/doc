@@ -1,0 +1,14 @@
+# consul
+
+curl -s --request PUT --data @web.json http://consul.apps.private.okd4.teh-1.snappcloud.io/v1/catalog/deregister
+https://www.consul.io/docs/discovery/checks#success-failures-before-passing-critical
+
+
+curl http://consul.apps.private.okd4.teh-1.snappcloud.io/v1/agent/metrics?format=prometheus
+consul_catalog_service_node_healthy{service_name!="consul-esm"} == 0
+consul_health_service_status{service_name!="consul-esm"} == 0
+consul_health_node_status{service_name!="consul-esm"} ==0
+consul_health_node_status{status!="passing"} != 0
+sum by (service_name) (consul_health_service_status{status!="passing"}) != 0
+sum by (service_name, backend_name) (consul_health_node_status) != 0
+

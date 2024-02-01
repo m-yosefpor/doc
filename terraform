@@ -1,0 +1,4 @@
+moved {
+  from = aws_vpc.vpc
+  to   = module.vpc.aws_vpc.vpc
+}

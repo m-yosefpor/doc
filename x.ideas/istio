@@ -1,0 +1,25 @@
+oc annotate namespace kube-system openshift.io/node-selector=
+cni pods should be able to schedule also on masters
+Mohammad Yosefpor
+oc label namespace <test> istio-injection=enabled
+
+
+pros:
+
+grpc loadbalancing
+multi-region loadbalancing without need for Gslb
+Automatic metrics, logs, and traces for all traffic within a cluster, including cluster ingress and egress
+http rewrite, retry, fault-injection, add headers, circuit breakers, mirroring, cors policy
+ratelimit, timeouts, weighted, path-match rules,
+cons:
+
+increased latency
+more resources required
+side-car throttling can impact performance -> monitoring/alerting
+slower container initilization time
+increased configuration complexity on user side
+
+questions:
+
+policies
+HA Gateway
