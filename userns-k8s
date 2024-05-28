@@ -1,0 +1,167 @@
+1.cri-o version (nightly builds)
+2. mc /etc/crio/crio.conf.d/99-crio-userns.conf
+
+```
+crio.runtime.runtimes.runc]
+allowed_annotations=["io.kubernetes.cri-o.userns-mode"]
+```
+
+```
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: crio-userns
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - path: /etc/crio/crio.conf.d/99-crio-userns.conf
+        overwrite: true
+        contents:
+          source: data:text/plain;charset=utf-8;base64,W2NyaW8ucnVudGltZS5ydW50aW1lcy5ydW5jXQphbGxvd2VkX2Fubm90YXRpb25zPVsiaW8ua3ViZXJuZXRlcy5jcmktby51c2VybnMtbW9kZSJdCg==
+```
+
+3. increase uid range
+
+```
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: subuid-subgid
+spec:
+  config:
+    ignition:
+      version: 3.1.0
+    storage:
+      files:
+      - path: /etc/subuid
+        overwrite: true
+        contents:
+          source: data:text/plain;charset=utf-8;base64,Y29yZToxMDAwMDA6NjU1MzYKcm9vdDoyMDAwMDA6MjY4NDM1NDU2Cg==
+      - path: /etc/subgid
+        overwrite: true
+        contents:
+          source: data:text/plain;charset=utf-8;base64,Y29yZToxMDAwMDA6NjU1MzYKcm9vdDoyMDAwMDA6MjY4NDM1NDU2Cg==
+```
+
+```
+core:100000:65536
+containers:200000:268435456
+```
+
+4. disable sysctl
+
+```
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 0
+    sysctls:
+    - name: "net.ipv4.ping_group_range"
+      value: "0 65535"
+```
+
+5. anyuid scc
+
+
+
+
+This unit failed to execute, because the user service manager does not have permission to determine supplementary groups. Without going into too much detail, this is because the user systemd instance lacks the CAP_SETGID capability required by the setgroups(2) system call used by initgroups(3).
+
+There doesn’t seem to be a way around this. For the rest of my testing I’ll talk to the system service manager. That’s okay, because runc on OpenShift also talks to the system service manage
+(but for usernetes, we can't ??)
+
+
+  annotations:
+    openshift.io/scc: restricted
+    io.kubernetes.cri-o.userns-mode: "auto:size=65536"
+  securityContext:
+    sysctls:
+    - name: "net.ipv4.ping_group_range"
+      value: "0 65535"
+
+
+
+verify:
+
+1. get .status.containerStatuses\[0\].containerID
+2. crictl inspect \<cri-o-ID> | jq .info.pid
+3. cat /proc/\<pid>/uid\_map # exists also in crictl inspect
+4. pgrep --ns \<pid> | xargs ps -o user,pid,cmd --sort pid
+
+
+
+https://frasertweedale.github.io/blog-redhat/archive.html
+
+
+# UserNamespacesStatelessPodsSupport
+https://frasertweedale.github.io/blog-redhat/posts/2023-01-22-openshift-feature-gates.html
+
+
+users can not set uid,gid outside of 0 65535 -> also anyuid scc should be given to all namespaces.
+enforce/mutate cri-o annotation io.kubernetes.cri-o.userns-mode: "auto:size=65536;map-to-root=true" in pod.metadata
+enforce/mutate the following in pod.spec
+1
+2
+3
+4
+      securityContext:
+        sysctls:
+        - name: net.ipv4.ping_group_range
+          value: 0 65535
+
+
+
+lsns
+
+user: id, pgrep --ns <pid> | xargs ps -o user,pid,cmd --sort pid
+uts: hostname
+ipc
+net: ip a
+mnt: mount
+pid: ps aux
+cgroup /sys/fs/cgroup
+Host info:
+
+/proc : free -m, /proc/meminfo, uptime , nproc
+lsblk (although not mountpath): /sys/class/block/
+
+
+differenece userns-anyuid vs normal-restricted:
+
+```
+container:
+    securityContext:
+      capabilities:
+        drop:
+        - KILL
+        - MKNOD
+        - SETGID
+        - SETUID
+      runAsUser: 1000690000
+---
+    securityContext:
+      capabilities:
+        drop:
+        - MKNOD
+```
+
+```
+pod:
+  securityContext:
+    fsGroup: 1000690000
+    seLinuxOptions:
+      level: s0:c26,c20
+---
+  securityContext:
+    seLinuxOptions:
+      level: s0:c26,c20
+    sysctls:
+    - name: net.ipv4.ping_group_range
+      value: 0 65535
+```

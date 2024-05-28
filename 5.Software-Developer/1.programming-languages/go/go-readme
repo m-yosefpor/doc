@@ -1,0 +1,20 @@
+generate metrics readme
+
+
+wget -O- http://127.0.0.1:8080/metrics  2> /dev/null | grep "# HELP"  | grep -v "HELP process_" | grep -v "HELP go_" |  awk '{print "| " $3 " | " substr($0, index($0, $4))}'
+
+
+checklist:
+
+description
+tags
+security alerts enabled
+protect main
+require resolved discussion
+required pipeline pass
+.........................
+...
+Dockerfile
+charts
+security advisory -> policy
+readme logo, shield tags

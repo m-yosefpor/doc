@@ -1,0 +1,93 @@
+The International Collegiate Programming Contest (ICPC) is a highly competitive programming contest where a wide range of algorithms and data structures are used. Here's a comprehensive list of algorithms and techniques that are commonly required for ICPC ACM competitions:
+
+### Graph Algorithms
+1. Depth-First Search (DFS)
+2. Breadth-First Search (BFS)
+3. Dijkstra's Algorithm
+4. Bellman-Ford Algorithm
+5. Floyd-Warshall Algorithm
+6. Kruskal's Algorithm
+7. Prim's Algorithm
+8. Topological Sort
+9. Strongly Connected Components (Tarjan's, Kosaraju's)
+10. Minimum Spanning Tree
+11. Shortest Path Algorithms
+12. Network Flow (Ford-Fulkerson, Edmonds-Karp)
+13. Graph Matching Algorithms
+14. Eulerian and Hamiltonian Paths
+
+### Dynamic Programming
+1. Knapsack Problem
+2. Coin Change Problem
+3. Longest Common Subsequence
+4. Longest Increasing Subsequence
+5. Matrix Chain Multiplication
+6. Edit Distance
+7. Subset Sum Problem
+8. Rod Cutting
+9. Optimal Binary Search Trees
+
+### Data Structures
+1. Arrays and Linked Lists
+2. Stacks and Queues
+3. Priority Queues (Heaps)
+4. Disjoint-Set Union (Union-Find)
+5. Segment Trees
+6. Binary Indexed Trees (Fenwick Trees)
+7. Trie (Prefix Tree)
+8. Suffix Array and Suffix Tree
+9. Binary Search Trees (including AVL, Red-Black Trees)
+10. Hash Tables
+
+### Number Theory and Combinatorics
+1. Prime Numbers (Sieve of Eratosthenes)
+2. GCD and LCM Algorithms
+3. Modular Arithmetic
+4. Fermat’s and Euler’s Theorem
+5. Chinese Remainder Theorem
+6. Permutations and Combinations
+7. Catalan Numbers
+
+### Computational Geometry
+1. Convex Hull (Graham Scan, Jarvis March)
+2. Line Intersection
+3. Polygon Area
+4. Point in Polygon
+5. Closest Pair of Points
+
+### String Algorithms
+1. String Matching (KMP, Rabin-Karp)
+2. Tries
+3. Suffix Arrays/Trees
+4. Z-Algorithm
+5. Manacher’s Algorithm
+
+### Mathematics and Miscellaneous
+1. Binary Exponentiation
+2. Euclidean Algorithm
+3. Matrix Exponentiation
+4. Probability and Expectation
+5. Game Theory (Minimax, Nim Game)
+6. Ad Hoc Problems (implementation-heavy problems not fitting into the categories above)
+
+### Sorting Algorithms
+1. Quick Sort
+2. Merge Sort
+3. Heap Sort
+4. Counting Sort
+5. Radix Sort
+6. Bucket Sort
+
+### Greedy Algorithms
+1. Activity Selection
+2. Job Scheduling
+3. Huffman Coding
+
+### Other Important Techniques
+1. Bit Manipulation
+2. Two Pointer Technique
+3. Sliding Window
+4. Divide and Conquer
+5. Backtracking
+
+Remember, this is a comprehensive list and not all algorithms may be required in every contest. The key is to understand the problem-solving principles behind these algorithms and how to implement them efficiently.

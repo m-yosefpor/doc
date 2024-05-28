@@ -1,0 +1,89 @@
+consider you are the designer of a new programming language. You want to design the best programming language that is going to be ever created. You know deeply all programming languages, syntax, gotchas, features and every small detail about them. So you are given a task to design the best progamming language for web development (backend), and considering all the languages you know (go, rust, swift, c, cpp, c#, java, kotlin, ocaml, zig, v, js, ts, ruby, python, and every other progamming language you know), and all the featuers and good points of them. start designing a new progamming language. first talk about the philosophy of the langauge you want to create and most highlited features, then go into syntax, and design. you should choose between all the tradeoffs you think of, and create the best progamming langaues for the humans for web development backend
+
+
+Designing the ultimate programming language for web development backend requires a balanced combination of performance, ease of use, safety, tooling, and ecosystem. Here is the philosophy and the highlighted features of the new language, tentatively named "WebRune."
+
+### Philosophy:
+
+1. **Performance**: The language should be optimized for speed and efficiency, taking advantage of modern multi-core processors and asynchronous I/O operations.
+2. **Developer Ergonomics**: It must have a clean syntax, be easy to read and write, with intuitive constructs that lower the learning curve.
+3. **Type Safety**: It should provide strong static typing to catch errors at compile-time, reducing runtime errors.
+4. **Memory Safety**: Automatic memory management should be provided without sacrificing control when needed.
+5. **Concurrency**: Built-in support for concurrency and parallelism should be a first-class citizen.
+6. **Interoperability**: The ability to easily interface with other languages and systems.
+7. **Tooling**: Strong tooling support for debugging, testing, building, and deploying.
+8. **Ecosystem**: A robust, standardized library system for web frameworks, ORMs, and middleware that all follow the language's philosophy.
+
+### Highlighted Features:
+
+1. **Zero-cost Abstractions**: Optimize high-level constructs that compile into efficient machine code, similar to Rust.
+2. **Optional Garbage Collection**: Inspired by C# and Swift, allowing developers to choose between automatic memory management and manual control.
+3. **Generics and Metaprogramming**: Powerful, easy-to-use generics, and metaprogramming inspired by Rust and C++.
+4. **Immutable by Default**: Encourage functional styles for safer concurrency, but allow for mutable state when needed.
+5. **Async/Await I/O**: Native syntax for asynchronous operations drawn from JavaScript (TypeScript) and C#.
+6. **Actor Model for Concurrency**: Incorporating a variant of the actor model for handling concurrency, as seen in languages like Erlang.
+7. **Integrated Package Manager and Build Tool**: A unified tool for dependency management and building projects, like Rust's Cargo.
+
+### Syntax:
+
+Keeping syntax simple and concise is crucial.
+
+```wbr
+// Comments start with //
+
+// Variables are immutable by default
+let username: String = "developer123";
+// For mutable variables
+mut count: Int = 0;
+
+// Functions are defined with `fun`
+fun greet(name: String) -> String {
+    return "Hello, \\(name)!";
+}
+
+// Error handling using `try/catch`
+try {
+    let result = executeQuery(...)
+} catch (e: DatabaseError) {
+    log.error(e.message);
+}
+
+// Classes and inheritance
+class User {
+    let id: Int
+    let username: String
+    init(id: Int, username: String) {
+        this.id = id
+        this.username = username
+    }
+}
+
+// Concurrency using an actor model
+actor Database {
+    fun query(q: String) -> Result {
+        // handle query
+    }
+}
+
+// Asynchronous operations with async/await
+async fun fetchData(url: String) -> String {
+    let response = await http.get(url);
+    return response.body;
+}
+
+// Using generics
+fun <T> findMax(items: [T]) -> T where T: Comparable {
+    // implementation
+}
+```
+
+### Design:
+
+- The language would be compiled, targeting LLVM for wide platform support and optimization capabilities.
+- Will feature light annotations for common web patterns which can enable things like automatic CRUD endpoint generation from data models.
+- Security practices are enforced at the compiler level, such as sanitising inputs to prevent SQL injection and ensuring proper encryption.
+- Offer a REPL environment for quick prototyping.
+
+Tradeoffs include avoiding overly complex features like C++ templates in favor of simpler generics and constraining the ability to do lower-level operations as in C for the sake of developer ergonomics and safety.
+
+By focusing on these areas, "WebRune" aims to be a language that is both powerful and accessible, allowing both rapid development and the production of high-performance, maintainable web services.

@@ -1,0 +1,10 @@
+db:
+  host: "localhost"
+  user: "youruser"
+  password: "yourpassword"
+  name: "yourdb"
+  port: "5433"
+
+server:
+  host: "localhost"
+  port: "8081"

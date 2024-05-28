@@ -1,0 +1,11 @@
+| Feature | Ethereum | Bitcoin |
+|---------|----------|---------|
+| Architecture | Single-blockchain | Single-blockchain |
+| Consensus Algorithm | Transitioned to Proof-of-Stake (as of Ethereum 2.0) | Proof-of-Work |
+| PoS System (if applicable) | BFT (Beacon Chain uses a PoS mechanism similar to BFT) | N/A |
+| Support for Arbitrary Smart Contracts | Yes, Turing-complete | No, limited scripting language |
+| Type and Rules of Member Blockchains | N/A | N/A |
+| Absence or Presence of a Masterchain | N/A | N/A |
+| Native Support for Sharding | Yes, with Ethereum 2.0 upgrade | No |
+| Static or Dynamic Sharding | Dynamic (as planned for Ethereum 2.0) | N/A |
+| Interaction between Member Blockchains | N/A (not applicable for single-blockchain) | N/A (not applicable for single-blockchain) |

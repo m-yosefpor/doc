@@ -6,16 +6,17 @@ Package: Helm
 CI:
 ---
 workload:
-    run: deployment, sts, ds(admin)
-    batch: cj, rollouts(ro) (with ref), volcano
+    run: deployment, sts, rollouts(ro) (with ref), ds(admin)
+    batch: cj, (volcano)
     autoscale: hpa, vpa -> faas maybe help on this
     configure: cm, agesecret/agekey, secret??
     resiliency: pdb (admin) -> operator
 network:
     l4: svc, externalService (virtualService??)
-    http: httpproxy/ingress (gateway???, smi???)
+    http: httpproxy / ingress(standard in helms)?? (gateway???, smi???)
     multi-region/dns: gslb, DNS?
     CDN: annotation on httpproxy??
+    netpol: netpol, cnp
 
 storage:
     volume:
@@ -115,3 +116,8 @@ istio:
     DestinationRule
     ServiceEntry
     Gateway
+-----------------------------------------
+karmada: (doesn't need some high load managemnts):
+- pods
+- endpoints/endpointslices/ciliumendpoints
+- events? (aggregate?)

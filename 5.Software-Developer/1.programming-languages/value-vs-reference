@@ -1,0 +1,9 @@
+value-refrence
+- The receiver (will not|will) be modified
+- The struct is (small|large): if your struct is larger than a couple of machine words (say 64 bytes), you should consider passing by pointer. (however for perfomance consider that Non-pointer fields mean fewer allocations, which reduces pressure on the garbage collector.)
+- The struct is (not meant/meant) to be nullable. If nil is a meaningful value for the data (e.g., to indicate the absence of value), then you may need to use a pointer.
+  * Ambiguity: Sometimes the zero value of a type is a valid, meaningful value, not just an indicator of “unset”. For example, the zero value of an integer is 0, which could be a valid value in many contexts
+  * Inefficiency with Large Structs: If Address is a large struct with many fields, it may be more efficient to use a pointer to avoid copying it around, especially if it’s often unset
+  * Limitation on Methods: If the Address struct has methods that need to modify the struct itself, they can’t be called on a non-pointer Address field within User without first creating a pointer to that field.
+  * Explicit Initialization Required: When using non-pointer struct fields, any time you construct a User, the Address field is automatically initialized to its zero value, whether you want it to be or not. This can be wasteful if the zero value is rarely used
+- Consistency in receivers. If some methods on a struct need pointer receivers (for the reasons above), it’s common to make all method receivers pointers for consistency.

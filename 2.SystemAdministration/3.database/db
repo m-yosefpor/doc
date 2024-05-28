@@ -3,3 +3,6 @@ columns/attributes
 rows/records # Document
 tables     # type
 databases  # index
+
+
+https://github.com/danistefanovic/build-your-own-x#build-your-own-database

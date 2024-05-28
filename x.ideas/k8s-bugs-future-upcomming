@@ -1,6 +1,7 @@
 # k8saf k8s-af
 k8s known issues, which does not have any solution/workarounds yet:
 
+1. Load Average (no clue why and which pod, also why the pod should be able to do this to node?)
 
 KNI:
 - one of the main issues of k8s to replace sth like openstack.

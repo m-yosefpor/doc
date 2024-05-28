@@ -1,0 +1,247 @@
+Containers:
+
+- Cgroups and Namespaces
+- Open Container Initative (OCI)
+- What exactly is a container
+...
+- Docker and Podman
+- Build your docker images
+- Run containers on your localhost
+
+K8s:
+
+- Understand Kubernetes API primitives
+- Create and configure basic Pods
+- Multi-Container Pod design patterns
+- Deployments and how to perform rolling updates
+- Deployments and how to perform rollbacks
+- How to use Labels, Selectors, and Annotations
+- StatefulSets and PersistentVolumeClaims
+- Create & consume ConfigMaps and Secrets
+- ServiceAccounts and RBAC
+- Services and Ingresses
+- Controller pattern and K8s operators
+
+Observability:
+
+- Metrics and monitoring
+- Logging
+- Tracing
+
+App Delivery:
+
+- Helm charts
+- GitOps
+
+
+
+
+
+OKD4 workshop:
+
+- OKD4 repos
+- OKD4 utility
+- VM harbor
+- Redeploying OKD4 + tshoot
+- Check cluster health + tshoot
+- add node + tshoot
+- add edge node
+- drain node, replace node
+- replace master
+- restore etcd backup
+- quota management
+- MC rollout + tshoot
+- Upgrade cluster + tshoot
+....
+
+Subjects which will not be covered in workshop, including all features that are only there for OKD4, but are not a built-in OKD4 feature. These will be explained in demo sessions:
+
+- istio
+- argo appset controller
+- grafana-operator
+- harbor
+- gslb + consul
+- coredns-ext
+- certmanager
+- cgroup v2  + cgroupns + userns (state of our staging)
+- clusterlogforwarder
+
+
+
+IDE
+Search in our repos
+Search in github
+API ref (openshift, k8s), CRD
+K8s CRs structure
+
+
+
+**Day4:**
+**Routing options**
+
+- alpha/beta
+- custom domains + acme
+- https://confluence.snapp.ir/display/CLD/API+Gateway+Features
+**Best practice**
+- probe
+- readiness
+- Liveness
+- tcp/exec/http and etc
+- sysctl
+- startup probe
+
+————————————————————
+
+**HPA**
+**HTTP Proxy**
+**Snappshotgroup + Recovering**
+**Familiar with network policy**
+**observability**
+
+- label
+- Service/Pod monitor
+- connect grafana-sre, federation
+**Logging**
+
+—————————————————————
+
+**Introducing advanced features**
+
+- Jaeger
+- Forwarding Logs
+- Argocd
+
+**Go through OKD3 documentation**
+( Name and share the related links of features)
+
+—————————————————————
+**Day3:**
+——— ——— ——— ——— ——— ———
+**15 min**
+User Questions
+——— ——— ———
+**15 min**
+Explain about -> Common mistakes Different namespace -n
+
+- Metadata namespace
+- Show the rs/rc and explain more detail about the differences
+- oc whoami
+- oc get all
+——— ——— ———
+**30min**
+Statefuleset
+pvc / pv
+- expansion -> OKD4 only
+Storage class
+Backup -> snapshot/snapshotclasess + recovering + resize ( you are not allowed in okd3)
+Operator by ui
+
+——— ——— ———
+15 min user test
+——— ——— ———
+
+45 min:
+cronjob / job
+Quota managemnt -> talk about restrictions in okd3 +
+
+- More detail about resources
+serviceaccount
+oc policy add-role-to-user
+oc get role
+image stream ( pull/push) + amount of quota
+
+——— ——— ———
+15min test
+——— ——— ———
+
+
+Day 2:
+
+- Openshift-CLI
+    - install cli
+    - oc login
+- Reviewing Resources with CLI
+    - project
+        - oc project
+        - oc new-project
+        - oc get project
+        - oc get ns/project -o yaml -> not for users
+    - deployment:
+        - oc create
+        - oc apply ( Resource )
+        - oc replace ( Adding Probe)
+        - oc get deploy/deployment -o yaml
+        - oc scale
+        - oc delete
+    - oc get options
+        - -o yaml
+        - -o wide
+        - -w
+        - —show-labels
+        - -L \< name-label>
+    - deploymentconfig (OKD3)
+        - oc get/create/applyreplace
+        - oc roll-out (latest/cancel)
+    - Service
+        - oc get/create/apply/replace/delete
+    - Route
+        - oc get/create/applyreplace/delete
+- Troubleshooting
+    - Pod Status ( Running ( 1/1 and 0/1 difference), Pending, ImagePullBackOff, Crashloopbackoff, RunContainerError)
+    - Logs
+    - events
+    - commands:
+        - describe
+        - logs (tail, containers)
+        - debug ( Only OKD4)
+- New Resources + related commands
+    - Configmap
+        - oc create configmap game-config --from-file=\<your-file> ( We can have couple of —from-file)
+        - oc create configmap \<map-name> \<data-source>
+    - Secret
+        - oc create secret generic password-secret --from-literal=PASS=snappcloud-test ( We can have couple of --from-literal)
+        - oc get secret password-secret  -o jsonpath='{.data.PASS}' | base64 --decode
+    - Service account
+
+
+**Day 1:**
+introduction:
+
+- okd3, okd4
+- openstack, s3
+- asia, afra (teh-1, teh-2)
+
+manage:
+
+- topolgy (UI)
+- scale (UI)
+- event (UI)
+- logs
+- terminal
+- monitoring (topolgy)
+
+start:
+
+- simple go project + dockerfile
+- push manuall to registry (only mention gitlab-ci and user-doc)
+- login, project overview
+
+deploy:
+
+- is
+- create app from container image (UI)
+- deployment, deploymentConfig
+- pod, state (running, pending, crashloop)
+
+svc:
+
+- clusterIP
+- x svc lb
+- request from inside cluster and check log pod
+
+route:
+
+- label (private, inter-dc, public)
+- termination (edge, passthrough, reencrypt)
+
+deployment yaml -> show simple deployment yaml -> create yaml

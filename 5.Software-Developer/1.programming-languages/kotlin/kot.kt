@@ -50,3 +50,15 @@ println , print
 
 a..b step c
 a downTo b step c
+
+fun sum(x: Int, y: Int): Int {
+    return x + y
+}
+
+named arguments:
+
+
+fun printMessageWithPrefix(message: String, prefix: String)
+printMessageWithPrefix(prefix = "Log", message = "Hello")
+
+Default parameter values

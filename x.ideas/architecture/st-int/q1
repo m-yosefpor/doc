@@ -1,0 +1,69 @@
+key value in memory
+persistance -> write into file: wal/append only, etcd, .., snapshot
+crash and recovery
+key and value: cassandara
+      sort memory based on keys
+  merge sstables
+binary search on file, andaze record : can use library and search
+work with files, permissions, writing binary into files, sorts (use default golang), binary search golang
+
+-------
+readers writers
+  some reads
+  some writes
+producers consumers
+  bounded buffers
+  don't use buffer
+    use mutex
+      condition variable
+      semaphore
+      https://pages.cs.wisc.edu/~remzi/OSTEP/
+        30,31:
+      condition vairable
+      semaphore
+    how mutex implemented?
+      spin lock
+----
+
+
+------
+
+More sophisticated solutions to this prob-
+lem exist; perhaps you can think of a better implementation? Hint: think
+about what you would need to do to prevent more readers from entering
+the lock once a writer is waiting.
+
+overEngineer:
+  - rwlock: beporse read vs write
+  - concurrentMap (bucket based) -> more reads than writes, and looong reads (?) / veryyy threads
+
+
+mutex/lock:
+  - hw
+  - os
+
+  spin/wait
+    test-set
+    get-val??
+  futex
+
+condition var:
+  futex
+
+
+
+producer-consumer (single, multi):
+  - lock+condition var
+  - semaphore
+
+semaphore:
+ - lock+condition -> semaphore
+ - semaphore -> lock
+ - semphoore -> join (cond var??)
+ - semaphore -> condition (haard)
+
+
+
+
+dining table philospher
+Thread Throttling

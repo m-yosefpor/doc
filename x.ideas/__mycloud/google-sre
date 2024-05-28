@@ -1,0 +1,54 @@
+cpu isolation:
+    guranteed: better predictability, but waste of resource
+Don’t overachieve
+`Users build on the reality of what you offer, rather than what you say you’ll sup‐
+ply, particularly for infrastructure services. If your service’s actual performance is
+much better than its stated SLO, users will come to rely on its current perfor‐
+mance. You can avoid over-dependence by deliberately taking the system offline
+occasionally (Google’s Chubby service introduced planned outages in response to
+being overly available),3 throttling some requests, or designing the system so that
+it isn’t faster under light loads
+
+
+
+
+Analyzing long-term trends and difference of metrics on changes/features
+
+Comparing over time or experiment groups
+Alerting
+Building dashboards
+Conducting ad hoc retrospective analysis
+
+
+
+The Four Golden Signals:
+  - latency (200 requests seprate from error latency)
+traffic:
+  - rps (pathPrefix, method: handlers)
+error rate:
+ - 4xx, 5xx, timeout
+Saturation
+* predictions of impending saturation: disk
+- cpu usage/throttling
+- memory usage
+- io network
+  - sommax ?
+- io disk
+
+------
+dependencies:
+  - db
+  - other external calls
+-------
+Does this rule detect an otherwise undetected condition that is
+- urgent
+- actionable -> safely automated? -> every page response should require intelligence. If a page merely merits a robotic response, it shouldn’t be a page -> pages should be about a novel problem or an event that hasn’t been seen before
+- actively or imminently user-visible?
+
+
+
+1. Operator-triggered manual action (no automation)
+2. Operator-written, system-specific automation
+3. Externally maintained generic automation
+4. Internally maintained, system-specific automation
+5. Autonomous systems that need no human intervention

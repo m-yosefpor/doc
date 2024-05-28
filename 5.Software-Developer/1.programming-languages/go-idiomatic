@@ -1,0 +1,2 @@
+named returns, instead of returning many many 0 values
+-  Naked returns are fine for very short functions but are harder to scale: it gets too easy to accidentally return partially constructed values or the wrong err because of shadowing

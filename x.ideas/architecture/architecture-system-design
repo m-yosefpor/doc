@@ -1,0 +1,41 @@
+
+0. user stories
+
+1. choose your data types
+
+2. choose db:
+  sql/no-sql
+  scheme/schema-less
+  scheme change
+  Complex Queries
+  kv/fuzzy search
+  acid
+  consistency strong/eventual (etc,...)
+  persistency
+  CAP theorem:
+  Scaling: Can be more challenging to scale horizontally compared to NoSQL databases.
+
+
+  etcd: CP, persist, KV
+  redis: CP, in-memory, KV
+  mongo: CP (configurable), presist, document
+  postgres/mariadb: acid, persist, sql
+  column:
+    cassandra/scyla: eventual consistent,
+    clickhouse: OLAP, fast reads
+
+
+3. api design
+
+3. monolothic vs microservice
+
+3. choose language:
+  static/dynamic
+  strong/weak
+  easy/hard (steeped learning curve)
+  gc/non-gc
+  efficiency
+  libraries/frameworks
+  compiled/interprted
+  community
+  developers/hiring

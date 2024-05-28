@@ -1,26 +1,72 @@
 C: OS, DB, lb-proxy
+    staitc-weak, compiled, non-gc, null-unsafe
 C++:  storage, db, lb-proxy / Game / ML libraries
+    staitc-moderate, compiled, non-gc, null-unsafe
 rust: storage, db, lb-proxy,
-golang:
-    Truly great, cloud
+    static-strong, compiled, barrow-checker, null-safe
+swift: IoS, macOS
+    static-strong, compiled, arc, null-safe
+---
+golang: Truly great, cloud
+    static-strong, compiled, gc, null-unsafe
+---
+kotlin: android (inter operability with java)
+    static-strong, jit, gc, null-safe
+    Kotlin has strong safety features, such as null safety, which eliminates the risk of null pointer exceptions, a common source of runtime crashes in Java applications.
+c#: windows
+    static-strong, jit, gc
+java: bigdata(hadoop,kafka), finance
+    static-strong, jit, gc, null-unsafe(libraires)
+---
+ts: Web UI softwares
+    static-strong, transpiled(interpreted), gc, null-safe
 js: browsers, web
-ts:
-    Web UI softwares
-c#:
-    windows
-java:
-    android, bigdata(hadoop,kafka,)
-kotlin:
-    android
-objective-c, swift:
-    IoS
+    dynamic, interpreted, gc, null-unsafe
 python: ml-scripting, simple/scripting, calculator/uni
+    dynamic, interpreted, gc, null-unsafe
+---
+
 
 
 dead:
+    objective-c: superceded by swift
     php: integrated with html, no more usage
     R: python replaced
     Matlab: python libraries (simulink and engineering specific tools however is still in use)
     Ruby:
 
 
+(static-strong)/static-weak/dynamic
+(compiled)/jit/interpreted
+gc/arc/barrow-checker/no-gc
+(null-safe)/null-unsafe
+easy/hard (steeped learning curve)
+--
+efficiency
+libraries/frameworks
+community
+developers/hiring
+
+
+
+
+Features:
+
+    type:
+        sum type
+    structs:
+        Embedded structs
+    conditions:
+        ternary
+        if is expression
+    loop:
+        iterator
+        Labelled break & continue
+    functions:
+        closure:
+        Named arguments: py, kt
+        Default parameter values: py, kt
+        Single-expression functions:
+            kt: # fun sum(x: Int, y: Int) = x + y
+        Lambda expressions:
+            kt: # { string: String -> string.uppercase() }("hello")
